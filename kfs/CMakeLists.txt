@@ -13,7 +13,6 @@ find_package(Qt5Core REQUIRED)
 set( project_sources
     kfs.cpp
     main.cpp
-    mountpoint.cpp
 )
 
 # Create executable with all necessary source files
