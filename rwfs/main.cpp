@@ -18,7 +18,7 @@ using namespace std;
 //Todo create create separate classes for fileInfona and dirInfo
 class fileInfo
 {
-  public:
+public:
     string fileName;
     string fileContent;
     mode_t mode;
@@ -28,14 +28,14 @@ class fileInfo
     {
         fileName = filename;
         fileContent = "";
-    updateTime = time(NULL);
+        updateTime = time(NULL);
     }
 
     fileInfo(string filename, string content)
     {
         fileName = filename;
         fileContent = content;
-    updateTime = time(NULL);
+        updateTime = time(NULL);
     }
 
     int length()
@@ -46,7 +46,7 @@ class fileInfo
 
 class dirInfo_t
 {
-  public:
+public:
     string dirName;
     map<string, fileInfo*> fileList;
     dirInfo_t* parentDir;
@@ -138,7 +138,7 @@ int findFile(const char* path)
         return 0;
 
     string sPath = getFileOrDirName(path);
-        fileListIter it = dInfo->fileList.begin();
+    fileListIter it = dInfo->fileList.begin();
     for (;it != dInfo->fileList.end(); it++)
     {
         if (!strcmp(sPath.c_str(), it->first.c_str()))
@@ -186,6 +186,11 @@ static int rwsf_getattr(const char *path, struct stat *stbuf)
         retValue = -ENOENT;
 
     return retValue;
+}
+
+static int rwfs_opendir(const char * path, struct fuse_file_info *fileInfo)
+{
+    return 0;
 }
 
 int main(int argc, char *argv[])
