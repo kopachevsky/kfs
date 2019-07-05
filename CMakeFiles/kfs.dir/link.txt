@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/kfs.dir/main.cpp.o  -o bin/kfs /usr/lib/x86_64-linux-gnu/libfuse.so 

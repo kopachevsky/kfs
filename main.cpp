@@ -197,7 +197,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("Enter <mount path>, <filesystem size>\n");
+        printf("Mounted");
         exit(0);
     }
 

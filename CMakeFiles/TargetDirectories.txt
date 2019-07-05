@@ -1,0 +1,3 @@
+/home/donelkostino/kfs/CMakeFiles/rebuild_cache.dir
+/home/donelkostino/kfs/CMakeFiles/kfs.dir
+/home/donelkostino/kfs/CMakeFiles/edit_cache.dir

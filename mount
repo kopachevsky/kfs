@@ -1,1 +1,1 @@
-sudo mount -t <file system> fuse <directory>
+ ./bin/kfs -d -s -f <directory>
