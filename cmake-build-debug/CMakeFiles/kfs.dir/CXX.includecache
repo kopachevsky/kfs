@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/donelkostino/bricks/kfs/main.cpp
+main.h
+/home/donelkostino/bricks/kfs/main.h
+
+/home/donelkostino/bricks/kfs/main.h
+fuse.h
+-
+stdio.h
+-
+string.h
+-
+errno.h
+-
+fcntl.h
+-
+iostream
+-
+stdlib.h
+-
+map
+-
+list
+-
+
