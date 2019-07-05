@@ -59,10 +59,10 @@ RM = /snap/clion/73/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/donelkostino/bricks/kfs
+CMAKE_SOURCE_DIR = /home/donelkostino/kfs
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/donelkostino/bricks/kfs/cmake-build-debug
+CMAKE_BINARY_DIR = /home/donelkostino/kfs/cmake-build-debug
 
 #=============================================================================
 # Target rules for target CMakeFiles/kfs.dir
@@ -71,7 +71,7 @@ CMAKE_BINARY_DIR = /home/donelkostino/bricks/kfs/cmake-build-debug
 CMakeFiles/kfs.dir/all:
 	$(MAKE) -f CMakeFiles/kfs.dir/build.make CMakeFiles/kfs.dir/depend
 	$(MAKE) -f CMakeFiles/kfs.dir/build.make CMakeFiles/kfs.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/donelkostino/bricks/kfs/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target kfs"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/donelkostino/kfs/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target kfs"
 .PHONY : CMakeFiles/kfs.dir/all
 
 # Include target in all.
@@ -81,9 +81,9 @@ all: CMakeFiles/kfs.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/kfs.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/donelkostino/bricks/kfs/cmake-build-debug/CMakeFiles 2
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/donelkostino/kfs/cmake-build-debug/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/kfs.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/donelkostino/bricks/kfs/cmake-build-debug/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/donelkostino/kfs/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/kfs.dir/rule
 
 # Convenience name for target.

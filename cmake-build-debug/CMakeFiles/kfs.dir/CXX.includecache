@@ -6,11 +6,11 @@
 
 #IncludeRegexTransform: 
 
-/home/donelkostino/bricks/kfs/main.cpp
+/home/donelkostino/kfs/main.cpp
 main.h
-/home/donelkostino/bricks/kfs/main.h
+/home/donelkostino/kfs/main.h
 
-/home/donelkostino/bricks/kfs/main.h
+/home/donelkostino/kfs/main.h
 fuse.h
 -
 stdio.h

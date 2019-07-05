@@ -13,3 +13,4 @@ find_package(FUSE REQUIRED)
 include_directories(${FUSE_INCLUDE_DIR})
 
 add_executable(kfs main.cpp main.h)
+target_link_libraries(kfs ${FUSE_LIBRARIES})
