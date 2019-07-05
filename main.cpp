@@ -128,6 +128,7 @@ int findFile(const char* path)
     return 0;
 }
 
+//fuse functions
 
 static int kfs_getattr(const char *path, struct stat *stbuf)
 {
@@ -170,11 +171,76 @@ static int kfs_getattr(const char *path, struct stat *stbuf)
     return retValue;
 }
 
+static int kfs_write(const char *path, const char *buf, size_t size, off_t offset,
+                      struct fuse_file_info *fileInfo)
+{
+    (void) fileInfo;
+
+    if (findFile(path) == 0)
+        return -ENOENT;
+
+    dirInfo_t* dInfo = getDirectory(path, GET_PARENT_DIR);
+    if (dInfo == NULL)
+        dInfo = currentDirectory;
+
+    if (curFsSize+size > maxfsSize)
+        return -ENOSPC;
+
+    string filename = getFileOrDirName(path);
+
+    fileListIter it = dInfo->fileList.find(filename);
+    if (it == dInfo->fileList.end())
+        return -ENOENT;
+
+    it->second->fileContent.append(const_cast<char*>(buf), size);
+    curFsSize += size;
+
+    return size;
+}
+
+static int kfs_create(const char *path, mode_t mode, struct fuse_file_info *fileInf)
+{
+    (void) fileInf;
+
+    dirInfo_t* dInfo = getDirectory(path, GET_PARENT_DIR);
+    if (dInfo == NULL)
+        dInfo = currentDirectory;
+
+    string filename = getFileOrDirName(path);
+    fileInfo* fInfo = new fileInfo(filename);
+
+    dInfo->fileList.insert(std::pair<string, fileInfo*>(filename, fInfo));
+    dInfo->updateFileTime(filename);
+
+    return 0;
+}
+
+static int kfs_unlink(const char *path)
+{
+    if (findFile(path) == 0)
+        return -ENOENT;
+
+    dirInfo_t* dInfo = getDirectory(path, GET_PARENT_DIR);
+    if (dInfo == NULL)
+        dInfo = currentDirectory;
+
+    string filename = getFileOrDirName(path);
+    curFsSize -= dInfo->fileList[filename]->length();
+    dInfo->fileList.erase(filename);
+
+    return 0;
+}
+
+
+
 static struct fuse_operations kfs_oper;
 
 int main(int argc, char *argv[])
 {
     kfs_oper.getattr           = kfs_getattr;
+    kfs_oper.write             = kfs_write;
+    kfs_oper.create            = kfs_create;
+    kfs_oper.unlink            = kfs_unlink;
 
 
     currentDirectory = new dirInfo_t;
