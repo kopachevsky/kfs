@@ -1,15 +1,17 @@
-#include <map>
-#include <string>
-#include <iostream>
-using namespace std;
+#define FUSE_USE_VERSION 26
 
-extern "C" {
-
-#define FUSE_USE_VERSION  26
 #include <fuse.h>
 #include <stdio.h>
 #include <string.h>
 #include <errno.h>
 #include <fcntl.h>
-#include <unistd.h>
-#include <sys/types.h>
+#include <iostream>
+#include <stdlib.h>
+#include <map>
+#include <list>
+
+#define GET_PARENT_DIR 1
+#define GET_DIR 2
+#define true 1
+
+using namespace std;
