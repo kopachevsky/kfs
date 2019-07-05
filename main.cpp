@@ -50,6 +50,7 @@ public:
 int dirInfo_t::updateFileTime(string filename)
 {
     fileList[filename]->updateTime = time(NULL);
+    return 0;
 }
 
 typedef map<string, fileInfo*>::iterator fileListIter;
