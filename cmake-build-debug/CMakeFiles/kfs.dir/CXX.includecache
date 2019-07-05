@@ -11,6 +11,12 @@ main.h
 /home/donelkostino/kfs/main.h
 
 /home/donelkostino/kfs/main.h
+map
+-
+string
+-
+iostream
+-
 fuse.h
 -
 stdio.h
@@ -21,12 +27,8 @@ errno.h
 -
 fcntl.h
 -
-iostream
+unistd.h
 -
-stdlib.h
--
-map
--
-list
+sys/types.h
 -
 

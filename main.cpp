@@ -1,269 +1,76 @@
 #include "main.h"
 
-class fileInfo
-{
-public:
-    string fileName;
-    string fileContent;
-    mode_t mode;
-    time_t updateTime;
+typedef map<int, unsigned char> FileContents;
+typedef map<string, FileContents> FileMap;
+static FileMap files;
 
-    fileInfo(string filename)
-    {
-        fileName = filename;
-        fileContent = "";
-        updateTime = time(NULL);
-    }
-
-    fileInfo(string filename, string content)
-    {
-        fileName = filename;
-        fileContent = content;
-        updateTime = time(NULL);
-    }
-
-    int length()
-    {
-        return fileContent.length();
-    }
-};
-
-class dirInfo_t
-{
-public:
-    string dirName;
-    map<string, fileInfo*> fileList;
-    dirInfo_t* parentDir;
-    map<string, dirInfo_t*> childDir;
-    map<string, time_t> fileTime;
-    time_t createTime;
-
-    dirInfo_t()
-    {
-        parentDir = NULL;
-        dirName = "/";
-    }
-
-    int updateFileTime(string filename);
-};
-
-int dirInfo_t::updateFileTime(string filename)
-{
-    fileList[filename]->updateTime = time(NULL);
+static bool file_exists(string filename) {
+    bool b = files.find(filename) != files.end();
+    cout << "file_exists: " << filename << ": " << b << endl;
+    return b;
 }
 
-typedef map<string, fileInfo*>::iterator fileListIter;
-typedef map<string, dirInfo_t*>::iterator dirListIter;
+FileContents to_map(string data) {
+    FileContents data_map;
+    int i = 0;
 
-time_t rootCreateTime;
-dirInfo_t* currentDirectory = NULL;
-long curFsSize = 0;
-long maxfsSize;
+    for (string::iterator it = data.begin(); it < data.end(); ++it)
+        data_map[i++] = *it;
 
-list<string> parsePath(string path)
-{
-    list<string> parsedPath;
-    char* p;
-    char* cPath = strdup(path.c_str());
-
-    p = strtok(cPath, "/");
-
-    while (p != NULL)
-    {
-        parsedPath.push_back(p);
-        p = strtok(NULL, "/");
-    }
-
-    free(cPath);
-    return parsedPath;
+    return data_map;
 }
 
-string getFileOrDirName(string path)
-{
-    list<string> pathList = parsePath(path);
-    return pathList.back();
+static string strip_leading_slash(string filename) {
+    bool starts_with_slash = false;
+
+    if( filename.size() > 0 )
+        if( filename[0] == '/' )
+            starts_with_slash = true;
+
+    return starts_with_slash ? filename.substr(1, string::npos) : filename;
 }
 
-dirInfo_t* getDirectory(string path, int type)
-{
-    dirInfo_t* dInfo = currentDirectory;
-
-    list<string> mylist = parsePath(path);
-    if ((mylist.size() == 1) && (type == GET_PARENT_DIR))
-    {
-        return dInfo;
-    }
-
-    list<string>::iterator it = mylist.begin();
-    int size = mylist.size();
-    if (type == GET_PARENT_DIR)
-        size--;
-
-    for (int i = 0;i < size; it++,i++)
-    {
-        dirListIter iter = dInfo->childDir.find(*it);
-        if (iter == dInfo->childDir.end())
-            return NULL;
-
-        dInfo = iter->second;
-    }
-
-    return dInfo;
-
-}
-
-int findFile(const char* path)
-{
-    dirInfo_t* dInfo = getDirectory(path, GET_PARENT_DIR);
-    if (dInfo == NULL)
-        return 0;
-
-    string sPath = getFileOrDirName(path);
-    fileListIter it = dInfo->fileList.begin();
-    for (;it != dInfo->fileList.end(); it++)
-    {
-        if (!strcmp(sPath.c_str(), it->first.c_str()))
-            return 1;
-    }
-    return 0;
-}
-
-//fuse functions
-
-static int kfs_getattr(const char *path, struct stat *stbuf)
-{
-    int retValue = 0;
-
+static int kfs_getattr(const char* path, struct stat* stbuf) {
+    string filename = path;
+    string stripped_slash = strip_leading_slash(filename);
+    int res = 0;
     memset(stbuf, 0, sizeof(struct stat));
 
-    dirInfo_t* dInfo = NULL;
-    dInfo = getDirectory(path, GET_DIR);//check whether its a dir
+    stbuf->st_uid = getuid();
+    stbuf->st_gid = getgid();
+    stbuf->st_atime = stbuf->st_mtime = stbuf->st_ctime = time(NULL);
 
-    if (strcmp(path, "/") == 0) {
-        stbuf->st_mode = S_IFDIR | 0755;
-        stbuf->st_nlink = 3;  //should be 3 bec of hierarchical dir (. and ..)
-        stbuf->st_mtime	= rootCreateTime;
-        stbuf->st_size = 4096;
-    }
-    else if (dInfo != NULL)
-    {
-        stbuf->st_mode = S_IFDIR | 0755;
-        stbuf->st_nlink = 3;  //should be 3 bec of hierarchical dir (. and ..)
-        stbuf->st_mtime	= dInfo->createTime;
-        stbuf->st_size = 4096;
-    }
-    else if (findFile(path) == true)
-    {
-        dInfo = getDirectory(path, GET_PARENT_DIR);
-        if (dInfo == NULL)
-            return -ENOENT;
+    if(filename == "/") { //Attribute des Wurzelverzeichnisses
+        cout << "kfs_getattr("<<filename<<"): Returning attributes for /" << endl;
+        stbuf->st_mode = S_IFDIR | 0777;
+        stbuf->st_nlink = 2;
 
-        stbuf->st_mode = S_IFREG | 0755;
+    } else if(file_exists(stripped_slash)) { //Eine existierende Datei wird gelesen
+        cout << "kfs_getattr("<<stripped_slash<<"): Returning attributes" << endl;
+        stbuf->st_mode = S_IFREG | 0777;
         stbuf->st_nlink = 1;
-        string filename = getFileOrDirName(path);
-        stbuf->st_size = dInfo->fileList[filename]->length();
+        stbuf->st_size = files[stripped_slash].size();
 
-        stbuf->st_mtime = dInfo->fileList[filename]->updateTime;
+    } else {
+        cout << "kfs_getattr("<<stripped_slash<<"): not found" << endl;
+        res = -ENOENT;
     }
-    else
-        retValue = -ENOENT;
 
-    return retValue;
+    return res;
 }
 
-static int kfs_write(const char *path, const char *buf, size_t size, off_t offset,
-                      struct fuse_file_info *fileInfo)
-{
-    (void) fileInfo;
-
-    if (findFile(path) == 0)
-        return -ENOENT;
-
-    dirInfo_t* dInfo = getDirectory(path, GET_PARENT_DIR);
-    if (dInfo == NULL)
-        dInfo = currentDirectory;
-
-    if (curFsSize+size > maxfsSize)
-        return -ENOSPC;
-
-    string filename = getFileOrDirName(path);
-
-    fileListIter it = dInfo->fileList.find(filename);
-    if (it == dInfo->fileList.end())
-        return -ENOENT;
-
-    it->second->fileContent.append(const_cast<char*>(buf), size);
-    curFsSize += size;
-
-    return size;
+int kfs_fgetattr(const char* path, struct stat* stbuf, struct fuse_file_info *) {
+    cout << "kfs_fgetattr("<<path<<"): Delegating to kfs_getattr" << endl;
+    return kfs_getattr(path, stbuf);
 }
-
-static int kfs_create(const char *path, mode_t mode, struct fuse_file_info *fileInf)
-{
-    (void) fileInf;
-
-    dirInfo_t* dInfo = getDirectory(path, GET_PARENT_DIR);
-    if (dInfo == NULL)
-        dInfo = currentDirectory;
-
-    string filename = getFileOrDirName(path);
-    fileInfo* fInfo = new fileInfo(filename);
-
-    dInfo->fileList.insert(std::pair<string, fileInfo*>(filename, fInfo));
-    dInfo->updateFileTime(filename);
-
-    return 0;
-}
-
-static int kfs_unlink(const char *path)
-{
-    if (findFile(path) == 0)
-        return -ENOENT;
-
-    dirInfo_t* dInfo = getDirectory(path, GET_PARENT_DIR);
-    if (dInfo == NULL)
-        dInfo = currentDirectory;
-
-    string filename = getFileOrDirName(path);
-    curFsSize -= dInfo->fileList[filename]->length();
-    dInfo->fileList.erase(filename);
-
-    return 0;
-}
-
-
-
 static struct fuse_operations kfs_oper;
 
-int main(int argc, char *argv[])
-{
-    kfs_oper.getattr           = kfs_getattr;
-    kfs_oper.write             = kfs_write;
-    kfs_oper.create            = kfs_create;
-    kfs_oper.unlink            = kfs_unlink;
+int main(int argc, char** argv) {
 
+    kfs_oper.getattr	= kfs_getattr;
+    kfs_oper.fgetattr = kfs_fgetattr;
 
-    currentDirectory = new dirInfo_t;
-
-    rootCreateTime = time(NULL);
-
-    if (argc == 4)
-    {
-        maxfsSize = atoi(argv[argc-2]);
-        maxfsSize = maxfsSize*1024*1024;
-        argv[2] = argv[3];
-        return fuse_main(argc-1, argv, &kfs_oper, NULL);
-    }
-    else if (argc == 3)
-    {
-        maxfsSize = atoi(argv[argc-1]);
-        maxfsSize = maxfsSize*1024*1024;
-        return fuse_main(argc-1, argv, &kfs_oper, NULL);
-    }
-    else
-    {
-        printf("Enter <mount path>, <filesystem size>\n");
-        exit(0);
-    }
+    return fuse_main(argc, argv, &kfs_oper, NULL);
+}
 
 }

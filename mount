@@ -1,0 +1,1 @@
+sudo mount -t <file system> fuse <directory>
