@@ -20,6 +20,15 @@ include_directories(${FUSE_INCLUDE_DIR})
 add_executable(kfs main.cpp main.h)
 target_link_libraries(kfs ${FUSE_LIBRARIES})
 
+if(SPDLOG_BUILD_EXAMPLE_HO)
+    add_executable(example_header_only example.cpp)
+    spdlog_enable_warnings(example_header_only)
+    target_link_libraries(example_header_only PRIVATE spdlog::spdlog_header_only)
+endif()
+
+# Create logs directory
+file(MAKE_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/logs")
+
 set_target_properties(kfs 
     PROPERTIES 
     COMPILE_FLAGS "-D_FILE_OFFSET_BITS=64")
