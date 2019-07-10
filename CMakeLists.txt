@@ -13,13 +13,17 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS 1)
 
 
 
-find_package(FUSE REQUIRED)
+find_package(FUSE REQUIRED )
+find_package(Log4cxx)
 
 include_directories(${FUSE_INCLUDE_DIR})
+include_directories(${Log4cxx_INCLUDE_DIR})
 
 add_executable(kfs main.cpp main.h)
-target_link_libraries(kfs ${FUSE_LIBRARIES})
 
-set_target_properties(kfs 
+target_link_libraries(kfs ${FUSE_LIBRARIES})
+target_link_libraries(kfs ${Log4cxx_LIBRARY})
+
+set_target_properties(kfs
     PROPERTIES 
     COMPILE_FLAGS "-D_FILE_OFFSET_BITS=64")
