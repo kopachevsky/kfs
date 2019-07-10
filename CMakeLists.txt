@@ -19,7 +19,7 @@ find_package(Log4cxx)
 include_directories(${FUSE_INCLUDE_DIR})
 include_directories(${Log4cxx_INCLUDE_DIR})
 
-add_executable(kfs main.cpp main.h logger.h)
+add_executable(kfs main.cpp main.h)
 
 target_link_libraries(kfs ${FUSE_LIBRARIES})
 target_link_libraries(kfs ${Log4cxx_LIBRARY})
