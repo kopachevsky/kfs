@@ -4,5 +4,6 @@
 #include <iostream>
 #include <string.h>
 #include <errno.h>
+#include "logger.h"
 
 using namespace std;

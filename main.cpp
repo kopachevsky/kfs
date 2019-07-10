@@ -1,5 +1,5 @@
 #include "main.h"
-
+LOG_INIT("main");
 
 static const char *filepath = "/file";
 static const char *filename = "file";
