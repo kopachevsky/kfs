@@ -1,36 +1,5 @@
 #include "main.h"
 
-typedef map<int, unsigned char> FileContents;
-typedef map<string, FileContents> FileMap;
-static FileMap files;
-
-static bool file_exists(string filename) {
-    bool b = files.find(filename) != files.end();
-    cout << "file_exists: " << filename << ": " << b << endl;
-    return b;
-}
-
-
-FileContents to_map(string data) {
-    FileContents data_map;
-    int i = 0;
-
-    for (string::iterator it = data.begin(); it < data.end(); ++it)
-        data_map[i++] = *it;
-
-    return data_map;
-}
-
-static string strip_leading_slash(string filename) {
-    bool starts_with_slash = false;
-
-    if( filename.size() > 0 )
-        if( filename[0] == '/' )
-            starts_with_slash = true;
-
-    return starts_with_slash ? filename.substr(1, string::npos) : filename;
-}
-
 static int kfs_getattr(const char* path, struct stat* stbuf) {
     string filename = path;
     string stripped_slash = strip_leading_slash(filename);
@@ -71,8 +40,8 @@ static int kfs_readdir(const char* path, void* buf, fuse_fill_dir_t filler, off_
     filler(buf, ".", nullptr, 0);
     filler(buf, "..", nullptr, 0);
 
-    for (FileMap::iterator it = files.begin(); it != files.end(); it++)
-        filler(buf, it->first.c_str(), nullptr, 0);
+    for (auto & file : files)
+        filler(buf, file.first.c_str(), nullptr, 0);
 
     return 0;
 }
@@ -217,6 +186,4 @@ int main(int argc, char** argv) {
     kfs_oper.fgetattr   = kfs_fgetattr;
 
     return fuse_main(argc, argv, &kfs_oper, nullptr);
-}
-
 }
