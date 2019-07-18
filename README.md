@@ -1,9 +1,16 @@
- Build 
+How build:
+    
+    1.mkdir build && cd build
+    2.cmake.. && make
+    /or use build.sh
 
-    cmake -DCMAKE_BUILD_TYPE=Debug . -Bbuild
-    cd build
-    make -j 
+How to mount/unmount
 
-Mount
+To mount fs use:
+    ./build/KFS -d -s -f <directory>
+to unmount fs use:
+    fusermount -uz <directory>
 
-    ./bin/kfs -d -s -f <directory>
+How to check mount:
+
+    findmnt

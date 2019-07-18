@@ -1,7 +1,3 @@
-cmake -DCMAKE_BUILD_TYPE=Debug . -Bbuild
-cd build
-make -j 
+mkdir build && cd build
+cmake .. && make
 cd -
-mkdir -p bin
-cp build/bin/kfs bin 
-
