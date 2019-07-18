@@ -71,7 +71,7 @@ CMAKE_BINARY_DIR = /home/donelkostino/kfs/cmake-build-debug
 CMakeFiles/KFS.dir/all:
 	$(MAKE) -f CMakeFiles/KFS.dir/build.make CMakeFiles/KFS.dir/depend
 	$(MAKE) -f CMakeFiles/KFS.dir/build.make CMakeFiles/KFS.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/donelkostino/kfs/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target KFS"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/donelkostino/kfs/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7,8,9 "Built target KFS"
 .PHONY : CMakeFiles/KFS.dir/all
 
 # Include target in all.
@@ -81,7 +81,7 @@ all: CMakeFiles/KFS.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/KFS.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/donelkostino/kfs/cmake-build-debug/CMakeFiles 7
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/donelkostino/kfs/cmake-build-debug/CMakeFiles 9
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/KFS.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/donelkostino/kfs/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/KFS.dir/rule

@@ -258,6 +258,60 @@ kfs_read.c.s:
 	$(MAKE) -f CMakeFiles/KFS.dir/build.make CMakeFiles/KFS.dir/kfs_read.c.s
 .PHONY : kfs_read.c.s
 
+kfs_release.o: kfs_release.c.o
+
+.PHONY : kfs_release.o
+
+# target to build an object file
+kfs_release.c.o:
+	$(MAKE) -f CMakeFiles/KFS.dir/build.make CMakeFiles/KFS.dir/kfs_release.c.o
+.PHONY : kfs_release.c.o
+
+kfs_release.i: kfs_release.c.i
+
+.PHONY : kfs_release.i
+
+# target to preprocess a source file
+kfs_release.c.i:
+	$(MAKE) -f CMakeFiles/KFS.dir/build.make CMakeFiles/KFS.dir/kfs_release.c.i
+.PHONY : kfs_release.c.i
+
+kfs_release.s: kfs_release.c.s
+
+.PHONY : kfs_release.s
+
+# target to generate assembly for a file
+kfs_release.c.s:
+	$(MAKE) -f CMakeFiles/KFS.dir/build.make CMakeFiles/KFS.dir/kfs_release.c.s
+.PHONY : kfs_release.c.s
+
+kfs_truncate.o: kfs_truncate.c.o
+
+.PHONY : kfs_truncate.o
+
+# target to build an object file
+kfs_truncate.c.o:
+	$(MAKE) -f CMakeFiles/KFS.dir/build.make CMakeFiles/KFS.dir/kfs_truncate.c.o
+.PHONY : kfs_truncate.c.o
+
+kfs_truncate.i: kfs_truncate.c.i
+
+.PHONY : kfs_truncate.i
+
+# target to preprocess a source file
+kfs_truncate.c.i:
+	$(MAKE) -f CMakeFiles/KFS.dir/build.make CMakeFiles/KFS.dir/kfs_truncate.c.i
+.PHONY : kfs_truncate.c.i
+
+kfs_truncate.s: kfs_truncate.c.s
+
+.PHONY : kfs_truncate.s
+
+# target to generate assembly for a file
+kfs_truncate.c.s:
+	$(MAKE) -f CMakeFiles/KFS.dir/build.make CMakeFiles/KFS.dir/kfs_truncate.c.s
+.PHONY : kfs_truncate.c.s
+
 kfs_write.o: kfs_write.c.o
 
 .PHONY : kfs_write.o
@@ -309,6 +363,12 @@ help:
 	@echo "... kfs_read.o"
 	@echo "... kfs_read.i"
 	@echo "... kfs_read.s"
+	@echo "... kfs_release.o"
+	@echo "... kfs_release.i"
+	@echo "... kfs_release.s"
+	@echo "... kfs_truncate.o"
+	@echo "... kfs_truncate.i"
+	@echo "... kfs_truncate.s"
 	@echo "... kfs_write.o"
 	@echo "... kfs_write.i"
 	@echo "... kfs_write.s"

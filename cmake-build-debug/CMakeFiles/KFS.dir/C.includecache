@@ -7,24 +7,8 @@
 #IncludeRegexTransform: 
 
 /home/donelkostino/kfs/kfs.c
-errno.h
--
-fuse.h
--
-getopt.h
--
-stdio.h
--
-stdlib.h
--
-string.h
--
-sysexits.h
--
 kfs.h
 /home/donelkostino/kfs/kfs.h
-kfs_functions.h
-/home/donelkostino/kfs/kfs_functions.h
 
 /home/donelkostino/kfs/kfs.h
 fuse.h
@@ -45,6 +29,16 @@ stdlib.h
 -
 limits.h
 -
+errno.h
+-
+getopt.h
+-
+string.h
+-
+sysexits.h
+-
+kfs_fuse_functions.h
+/home/donelkostino/kfs/kfs_fuse_functions.h
 
 /home/donelkostino/kfs/kfs_access.c
 kfs_access.h
@@ -58,7 +52,7 @@ glusterfs/api/glfs.h
 kfs.h
 /home/donelkostino/kfs/kfs.h
 
-/home/donelkostino/kfs/kfs_functions.h
+/home/donelkostino/kfs/kfs_fuse_functions.h
 kfs_getattr.h
 /home/donelkostino/kfs/kfs_getattr.h
 kfs_access.h
@@ -67,6 +61,12 @@ kfs_open.h
 /home/donelkostino/kfs/kfs_open.h
 kfs_read.h
 /home/donelkostino/kfs/kfs_read.h
+kfs_write.h
+/home/donelkostino/kfs/kfs_write.h
+kfs_truncate.h
+/home/donelkostino/kfs/kfs_truncate.h
+kfs_release.h
+/home/donelkostino/kfs/kfs_release.h
 
 /home/donelkostino/kfs/kfs_getattr.c
 kfs_getattr.h
@@ -97,6 +97,42 @@ kfs_read.h
 /home/donelkostino/kfs/kfs_read.h
 
 /home/donelkostino/kfs/kfs_read.h
+errno.h
+-
+glusterfs/api/glfs.h
+-
+kfs.h
+/home/donelkostino/kfs/kfs.h
+
+/home/donelkostino/kfs/kfs_release.c
+kfs_release.h
+/home/donelkostino/kfs/kfs_release.h
+
+/home/donelkostino/kfs/kfs_release.h
+errno.h
+-
+glusterfs/api/glfs.h
+-
+kfs.h
+/home/donelkostino/kfs/kfs.h
+
+/home/donelkostino/kfs/kfs_truncate.c
+kfs_truncate.h
+/home/donelkostino/kfs/kfs_truncate.h
+
+/home/donelkostino/kfs/kfs_truncate.h
+errno.h
+-
+glusterfs/api/glfs.h
+-
+kfs.h
+/home/donelkostino/kfs/kfs.h
+
+/home/donelkostino/kfs/kfs_write.c
+kfs_write.h
+/home/donelkostino/kfs/kfs_write.h
+
+/home/donelkostino/kfs/kfs_write.h
 errno.h
 -
 glusterfs/api/glfs.h

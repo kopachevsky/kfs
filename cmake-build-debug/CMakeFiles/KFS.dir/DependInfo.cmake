@@ -9,6 +9,8 @@ set(CMAKE_DEPENDS_CHECK_C
   "/home/donelkostino/kfs/kfs_getattr.c" "/home/donelkostino/kfs/cmake-build-debug/CMakeFiles/KFS.dir/kfs_getattr.c.o"
   "/home/donelkostino/kfs/kfs_open.c" "/home/donelkostino/kfs/cmake-build-debug/CMakeFiles/KFS.dir/kfs_open.c.o"
   "/home/donelkostino/kfs/kfs_read.c" "/home/donelkostino/kfs/cmake-build-debug/CMakeFiles/KFS.dir/kfs_read.c.o"
+  "/home/donelkostino/kfs/kfs_release.c" "/home/donelkostino/kfs/cmake-build-debug/CMakeFiles/KFS.dir/kfs_release.c.o"
+  "/home/donelkostino/kfs/kfs_truncate.c" "/home/donelkostino/kfs/cmake-build-debug/CMakeFiles/KFS.dir/kfs_truncate.c.o"
   "/home/donelkostino/kfs/kfs_write.c" "/home/donelkostino/kfs/cmake-build-debug/CMakeFiles/KFS.dir/kfs_write.c.o"
   )
 set(CMAKE_C_COMPILER_ID "GNU")

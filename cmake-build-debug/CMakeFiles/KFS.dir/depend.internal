@@ -5,23 +5,87 @@ CMakeFiles/KFS.dir/kfs.c.o
  /home/donelkostino/kfs/kfs.c
  /home/donelkostino/kfs/kfs.h
  /home/donelkostino/kfs/kfs_access.h
- /home/donelkostino/kfs/kfs_functions.h
+ /home/donelkostino/kfs/kfs_fuse_functions.h
  /home/donelkostino/kfs/kfs_getattr.h
  /home/donelkostino/kfs/kfs_open.h
  /home/donelkostino/kfs/kfs_read.h
+ /home/donelkostino/kfs/kfs_release.h
+ /home/donelkostino/kfs/kfs_truncate.h
+ /home/donelkostino/kfs/kfs_write.h
 CMakeFiles/KFS.dir/kfs_access.c.o
  /home/donelkostino/kfs/kfs.h
  /home/donelkostino/kfs/kfs_access.c
  /home/donelkostino/kfs/kfs_access.h
+ /home/donelkostino/kfs/kfs_fuse_functions.h
+ /home/donelkostino/kfs/kfs_getattr.h
+ /home/donelkostino/kfs/kfs_open.h
+ /home/donelkostino/kfs/kfs_read.h
+ /home/donelkostino/kfs/kfs_release.h
+ /home/donelkostino/kfs/kfs_truncate.h
+ /home/donelkostino/kfs/kfs_write.h
 CMakeFiles/KFS.dir/kfs_getattr.c.o
  /home/donelkostino/kfs/kfs.h
+ /home/donelkostino/kfs/kfs_access.h
+ /home/donelkostino/kfs/kfs_fuse_functions.h
  /home/donelkostino/kfs/kfs_getattr.c
  /home/donelkostino/kfs/kfs_getattr.h
+ /home/donelkostino/kfs/kfs_open.h
+ /home/donelkostino/kfs/kfs_read.h
+ /home/donelkostino/kfs/kfs_release.h
+ /home/donelkostino/kfs/kfs_truncate.h
+ /home/donelkostino/kfs/kfs_write.h
 CMakeFiles/KFS.dir/kfs_open.c.o
  /home/donelkostino/kfs/kfs.h
+ /home/donelkostino/kfs/kfs_access.h
+ /home/donelkostino/kfs/kfs_fuse_functions.h
+ /home/donelkostino/kfs/kfs_getattr.h
  /home/donelkostino/kfs/kfs_open.c
  /home/donelkostino/kfs/kfs_open.h
+ /home/donelkostino/kfs/kfs_read.h
+ /home/donelkostino/kfs/kfs_release.h
+ /home/donelkostino/kfs/kfs_truncate.h
+ /home/donelkostino/kfs/kfs_write.h
 CMakeFiles/KFS.dir/kfs_read.c.o
  /home/donelkostino/kfs/kfs.h
+ /home/donelkostino/kfs/kfs_access.h
+ /home/donelkostino/kfs/kfs_fuse_functions.h
+ /home/donelkostino/kfs/kfs_getattr.h
+ /home/donelkostino/kfs/kfs_open.h
  /home/donelkostino/kfs/kfs_read.c
  /home/donelkostino/kfs/kfs_read.h
+ /home/donelkostino/kfs/kfs_release.h
+ /home/donelkostino/kfs/kfs_truncate.h
+ /home/donelkostino/kfs/kfs_write.h
+CMakeFiles/KFS.dir/kfs_release.c.o
+ /home/donelkostino/kfs/kfs.h
+ /home/donelkostino/kfs/kfs_access.h
+ /home/donelkostino/kfs/kfs_fuse_functions.h
+ /home/donelkostino/kfs/kfs_getattr.h
+ /home/donelkostino/kfs/kfs_open.h
+ /home/donelkostino/kfs/kfs_read.h
+ /home/donelkostino/kfs/kfs_release.c
+ /home/donelkostino/kfs/kfs_release.h
+ /home/donelkostino/kfs/kfs_truncate.h
+ /home/donelkostino/kfs/kfs_write.h
+CMakeFiles/KFS.dir/kfs_truncate.c.o
+ /home/donelkostino/kfs/kfs.h
+ /home/donelkostino/kfs/kfs_access.h
+ /home/donelkostino/kfs/kfs_fuse_functions.h
+ /home/donelkostino/kfs/kfs_getattr.h
+ /home/donelkostino/kfs/kfs_open.h
+ /home/donelkostino/kfs/kfs_read.h
+ /home/donelkostino/kfs/kfs_release.h
+ /home/donelkostino/kfs/kfs_truncate.c
+ /home/donelkostino/kfs/kfs_truncate.h
+ /home/donelkostino/kfs/kfs_write.h
+CMakeFiles/KFS.dir/kfs_write.c.o
+ /home/donelkostino/kfs/kfs.h
+ /home/donelkostino/kfs/kfs_access.h
+ /home/donelkostino/kfs/kfs_fuse_functions.h
+ /home/donelkostino/kfs/kfs_getattr.h
+ /home/donelkostino/kfs/kfs_open.h
+ /home/donelkostino/kfs/kfs_read.h
+ /home/donelkostino/kfs/kfs_release.h
+ /home/donelkostino/kfs/kfs_truncate.h
+ /home/donelkostino/kfs/kfs_write.c
+ /home/donelkostino/kfs/kfs_write.h

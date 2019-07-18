@@ -1,13 +1,4 @@
-#include <errno.h>
-#include <fuse.h>
-#include <getopt.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <sysexits.h>
-
 #include "kfs.h"
-#include "kfs_functions.h"
 
 struct fuse_operations kfs_ops =
         {
@@ -16,9 +7,11 @@ struct fuse_operations kfs_ops =
                 .open       = kfs_open,
                 .read       = kfs_read,
                 .write      = kfs_write,
-                .getdir     = NULL,
-                .utime      = NULL,
-                .bmap       = NULL
+                .truncate   = kfs_truncate,
+                .release    = kfs_release
+//                .getdir     = NULL,
+//                .utime      = NULL,
+//                .bmap       = NULL
         };
 
 

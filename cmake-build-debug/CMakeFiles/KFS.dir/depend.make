@@ -4,24 +4,88 @@
 CMakeFiles/KFS.dir/kfs.c.o: ../kfs.c
 CMakeFiles/KFS.dir/kfs.c.o: ../kfs.h
 CMakeFiles/KFS.dir/kfs.c.o: ../kfs_access.h
-CMakeFiles/KFS.dir/kfs.c.o: ../kfs_functions.h
+CMakeFiles/KFS.dir/kfs.c.o: ../kfs_fuse_functions.h
 CMakeFiles/KFS.dir/kfs.c.o: ../kfs_getattr.h
 CMakeFiles/KFS.dir/kfs.c.o: ../kfs_open.h
 CMakeFiles/KFS.dir/kfs.c.o: ../kfs_read.h
+CMakeFiles/KFS.dir/kfs.c.o: ../kfs_release.h
+CMakeFiles/KFS.dir/kfs.c.o: ../kfs_truncate.h
+CMakeFiles/KFS.dir/kfs.c.o: ../kfs_write.h
 
 CMakeFiles/KFS.dir/kfs_access.c.o: ../kfs.h
 CMakeFiles/KFS.dir/kfs_access.c.o: ../kfs_access.c
 CMakeFiles/KFS.dir/kfs_access.c.o: ../kfs_access.h
+CMakeFiles/KFS.dir/kfs_access.c.o: ../kfs_fuse_functions.h
+CMakeFiles/KFS.dir/kfs_access.c.o: ../kfs_getattr.h
+CMakeFiles/KFS.dir/kfs_access.c.o: ../kfs_open.h
+CMakeFiles/KFS.dir/kfs_access.c.o: ../kfs_read.h
+CMakeFiles/KFS.dir/kfs_access.c.o: ../kfs_release.h
+CMakeFiles/KFS.dir/kfs_access.c.o: ../kfs_truncate.h
+CMakeFiles/KFS.dir/kfs_access.c.o: ../kfs_write.h
 
 CMakeFiles/KFS.dir/kfs_getattr.c.o: ../kfs.h
+CMakeFiles/KFS.dir/kfs_getattr.c.o: ../kfs_access.h
+CMakeFiles/KFS.dir/kfs_getattr.c.o: ../kfs_fuse_functions.h
 CMakeFiles/KFS.dir/kfs_getattr.c.o: ../kfs_getattr.c
 CMakeFiles/KFS.dir/kfs_getattr.c.o: ../kfs_getattr.h
+CMakeFiles/KFS.dir/kfs_getattr.c.o: ../kfs_open.h
+CMakeFiles/KFS.dir/kfs_getattr.c.o: ../kfs_read.h
+CMakeFiles/KFS.dir/kfs_getattr.c.o: ../kfs_release.h
+CMakeFiles/KFS.dir/kfs_getattr.c.o: ../kfs_truncate.h
+CMakeFiles/KFS.dir/kfs_getattr.c.o: ../kfs_write.h
 
 CMakeFiles/KFS.dir/kfs_open.c.o: ../kfs.h
+CMakeFiles/KFS.dir/kfs_open.c.o: ../kfs_access.h
+CMakeFiles/KFS.dir/kfs_open.c.o: ../kfs_fuse_functions.h
+CMakeFiles/KFS.dir/kfs_open.c.o: ../kfs_getattr.h
 CMakeFiles/KFS.dir/kfs_open.c.o: ../kfs_open.c
 CMakeFiles/KFS.dir/kfs_open.c.o: ../kfs_open.h
+CMakeFiles/KFS.dir/kfs_open.c.o: ../kfs_read.h
+CMakeFiles/KFS.dir/kfs_open.c.o: ../kfs_release.h
+CMakeFiles/KFS.dir/kfs_open.c.o: ../kfs_truncate.h
+CMakeFiles/KFS.dir/kfs_open.c.o: ../kfs_write.h
 
 CMakeFiles/KFS.dir/kfs_read.c.o: ../kfs.h
+CMakeFiles/KFS.dir/kfs_read.c.o: ../kfs_access.h
+CMakeFiles/KFS.dir/kfs_read.c.o: ../kfs_fuse_functions.h
+CMakeFiles/KFS.dir/kfs_read.c.o: ../kfs_getattr.h
+CMakeFiles/KFS.dir/kfs_read.c.o: ../kfs_open.h
 CMakeFiles/KFS.dir/kfs_read.c.o: ../kfs_read.c
 CMakeFiles/KFS.dir/kfs_read.c.o: ../kfs_read.h
+CMakeFiles/KFS.dir/kfs_read.c.o: ../kfs_release.h
+CMakeFiles/KFS.dir/kfs_read.c.o: ../kfs_truncate.h
+CMakeFiles/KFS.dir/kfs_read.c.o: ../kfs_write.h
+
+CMakeFiles/KFS.dir/kfs_release.c.o: ../kfs.h
+CMakeFiles/KFS.dir/kfs_release.c.o: ../kfs_access.h
+CMakeFiles/KFS.dir/kfs_release.c.o: ../kfs_fuse_functions.h
+CMakeFiles/KFS.dir/kfs_release.c.o: ../kfs_getattr.h
+CMakeFiles/KFS.dir/kfs_release.c.o: ../kfs_open.h
+CMakeFiles/KFS.dir/kfs_release.c.o: ../kfs_read.h
+CMakeFiles/KFS.dir/kfs_release.c.o: ../kfs_release.c
+CMakeFiles/KFS.dir/kfs_release.c.o: ../kfs_release.h
+CMakeFiles/KFS.dir/kfs_release.c.o: ../kfs_truncate.h
+CMakeFiles/KFS.dir/kfs_release.c.o: ../kfs_write.h
+
+CMakeFiles/KFS.dir/kfs_truncate.c.o: ../kfs.h
+CMakeFiles/KFS.dir/kfs_truncate.c.o: ../kfs_access.h
+CMakeFiles/KFS.dir/kfs_truncate.c.o: ../kfs_fuse_functions.h
+CMakeFiles/KFS.dir/kfs_truncate.c.o: ../kfs_getattr.h
+CMakeFiles/KFS.dir/kfs_truncate.c.o: ../kfs_open.h
+CMakeFiles/KFS.dir/kfs_truncate.c.o: ../kfs_read.h
+CMakeFiles/KFS.dir/kfs_truncate.c.o: ../kfs_release.h
+CMakeFiles/KFS.dir/kfs_truncate.c.o: ../kfs_truncate.c
+CMakeFiles/KFS.dir/kfs_truncate.c.o: ../kfs_truncate.h
+CMakeFiles/KFS.dir/kfs_truncate.c.o: ../kfs_write.h
+
+CMakeFiles/KFS.dir/kfs_write.c.o: ../kfs.h
+CMakeFiles/KFS.dir/kfs_write.c.o: ../kfs_access.h
+CMakeFiles/KFS.dir/kfs_write.c.o: ../kfs_fuse_functions.h
+CMakeFiles/KFS.dir/kfs_write.c.o: ../kfs_getattr.h
+CMakeFiles/KFS.dir/kfs_write.c.o: ../kfs_open.h
+CMakeFiles/KFS.dir/kfs_write.c.o: ../kfs_read.h
+CMakeFiles/KFS.dir/kfs_write.c.o: ../kfs_release.h
+CMakeFiles/KFS.dir/kfs_write.c.o: ../kfs_truncate.h
+CMakeFiles/KFS.dir/kfs_write.c.o: ../kfs_write.c
+CMakeFiles/KFS.dir/kfs_write.c.o: ../kfs_write.h
 

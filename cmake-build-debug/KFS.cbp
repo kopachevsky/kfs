@@ -108,6 +108,18 @@
 		<Unit filename="/home/donelkostino/kfs/kfs_read.h">
 			<Option target="KFS"/>
 		</Unit>
+		<Unit filename="/home/donelkostino/kfs/kfs_release.c">
+			<Option target="KFS"/>
+		</Unit>
+		<Unit filename="/home/donelkostino/kfs/kfs_release.h">
+			<Option target="KFS"/>
+		</Unit>
+		<Unit filename="/home/donelkostino/kfs/kfs_truncate.c">
+			<Option target="KFS"/>
+		</Unit>
+		<Unit filename="/home/donelkostino/kfs/kfs_truncate.h">
+			<Option target="KFS"/>
+		</Unit>
 		<Unit filename="/home/donelkostino/kfs/kfs_write.c">
 			<Option target="KFS"/>
 		</Unit>

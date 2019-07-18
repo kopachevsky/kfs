@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/KFS.dir/kfs_open.c.o"
   "CMakeFiles/KFS.dir/kfs_read.c.o"
   "CMakeFiles/KFS.dir/kfs_write.c.o"
+  "CMakeFiles/KFS.dir/kfs_truncate.c.o"
+  "CMakeFiles/KFS.dir/kfs_release.c.o"
   "KFS.pdb"
   "KFS"
 )
