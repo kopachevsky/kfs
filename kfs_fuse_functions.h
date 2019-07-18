@@ -9,5 +9,6 @@
 #include "kfs_truncate.h"
 #include "kfs_release.h"
 #include "kfs_readdir.h"
+#include "kfs_unlink.h"
 
 #endif //KFS_KFS_FUSE_FUNCTIONS_H
