@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_getattr(const char* _path, struct stat* _buffer);
+int kfs_getattr(const char* path, struct stat* _buffer);
 
 #endif //KFS_KFS_GETATTR_H

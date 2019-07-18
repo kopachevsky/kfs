@@ -45,7 +45,9 @@ add_executable(KFS
         kfs.c
         kfs_getattr.c
         kfs_access.c
-        kfs_open.c)
+        kfs_open.c
+        kfs_read.c
+        kfs_write.c)
 
 target_link_libraries(KFS
         pthread
