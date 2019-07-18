@@ -10,5 +10,6 @@
 #include "kfs_release.h"
 #include "kfs_readdir.h"
 #include "kfs_unlink.h"
+#include "kfs_rename.h"
 
 #endif //KFS_KFS_FUSE_FUNCTIONS_H

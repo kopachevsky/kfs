@@ -10,11 +10,8 @@ struct fuse_operations kfs_ops =
                 .truncate   = kfs_truncate,
                 .release    = kfs_release,
                 .readdir    = kfs_readdir,
-                .unlink     = kfs_unlink
-
-//                .getdir     = NULL,
-//                .utime      = NULL,
-//                .bmap       = NULL
+                .unlink     = kfs_unlink,
+                .rename     = kfs_rename
         };
 
 
