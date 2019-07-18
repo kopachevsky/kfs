@@ -9,7 +9,9 @@ struct fuse_operations kfs_ops =
                 .write      = kfs_write,
                 .truncate   = kfs_truncate,
                 .release    = kfs_release,
-                .readdir    = kfs_readdir
+                .readdir    = kfs_readdir,
+                .unlink     = kfs_unlink
+
 //                .getdir     = NULL,
 //                .utime      = NULL,
 //                .bmap       = NULL

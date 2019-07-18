@@ -50,7 +50,8 @@ add_executable(KFS
         kfs_write.c
         kfs_truncate.c
         kfs_release.c
-        kfs_readdir.c)
+        kfs_readdir.c
+        kfs_unlink.c)
 
 target_link_libraries(KFS
         pthread

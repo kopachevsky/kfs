@@ -4,12 +4,11 @@ Build:
     2.cmake.. && make
     /or use build.sh
 
-Mount:
+Mount/Unmount
 
+To mount fs use:
     ./build/KFS -d -s -f <directory>
-
-Unmount:
-
+to unmount fs use:
     fusermount -uz <directory>
 
 How to check mount:
