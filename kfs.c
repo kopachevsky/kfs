@@ -11,7 +11,8 @@ struct fuse_operations kfs_ops =
                 .release    = kfs_release,
                 .readdir    = kfs_readdir,
                 .unlink     = kfs_unlink,
-                .rename     = kfs_rename
+                .rename     = kfs_rename,
+                .mkdir      = kfs_mkdir
         };
 
 
