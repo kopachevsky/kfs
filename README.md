@@ -1,10 +1,10 @@
-How build:
+Build:
     
     1.mkdir build && cd build
     2.cmake.. && make
     /or use build.sh
 
-How to mount/unmount
+Mount/Unmount
 
 To mount fs use:
     ./build/KFS -d -s -f <directory>
