@@ -1,3 +1,7 @@
+Dependencies:
+
+    sudo ./install_dependencies.sh
+
 Build:
     
     1.mkdir build && cd build

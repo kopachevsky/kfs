@@ -54,7 +54,8 @@ add_executable(KFS
         kfs_unlink.c
         kfs_rename.c
         kfs_mkdir.c
-        kfs_rmdir.c)
+        kfs_rmdir.c
+        kfs_mknod.c)
 
 target_link_libraries(KFS
         pthread

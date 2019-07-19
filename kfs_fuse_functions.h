@@ -13,5 +13,6 @@
 #include "kfs_rename.h"
 #include "kfs_mkdir.h"
 #include "kfs_rmdir.h"
+#include "kfs_mknod.h"
 
 #endif //KFS_KFS_FUSE_FUNCTIONS_H

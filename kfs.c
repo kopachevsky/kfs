@@ -13,7 +13,8 @@ struct fuse_operations kfs_ops =
                 .unlink     = kfs_unlink,
                 .rename     = kfs_rename,
                 .mkdir      = kfs_mkdir,
-                .rmdir      = kfs_rmdir
+                .rmdir      = kfs_rmdir,
+                .mknod      = kfs_mknod
         };
 
 
