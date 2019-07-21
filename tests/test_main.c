@@ -1,4 +1,6 @@
 #include <check.h>
+#include <stdlib.h>
+#include "kfs_suites.h"
 
 int main(void) {
     int number_failed;
