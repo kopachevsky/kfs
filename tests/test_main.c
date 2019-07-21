@@ -1,13 +1,27 @@
 #include <check.h>
 #include <stdlib.h>
+#include <kfs_common.h>
+#include <stdio.h>
+
 #include "kfs_suites.h"
+
+void main_setup(void) {
+    char template[] = "/tmp/kfs_tests.XXXXXX";
+    ABSOLUTE_PATH = mkdtemp(template);
+
+    if(ABSOLUTE_PATH == NULL) {
+        perror("mkdtemp failed: ");
+    }
+}
 
 int main(void) {
     int number_failed;
     SRunner *sr;
 
-    sr = srunner_create(kfs_access_suite());
-    srunner_add_suite(sr, kfs_read_suite());
+    sr = srunner_create(kfs_common_suite());
+    //srunner_add_suite(sr, kfs_mkdir_suite());
+   // srunner_add_suite(sr, kfs_access_suite());
+  //  srunner_add_suite(sr, kfs_read_suite());
     srunner_set_fork_status(sr, CK_NOFORK);
     srunner_set_log (sr, "test.log");
     srunner_set_xml (sr, "test.xml");

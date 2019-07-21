@@ -7,7 +7,7 @@
 #include "kfs_common.h"
 
 #pragma once
-char ABSOLUTE_PATH[PATH_MAX];
+
 int kfs_access(const char* path, int mask);
 
 

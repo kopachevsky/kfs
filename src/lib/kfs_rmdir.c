@@ -1,4 +1,4 @@
-
+#include <kfs_rmdir.h>
 
 int kfs_rmdir(const char* path) {
     int res = 0;

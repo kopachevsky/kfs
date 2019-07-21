@@ -1,4 +1,4 @@
-
+#include <kfs_unlink.h>
 
 int kfs_unlink(const char* path) {
     int res = 0;

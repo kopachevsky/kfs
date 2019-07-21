@@ -1,9 +1,9 @@
 #include <check.h>
 
-int i;
+#include <kfs_common.h>
 
 void kfs_acces_setup(void) {
-    i = 10;
+
 }
 
 void kfs_acces_teardown(void) {
