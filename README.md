@@ -19,3 +19,11 @@ Unmount:
 How to check mount:
 
     findmnt
+
+Test:
+
+    make & make test
+
+To check tests results
+
+    ${BUILD_DIR}/Testings/test.log
