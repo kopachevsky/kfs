@@ -5,21 +5,22 @@
 #include <string.h>
 #include <stdlib.h>
 #include <fuse.h>
+#include <stdio.h>
 
 #pragma once
-char *ABSOLUTE_PATH;
 
 char *MOUNT_PATH;
 char *LOCAL_DISC_CACHE_PATH;
 
-static char* concat(const char *s1, const char *s2) {
-    char *result = malloc(strlen(s1) + strlen(s2) + 1);
-    strcpy(result, s1);
-    strcat(result, s2);
-    return result;
+static char * str_concat(char const *const str1, char const *const str2) {
+    char s1[strlen(str1)], s2[strlen(str2)];
+    strcpy(s1, str1);
+    strcpy(s2, str2);
+    char *res = strcat(s1, s2);
+    return res;
 }
 
-static char *str_replace1( char const * const original, char const * const pattern, char const * const replacement) {
+static char *str_replace(char const *const original, char const *const pattern, char const *const replacement) {
     size_t const replen = strlen(replacement);
     size_t const patlen = strlen(pattern);
     size_t const orilen = strlen(original);
@@ -56,9 +57,13 @@ static char *str_replace1( char const * const original, char const * const patte
     return returned;
 }
 
-static char* local_disk_cache_path(const char *original) {
-    char *path = realpath(original, NULL);
-    return str_replace1(path, MOUNT_PATH, LOCAL_DISC_CACHE_PATH);
+static char* local_disk_cache_path(const char *path) {
+    if (path[0] == '/') {
+        return str_replace(path, MOUNT_PATH, LOCAL_DISC_CACHE_PATH);
+    } else {
+        char * res = str_concat(LOCAL_DISC_CACHE_PATH, path);
+        return res;
+    }
 }
 
 #endif //KFS_COMMON

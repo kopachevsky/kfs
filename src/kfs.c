@@ -17,6 +17,6 @@ struct fuse_operations kfs_ops = {
 };
 
 int main(int argc, char *argv[]) {
-    getcwd(ABSOLUTE_PATH, sizeof(ABSOLUTE_PATH));
+    getcwd(LOCAL_DISC_CACHE_PATH, sizeof(LOCAL_DISC_CACHE_PATH));
     return fuse_main(argc, argv, &kfs_ops, NULL);
 }

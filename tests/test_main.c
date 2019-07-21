@@ -7,9 +7,9 @@
 
 void main_setup(void) {
     char template[] = "/tmp/kfs_tests.XXXXXX";
-    ABSOLUTE_PATH = mkdtemp(template);
+    LOCAL_DISC_CACHE_PATH = mkdtemp(template);
 
-    if(ABSOLUTE_PATH == NULL) {
+    if(LOCAL_DISC_CACHE_PATH == NULL) {
         perror("mkdtemp failed: ");
     }
 }
