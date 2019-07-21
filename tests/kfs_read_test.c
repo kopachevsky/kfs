@@ -8,7 +8,6 @@ void kfs_read_setup(void) {
 }
 
 void kfs_read_teardown(void) {
-
 }
 
 START_TEST(kfs_read_base) {

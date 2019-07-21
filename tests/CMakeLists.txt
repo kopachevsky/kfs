@@ -11,7 +11,12 @@ include(CheckTypeSize)
 
 # Since Check uses Threads to paralelize the tests, it's mandatory
 # add pthread as a dependency, alongside the Check libraries.
-add_executable(kfs_fuse test_main.c kfs_access_test.c kfs_read_test.c kfs_common_test.c)
+add_executable(kfs_fuse
+        test_main.c
+        kfs_common_test.c
+        kfs_access_test.c
+        kfs_read_test.c
+        kfs_mkdir_test.c)
 target_link_libraries(kfs_fuse fuse_cache ${CHECK_LIBRARIES} pthread)
 
 add_test(NAME kfs_fuse COMMAND kfs_fuse WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Testing)
