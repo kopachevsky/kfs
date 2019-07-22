@@ -6,7 +6,7 @@ Build:
     
     1.mkdir build && cd build
     2.cmake.. && make
-    /or use build.sh
+    /or use ./scripts/build.sh 
 
 Mount:
 
@@ -24,6 +24,7 @@ Test:
 
     make & make test
 
-To check tests results
+To check tests results:
 
     ${BUILD_DIR}/Testings/test.log
+
