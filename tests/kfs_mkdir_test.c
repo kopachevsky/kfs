@@ -16,15 +16,12 @@ void kfs_mkdir_teardown(void) {
 }
 
 START_TEST(kfs_mkdir_base) {
-    ck_assert_int_eq(21, strlen(LOCAL_DISC_CACHE_PATH));
-
     int res = kfs_mkdir("mydir", 0777);
     ck_assert_int_eq(0, res);
 
     printf("%s\n", LOCAL_DISC_CACHE_PATH);
     char *path = str_concat(LOCAL_DISC_CACHE_PATH, "mydir");
-    struct stat buff;
-    stat(path, &buff);
+    // TODO at this point we need to assert that directory with correct permissions is created
 }
 END_TEST
 

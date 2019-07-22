@@ -6,16 +6,20 @@
 #include "kfs_suites.h"
 
 void main_setup(void) {
+    MOUNT_PATH = "/ext/data1/";
+
     char template[] = "/tmp/kfs_tests.XXXXXX";
-    LOCAL_DISC_CACHE_PATH = mkdtemp(template);
+    char *tmp_file = mkdtemp(template);
     if(LOCAL_DISC_CACHE_PATH == NULL) {
         perror("mkdtemp failed: ");
     }
-    MOUNT_PATH = "/ext/data1/";
+    LOCAL_DISC_CACHE_PATH = malloc(sizeof(template));
+    strcpy(LOCAL_DISC_CACHE_PATH, tmp_file);
 }
 
 void main_teardown(void) {
     remove_directory(LOCAL_DISC_CACHE_PATH);
+    free(LOCAL_DISC_CACHE_PATH);
 }
 
 int main(void) {
