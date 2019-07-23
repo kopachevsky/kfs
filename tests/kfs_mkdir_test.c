@@ -17,8 +17,17 @@ void kfs_mkdir_teardown(void) {
 
 START_TEST(kfs_mkdir_creation) {
     int res = kfs_mkdir("mydir", 0777);
-    char *dir_path = str_concat(MOUNT_PATH, "mydir");
-    ck_assert_str_eq("/ext/data1/mydir", dir_path);
+    fail_unless(res == 0);
+    ck_assert_int_ne("mydir", 0);
+}
+END_TEST
+
+START_TEST(kfs_mkdir_exist) {
+    int dir1 = kfs_mkdir("test", 0777);
+    ck_assert_int_eq(dir1, 0);
+    int dir2 = kfs_mkdir("test", 0777);
+    ck_assert_int_ne(dir2, 0);
+    fail_unless("test" != 0);
 }
 END_TEST
 
@@ -27,6 +36,7 @@ Suite * kfs_mkdir_suite(void) {
     TCase *tcase = tcase_create("Test Cases with Setup and Teardown");
     tcase_add_checked_fixture(tcase, kfs_mkdir_setup, kfs_mkdir_teardown);
     tcase_add_test(tcase, kfs_mkdir_creation);
+    tcase_add_test(tcase, kfs_mkdir_exist);
     suite_add_tcase(suite, tcase);
     return suite;
 }
