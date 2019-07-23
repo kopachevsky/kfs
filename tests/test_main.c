@@ -10,7 +10,7 @@ void main_setup(void) {
 
     char template[] = "/tmp/kfs_tests.XXXXXX";
     char *tmp_file = mkdtemp(template);
-    if(LOCAL_DISC_CACHE_PATH == NULL) {
+    if(tmp_file == NULL) {
         perror("mkdtemp failed: ");
     }
     LOCAL_DISC_CACHE_PATH = malloc(sizeof(template));
@@ -27,7 +27,7 @@ int main(void) {
     SRunner *sr;
 
     sr = srunner_create(kfs_mkdir_suite());
-    srunner_add_suite(sr, kfs_common_suite());
+   // srunner_add_suite(sr, kfs_common_suite());
    // srunner_add_suite(sr, kfs_access_suite());
     srunner_add_suite(sr, kfs_read_suite());
     srunner_set_fork_status(sr, CK_NOFORK);

@@ -17,17 +17,16 @@ void kfs_mkdir_teardown(void) {
 
 START_TEST(kfs_mkdir_creation) {
     int res = kfs_mkdir("mydir", 0777);
-    fail_unless(res == 0);
-    ck_assert_int_ne("mydir", 0);
+    ck_assert_int_eq(res, 0);
+
 }
 END_TEST
 
 START_TEST(kfs_mkdir_exist) {
-    int dir1 = kfs_mkdir("test", 0777);
-    ck_assert_int_eq(dir1, 0);
-    int dir2 = kfs_mkdir("test", 0777);
-    ck_assert_int_ne(dir2, 0);
-    fail_unless("test" != 0);
+    int res = kfs_mkdir("test", 0777);
+    ck_assert_int_eq(res, 0);
+    res = kfs_mkdir("test", 0777);
+    ck_assert_int_eq(res, EEXIST);
 }
 END_TEST
 
