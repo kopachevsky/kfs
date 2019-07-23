@@ -29,7 +29,7 @@ int main(void) {
     sr = srunner_create(kfs_mkdir_suite());
    // srunner_add_suite(sr, kfs_common_suite());
    // srunner_add_suite(sr, kfs_access_suite());
-    srunner_add_suite(sr, kfs_read_suite());
+//    srunner_add_suite(sr, kfs_read_suite());
     srunner_set_fork_status(sr, CK_NOFORK);
     srunner_set_log (sr, "test.log");
     srunner_set_xml (sr, "test.xml");
