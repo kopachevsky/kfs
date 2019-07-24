@@ -9,10 +9,12 @@ void main_setup(void) {
     MOUNT_PATH = "/ext/data1/";
 
     char template[] = "/tmp/kfs_tests.XXXXXX";
-    char *tmp_file = mkdtemp(template);
+    char *tmp_file = str_concat(mkdtemp(template), "/");
+//    char *tmp_file = mkdtemp(template);
     if(tmp_file == NULL) {
         perror("mkdtemp failed: ");
     }
+//    char *path = str_concat(tmp_file, "/");
     LOCAL_DISC_CACHE_PATH = malloc(sizeof(template));
     strcpy(LOCAL_DISC_CACHE_PATH, tmp_file);
 }
