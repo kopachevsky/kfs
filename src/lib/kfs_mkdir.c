@@ -4,8 +4,7 @@ int kfs_mkdir(const char* original_path, const mode_t mode) {
     char *path = local_disk_cache_path(original_path);
     int res = mkdir(path, mode);
     if (res == -1) {
-        perror("Error create directory");
-        return -errno;
+        return errno;
     }
     return 0;
 }
