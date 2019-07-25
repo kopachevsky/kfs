@@ -17,6 +17,7 @@ add_executable(kfs_fuse
         kfs_access_test.c
         kfs_read_test.c
         kfs_mkdir_test.c
+        kfs_open_test.c
         kfs_rmdir_test.c)
 target_link_libraries(kfs_fuse fuse_cache ${CHECK_LIBRARIES} pthread)
 

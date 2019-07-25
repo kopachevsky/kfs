@@ -28,7 +28,7 @@ START_TEST(kfs_mkdir_exist) {
     int res = kfs_mkdir("test", 0777);
     ck_assert_int_eq(res, 0);
     res = kfs_mkdir("test", 0777);
-    ck_assert_int_eq(res, EEXIST);
+    ck_assert_int_eq(res, -EEXIST);
 }
 END_TEST
 
