@@ -28,5 +28,6 @@
 #include "lib/includes/kfs_rmdir.h"
 #include "lib/includes/kfs_mknod.h"
 #include "lib/includes/kfs_create.h"
+#include "lib/includes/kfs_link.h"
 
 #endif //KFS_KFS_H

@@ -19,7 +19,8 @@ add_executable(kfs_fuse
         kfs_mkdir_test.c
         kfs_open_test.c
         kfs_rmdir_test.c
-        kfs_create_test.c)
+        kfs_create_test.c
+        kfs_link_test.c)
 target_link_libraries(kfs_fuse fuse_cache ${CHECK_LIBRARIES} pthread)
 
 add_test(NAME kfs_fuse COMMAND kfs_fuse WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Testing)

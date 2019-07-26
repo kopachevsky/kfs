@@ -14,6 +14,7 @@ struct fuse_operations kfs_ops = {
                 .mkdir      = kfs_mkdir,
                 .rmdir      = kfs_rmdir,
                 .create     = kfs_create,
+                .link       = kfs_link,
                 .mknod      = kfs_mknod
 };
 

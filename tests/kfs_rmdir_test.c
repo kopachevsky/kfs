@@ -7,7 +7,6 @@
 
 void kfs_rmdir_setup(void) {
     main_setup();
-    ck_assert_int_eq(22, strlen(LOCAL_DISC_CACHE_PATH));
 }
 
 void kfs_rmdir_teardown(void) {

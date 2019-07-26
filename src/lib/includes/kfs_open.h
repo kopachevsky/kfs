@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_open(const char* original_path, mode_t mode);
+int kfs_open(const char* path, mode_t mode);
 
 #endif //KFS_KFS_OPEN_H

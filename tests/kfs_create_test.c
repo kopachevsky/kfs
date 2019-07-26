@@ -6,7 +6,6 @@
 
 void kfs_create_setup(void) {
     main_setup();
-    ck_assert_int_eq(22, strlen(LOCAL_DISC_CACHE_PATH));
 }
 
 void kfs_create_teardown(void) {
