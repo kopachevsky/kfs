@@ -13,6 +13,7 @@ add_library(
         kfs_truncate.c
         kfs_unlink.c
         kfs_write.c
+        kfs_create.c
 )
 
 target_include_directories(fuse_cache PUBLIC includes)
