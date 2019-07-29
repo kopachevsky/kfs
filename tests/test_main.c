@@ -33,6 +33,7 @@ int main(void) {
     srunner_add_suite(sr, kfs_access_suite());
     srunner_add_suite(sr, kfs_read_suite());
     srunner_add_suite(sr, kfs_link_suite());
+    srunner_add_suite(sr, kfs_unlink_suite());
     srunner_set_fork_status(sr, CK_NOFORK);
     srunner_set_log (sr, "test.log");
     srunner_set_xml (sr, "test.xml");

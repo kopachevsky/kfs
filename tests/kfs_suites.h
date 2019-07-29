@@ -8,3 +8,4 @@ Suite* kfs_access_suite(void);
 Suite* kfs_open_suite(void);
 Suite* kfs_create_suite(void);
 Suite* kfs_link_suite(void);
+Suite* kfs_unlink_suite(void);
