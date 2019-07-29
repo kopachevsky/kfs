@@ -20,7 +20,7 @@ START_TEST(kfs_link_exist_files) {
     ck_assert_int_ne(ves, 0);
     char *path2 = str_concat(LOCAL_DISC_CACHE_PATH, "file2.txt");
     FILE *file = kfs_link(path1, path2);
-    fail_if(file == 0);
+    fail_if(file == NULL);
 }
 END_TEST
 
