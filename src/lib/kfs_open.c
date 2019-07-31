@@ -1,9 +1,10 @@
 #include <kfs_open.h>
 
-int kfs_open(const char* original_path, mode_t mode) {
+int kfs_open(const char* original_path, struct fuse_file_info *fi) {
     char *path = local_disk_cache_path(original_path);
-    int fd = open(path, O_WRONLY|O_RDONLY|O_TRUNC, mode);
+    int fd = open(path, fi->flags);
     if (fd == -1)
         return -errno;
+    fi ->fh = fd;
     return 0;
 }

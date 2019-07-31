@@ -1,5 +1,6 @@
 #include <check.h>
 #include <kfs_create.h>
+#include <kfs_open.h>
 #include <stdio.h>
 
 #include "test_main.h"
@@ -13,12 +14,14 @@ void kfs_create_teardown(void) {
 }
 
 START_TEST(kfs_create_creation) {
-    struct fuse_file_info fi = {O_CREAT};
-    int res = kfs_create("creation.txt", 0777, &fi);
+    char * path = strcat(LOCAL_DISC_CACHE_PATH, "creation.txt");
+    struct fuse_file_info create = {O_CREAT};
+    int res = kfs_create(path, 0777, &create);
     ck_assert_int_eq(res,0);
-    char *path = str_concat(LOCAL_DISC_CACHE_PATH, "creation.txt");
-    FILE *file = open(path, O_RDONLY);
-    fail_if(file == 0);
+    struct fuse_file_info open = {O_RDWR};
+    res = kfs_open(path, &open);
+    ck_assert_int_eq(res, 0);
+    close(res);
 }
 END_TEST
 
