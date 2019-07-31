@@ -6,7 +6,6 @@
 
 void kfs_create_setup(void) {
     main_setup();
-    ck_assert_int_eq(22, strlen(LOCAL_DISC_CACHE_PATH));
 }
 
 void kfs_create_teardown(void) {
@@ -14,7 +13,8 @@ void kfs_create_teardown(void) {
 }
 
 START_TEST(kfs_create_creation) {
-    int res = kfs_create("creation.txt", 0777);
+    struct fuse_file_info fi = {O_CREAT};
+    int res = kfs_create("creation.txt", 0777, &fi);
     ck_assert_int_eq(res,0);
     char *path = str_concat(LOCAL_DISC_CACHE_PATH, "creation.txt");
     FILE *file = open(path, O_RDONLY);
@@ -23,18 +23,20 @@ START_TEST(kfs_create_creation) {
 END_TEST
 
 START_TEST(kfs_create_exist) {
-    int res = kfs_create("exist.txt", 0111);
+    struct fuse_file_info fi = {O_CREAT|O_EXCL};
+    int res = kfs_create("exist.txt", 0777, &fi);
     ck_assert_int_eq(res, 0);
-    res = kfs_create("exist.txt", 0111);
+    res = kfs_create("exist.txt", 0777, &fi);
     ck_assert_int_eq(res, -EEXIST);
 }
 END_TEST
 
 START_TEST(kfs_create_chmod) {
-    int res = kfs_create("chmod.txt", 0111);
+    struct fuse_file_info fi = {O_CREAT};
+    int res = kfs_create("chmod.txt", 0111, &fi);
     ck_assert_int_eq(res, 0);
-    res = kfs_create("chmod.txt", 0777);
-    ck_assert_int_eq(res, -EEXIST);
+    res = kfs_create("chmod.txt", 0777, &fi);
+    ck_assert_int_eq(res, -EACCES);
 }
 END_TEST
 
