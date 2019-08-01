@@ -14,7 +14,9 @@ void kfs_create_teardown(void) {
 }
 
 START_TEST(kfs_create_creation) {
-    char * path = strcat(LOCAL_DISC_CACHE_PATH, "creation.txt");
+    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("creation.txt") + 1];
+    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
+    char *path = strcat(dir_path, "creation.txt");
     struct fuse_file_info create = {O_CREAT};
     int res = kfs_create(path, 0777, &create);
     fail_if(&create.fh == NULL);
