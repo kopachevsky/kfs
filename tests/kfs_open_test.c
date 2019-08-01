@@ -17,9 +17,11 @@ START_TEST(kfs_open_exist) {
     char * path = strcat(LOCAL_DISC_CACHE_PATH, "exist.txt");
     struct fuse_file_info create = {O_CREAT};
     int res = kfs_create(path, 0777, &create);
+    fail_if(&create.fh == NULL);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info open = {O_RDONLY|O_WRONLY};
     res = kfs_open(path, &open);
+    fail_if(&open.fh == NULL);
     fail_if(res != 0);
     fail_if(path == NULL);
 }

@@ -17,9 +17,11 @@ START_TEST(kfs_create_creation) {
     char * path = strcat(LOCAL_DISC_CACHE_PATH, "creation.txt");
     struct fuse_file_info create = {O_CREAT};
     int res = kfs_create(path, 0777, &create);
+    fail_if(&create.fh == NULL);
     ck_assert_int_eq(res,0);
     struct fuse_file_info open = {O_RDWR};
     res = kfs_open(path, &open);
+    fail_if(&open.fh == NULL);
     ck_assert_int_eq(res, 0);
     close(res);
 }
