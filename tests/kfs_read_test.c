@@ -29,7 +29,7 @@ START_TEST(kfs_read_exist_file_with_content) {
     fail_if(res != 0);
     char *buf = "qwerty\n";
     res = kfs_write(path,buf, strlen(buf), 0, &fi);
-    fail_if(fi.fh == 0 );
+    fail_if(fi.fh == 0);
     ck_assert_int_eq(res, strlen(buf));
     char buf_read [strlen(buf)];
     res = kfs_read(path, buf_read, strlen(buf_read), 0, &fi);
@@ -73,7 +73,7 @@ START_TEST(kfs_read_released_file) {
     fail_if(res != 0);
     char *buf = "qwerty\n";
     res = kfs_write(path,buf, strlen(buf), 0, &fi);
-    fail_if(fi.fh == 0 );
+    fail_if(fi.fh == 0);
     ck_assert_int_eq(res, strlen(buf));
     char buf_read [strlen(buf)];
     close(fi.fh);
@@ -97,7 +97,7 @@ START_TEST(kfs_read_chmod) {
     fail_if(res != 0);
     char *buf = "qwerty\n";
     res = kfs_write(path,buf, strlen(buf), 0, &fi);
-    fail_if(fi.fh == 0 );
+    fail_if(fi.fh == 0);
     ck_assert_int_eq(res, strlen(buf));
     char buf_read [strlen(buf)];
     struct fuse_file_info read = {O_RDONLY};
