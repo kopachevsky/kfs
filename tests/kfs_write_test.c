@@ -20,15 +20,15 @@ START_TEST(kfs_write_exist) {
     char *path = strcat(dir_path, "exist.txt");
     struct fuse_file_info create = {O_CREAT};
     int res = kfs_create(path, 0777, &create);
-    fail_if(&create.fh == NULL);
+    fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info fi = {O_WRONLY};
     res = kfs_open(path, &fi);
-    fail_if(&fi.fh == NULL);
+    fail_if(fi.fh == 0);
     fail_if(res != 0);
     char *buf = "qwerty\n";
     res = kfs_write(path,buf, strlen(buf), 0, &fi);
-    fail_if(&fi.fh == NULL );
+    fail_if(fi.fh == 0 );
     ck_assert_int_eq(res, strlen(buf));
     close(create.fh);
     close(fi.fh);
@@ -41,7 +41,7 @@ START_TEST(kfs_write_file_not_opened) {
     char *path = strcat(dir_path, "not_opened.txt");
     struct fuse_file_info create = {O_CREAT};
     int res = kfs_create(path, 0777, &create);
-    fail_if(&create.fh == NULL);
+    fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info fi = {O_WRONLY};
     char *buf = "qwerty";
