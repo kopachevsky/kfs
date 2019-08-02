@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_read(const char* path, char* _buf, size_t _size, off_t _offset, struct fuse_file_info* _info);
+int kfs_read(const char* original_path, char* buf, size_t size, off_t offset, struct fuse_file_info* fi);
 
 #endif //KFS_KFS_READ_H
