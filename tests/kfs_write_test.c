@@ -43,10 +43,13 @@ START_TEST(kfs_write_file_not_opened) {
     int res = kfs_create(path, 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
-    struct fuse_file_info fi = {O_WRONLY};
+    struct fuse_file_info fi = {O_RDWR|O_RDONLY|O_WRONLY};
+    res = kfs_open(path, &fi);
+    ck_assert_int_eq(res, 0);
+    close(fi.fh);
     char *buf = "qwerty";
     res = kfs_write(path,buf, strlen(buf), 0, &fi);
-    ck_assert_int_eq(res, -ESPIPE);
+    ck_assert_int_eq(res, -EBADF);
 }
 END_TEST
 

@@ -88,7 +88,7 @@ START_TEST(kfs_read_chmod) {
     strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
     char *path = strcat(dir_path, "exist_content.txt");
     struct fuse_file_info create = {O_CREAT};
-    int res = kfs_create(path, 0222, &create);
+    int res = kfs_create(path, 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info fi = {O_WRONLY};
@@ -100,12 +100,10 @@ START_TEST(kfs_read_chmod) {
     fail_if(fi.fh == 0);
     ck_assert_int_eq(res, strlen(buf));
     char buf_read [strlen(buf)];
-    struct fuse_file_info read = {O_RDONLY};
-    res = kfs_read(path, buf_read, strlen(buf_read), 0, &read);
-    ck_assert_int_eq(res, -ESPIPE);
+    res = kfs_read(path, buf_read, strlen(buf_read), 0, &fi);
+    ck_assert_int_eq(res, -EBADF);
     close(create.fh);
     close(fi.fh);
-    close(read.fh);
 }
 END_TEST
 
