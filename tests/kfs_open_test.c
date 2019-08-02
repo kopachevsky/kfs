@@ -19,7 +19,7 @@ START_TEST(kfs_open_exist) {
     char *path = strcat(dir_path, "exist.txt");
     struct fuse_file_info create = {O_CREAT};
     int res = kfs_create(path, 0777, &create);
-    fail_if(&create.fh == NULL);
+    fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info open = {O_RDONLY|O_WRONLY};
     res = kfs_open(path, &open);
