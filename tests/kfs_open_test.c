@@ -84,7 +84,7 @@ START_TEST(kfs_open_write) {
 }
 END_TEST
 
-Suite * kfs_open_suite(void) {
+Suite *kfs_open_suite(void) {
     Suite *suite = suite_create("kfs_open()");
     TCase *tcase = tcase_create("Test Cases with Setup and Teardown");
     tcase_add_checked_fixture(tcase, kfs_open_setup, kfs_open_teardown);

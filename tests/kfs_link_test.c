@@ -93,7 +93,7 @@ START_TEST(kfs_link_chmod) {
 }
 END_TEST
 
-Suite * kfs_link_suite(void) {
+Suite *kfs_link_suite(void) {
     Suite *suite = suite_create("kfs_link()");
     TCase *tcase = tcase_create("Test Cases with Setup and Teardown");
     tcase_add_checked_fixture(tcase, kfs_link_setup, kfs_link_teardown);

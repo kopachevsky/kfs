@@ -106,7 +106,7 @@ START_TEST(kfs_unlink_not_exist) {
 }
 END_TEST
 
-Suite * kfs_unlink_suite(void) {
+Suite *kfs_unlink_suite(void) {
     Suite *suite = suite_create("kfs_unlink()");
     TCase *tcase = tcase_create("Test Cases with Setup and Teardown");
     tcase_add_checked_fixture(tcase, kfs_unlink_setup, kfs_unlink_teardown);

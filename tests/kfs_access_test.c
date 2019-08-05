@@ -15,7 +15,7 @@ START_TEST(kfs_access_base) {
 }
 END_TEST
 
-Suite * kfs_access_suite(void) {
+Suite *kfs_access_suite(void) {
     Suite *s;
     TCase *tc_core;
 
