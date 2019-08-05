@@ -25,7 +25,8 @@ START_TEST(kfs_create_creation) {
     res = kfs_open(path, &open);
     fail_if(open.fh == 0);
     ck_assert_int_eq(res, 0);
-    close(res);
+    close(create.fh);
+    close(open.fh);
 }
 END_TEST
 
