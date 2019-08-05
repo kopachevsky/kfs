@@ -107,7 +107,7 @@ START_TEST(kfs_read_chmod) {
 }
 END_TEST
 
-Suite * kfs_read_suite(void) {
+Suite *kfs_read_suite(void) {
     Suite *suite = suite_create("kfs_read()");
     TCase *tcase = tcase_create("Test Cases with Setup and Teardown");
     tcase_add_checked_fixture(tcase, kfs_read_setup, kfs_read_teardown);

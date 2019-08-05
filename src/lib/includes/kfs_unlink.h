@@ -3,7 +3,6 @@
 
 #include <errno.h>
 #include <glusterfs/api/glfs.h>
-#include <zconf.h>
 
 #include "kfs_common.h"
 
