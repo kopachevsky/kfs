@@ -35,6 +35,8 @@ int main(void) {
     srunner_add_suite(sr, kfs_write_suite());
     srunner_add_suite(sr, kfs_release_suite());
     srunner_add_suite(sr, kfs_chmod_suite());
+    srunner_add_suite(sr, kfs_link_suite());
+    srunner_add_suite(sr, kfs_unlink_suite());
     srunner_add_suite(sr, kfs_rename_suite());
     srunner_set_fork_status(sr, CK_NOFORK);
     srunner_set_log (sr, "test.log");

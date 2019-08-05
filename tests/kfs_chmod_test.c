@@ -68,7 +68,7 @@ START_TEST(kfs_chmod_file) {
 }
 END_TEST
 
-Suite * kfs_chmod_suite(void) {
+Suite *kfs_chmod_suite(void) {
     Suite *suite = suite_create("kfs_chmod()");
     TCase *tcase = tcase_create("Test Cases with Setup and Teardown");
     tcase_add_checked_fixture(tcase, kfs_chmod_setup, kfs_chmod_teardown);

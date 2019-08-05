@@ -10,4 +10,6 @@ Suite* kfs_create_suite(void);
 Suite* kfs_write_suite(void);
 Suite* kfs_release_suite(void);
 Suite* kfs_chmod_suite(void);
+Suite* kfs_link_suite(void);
+Suite* kfs_unlink_suite(void);
 Suite* kfs_rename_suite(void);

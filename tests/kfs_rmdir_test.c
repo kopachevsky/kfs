@@ -34,7 +34,7 @@ START_TEST(kfs_rmdir_not_existing_folder) {
 }
 END_TEST
 
-Suite * kfs_rmdir_suite(void) {
+Suite *kfs_rmdir_suite(void) {
     Suite *suite = suite_create("kfs_rmdir()");
     TCase *tcase = tcase_create("Test Cases with Setup and Teardown");
     tcase_add_checked_fixture(tcase, kfs_rmdir_setup, kfs_rmdir_teardown);

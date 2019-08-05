@@ -48,7 +48,7 @@ START_TEST(kfs_create_chmod) {
 }
 END_TEST
 
-Suite * kfs_create_suite(void) {
+Suite *kfs_create_suite(void) {
     Suite *suite = suite_create("kfs_create()");
     TCase *tcase = tcase_create("Test Cases with Setup and Teardown");
     tcase_add_checked_fixture(tcase, kfs_create_setup, kfs_create_teardown);

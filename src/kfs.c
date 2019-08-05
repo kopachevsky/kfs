@@ -15,7 +15,8 @@ struct fuse_operations kfs_ops = {
                 .rmdir      = kfs_rmdir,
                 .create     = kfs_create,
                 .mknod      = kfs_mknod,
-                .chmod      = kfs_chmod
+                .chmod      = kfs_chmod,
+                .link       = kfs_link
 };
 
 int main(int argc, char *argv[]) {

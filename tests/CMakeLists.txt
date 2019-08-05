@@ -23,6 +23,8 @@ add_executable(kfs_fuse
         kfs_write_test.c
         kfs_release_test.c
         kfs_chmod_test.c
+        kfs_link_test.c
+        kfs_unlink_test.c
         kfs_rename_test.c)
 target_link_libraries(kfs_fuse fuse_cache ${CHECK_LIBRARIES} pthread)
 
