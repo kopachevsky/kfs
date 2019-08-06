@@ -31,5 +31,6 @@
 #include "lib/includes/kfs_chmod.h"
 #include "lib/includes/kfs_link.h"
 #include "lib/includes/kfs_symlink.h"
+#include "lib/includes/kfs_flush.h"
 
 #endif //KFS_KFS_H
