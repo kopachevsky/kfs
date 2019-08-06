@@ -43,6 +43,6 @@ Suite *kfs_release_suite(void) {
     TCase *tcase = tcase_create("Test Cases with Setup and Teardown");
     tcase_add_checked_fixture(tcase, kfs_release_setup, kfs_release_teardown);
     tcase_add_test(tcase, kfs_release_opened_file);
-     suite_add_tcase(suite, tcase);
+    suite_add_tcase(suite, tcase);
     return suite;
 }
