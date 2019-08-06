@@ -13,3 +13,4 @@ Suite* kfs_chmod_suite(void);
 Suite* kfs_link_suite(void);
 Suite* kfs_unlink_suite(void);
 Suite* kfs_rename_suite(void);
+Suite* kfs_flush_suite(void);

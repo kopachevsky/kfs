@@ -20,9 +20,9 @@ START_TEST(kfs_common_local_disc_cache_path_absolute) {
 END_TEST
 
 START_TEST(kfs_common_local_disc_cache_path_relative) {
-        char *cache_path = local_disk_cache_path("dir/file.txt");
-        ck_assert_str_eq("/local/fuse_cache/dir/file.txt", cache_path);
-    }
+    char *cache_path = local_disk_cache_path("dir/file.txt");
+    ck_assert_str_eq("/local/fuse_cache/dir/file.txt", cache_path);
+}
 END_TEST
 
 
