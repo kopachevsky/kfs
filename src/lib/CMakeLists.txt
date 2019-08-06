@@ -16,6 +16,7 @@ add_library(
         kfs_create.c
         kfs_chmod.c
         kfs_link.c
+        kfs_symlink.c
         kfs_flush.c
 )
 

@@ -17,6 +17,7 @@ struct fuse_operations kfs_ops = {
                 .mknod      = kfs_mknod,
                 .chmod      = kfs_chmod,
                 .link       = kfs_link,
+                .symlink    = kfs_symlink,
                 .flush      = kfs_flush
 };
 
