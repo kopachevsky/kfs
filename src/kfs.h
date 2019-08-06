@@ -32,5 +32,6 @@
 #include "lib/includes/kfs_link.h"
 #include "lib/includes/kfs_symlink.h"
 #include "lib/includes/kfs_flush.h"
+#include "lib/includes/kfs_ftruncate.h"
 
 #endif //KFS_KFS_H

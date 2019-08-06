@@ -18,6 +18,7 @@ add_library(
         kfs_link.c
         kfs_symlink.c
         kfs_flush.c
+        kfs_ftruncate.c
 )
 
 target_include_directories(fuse_cache PUBLIC includes)
