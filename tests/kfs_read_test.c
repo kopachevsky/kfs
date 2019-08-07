@@ -3,7 +3,6 @@
 #include <kfs_open.h>
 #include <kfs_write.h>
 #include <kfs_read.h>
-#include <stdio.h>
 
 #include "test_main.h"
 

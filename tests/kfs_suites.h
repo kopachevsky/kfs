@@ -15,3 +15,4 @@ Suite* kfs_unlink_suite(void);
 Suite* kfs_rename_suite(void);
 Suite* kfs_symlink_suite(void);
 Suite* kfs_flush_suite(void);
+Suite* kfs_ftruncate_suite(void);
