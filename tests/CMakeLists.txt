@@ -28,6 +28,7 @@ add_executable(kfs_fuse
         kfs_rename_test.c
         kfs_symlink_test.c
         kfs_flush_test.c
+        kfs_truncate.c
         kfs_ftruncate_test.c)
 target_link_libraries(kfs_fuse fuse_cache ${CHECK_LIBRARIES} pthread)
 

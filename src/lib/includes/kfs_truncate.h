@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_truncate(const char* path, off_t length);
+int kfs_truncate(const char* path, off_t size);
 
 #endif //KFS_KFS_TRUNCATE_H
