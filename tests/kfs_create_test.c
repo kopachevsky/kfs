@@ -1,7 +1,6 @@
 #include <check.h>
 #include <kfs_create.h>
 #include <kfs_open.h>
-#include <stdio.h>
 
 #include "test_main.h"
 

@@ -5,8 +5,6 @@
 #include <kfs_unlink.h>
 #include <kfs_symlink.h>
 #include <kfs_mkdir.h>
-#include <kfs_rmdir.h>
-#include <stdio.h>
 
 #include "test_main.h"
 
