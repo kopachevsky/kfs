@@ -19,6 +19,7 @@ add_library(
         kfs_symlink.c
         kfs_flush.c
         kfs_ftruncate.c
+        kfs_readlink.c
         kfs_fsync.c
 )
 

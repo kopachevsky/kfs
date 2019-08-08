@@ -30,6 +30,7 @@ add_executable(kfs_fuse
         kfs_flush_test.c
         kfs_truncate.c
         kfs_ftruncate_test.c
+        kfs_readlink_test.c
         kfs_fsync_test.c)
 target_link_libraries(kfs_fuse fuse_cache ${CHECK_LIBRARIES} pthread)
 
