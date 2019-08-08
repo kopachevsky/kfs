@@ -34,5 +34,6 @@
 #include "lib/includes/kfs_flush.h"
 #include "lib/includes/kfs_ftruncate.h"
 #include "lib/includes/kfs_readlink.h"
+#include "lib/includes/kfs_fsync.h"
 
 #endif //KFS_KFS_H

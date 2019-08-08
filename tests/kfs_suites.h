@@ -18,3 +18,4 @@ Suite* kfs_flush_suite(void);
 Suite* kfs_truncate_suite(void);
 Suite* kfs_ftruncate_suite(void);
 Suite* kfs_readlink_suite(void);
+Suite* kfs_fsync_suite(void);

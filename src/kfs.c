@@ -20,7 +20,8 @@ struct fuse_operations kfs_ops = {
                 .symlink    = kfs_symlink,
                 .flush      = kfs_flush,
                 .ftruncate  = kfs_ftruncate,
-                .readlink   = kfs_readlink
+                .readlink   = kfs_readlink,
+                .fsync      = kfs_fsync
 };
 
 int main(int argc, char *argv[]) {
