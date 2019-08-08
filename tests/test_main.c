@@ -15,6 +15,7 @@ void main_setup(void) {
     }
     LOCAL_DISC_CACHE_PATH = malloc(sizeof(template));
     strcpy(LOCAL_DISC_CACHE_PATH, tmp_file);
+    free(tmp_file);
 }
 
 void main_teardown(void) {
