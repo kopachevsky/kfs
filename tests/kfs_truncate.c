@@ -21,11 +21,11 @@ START_TEST(kfs_truncate_increase_size_of_exist_file) {
     char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("exist.txt") + 1];
     strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
     char *path = strcat(dir_path, "exist.txt");
-    struct fuse_file_info create = {O_CREAT};
+    struct fuse_file_info create = {O_CREAT,0,0,1,1,0,1,1,27,0,0};
     int res = kfs_create(path, 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
-    struct fuse_file_info fi = {O_RDWR};
+    struct fuse_file_info fi = {O_RDWR,0,0,1,1,0,1,1,27,0,0};
     res = kfs_open(path, &fi);
     fail_if(fi.fh == 0);
     fail_if(res != 0);
@@ -48,11 +48,11 @@ START_TEST(kfs_truncate_decrease_size_of_exist_file) {
     char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("exist.txt") + 1];
     strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
     char *path = strcat(dir_path, "exist.txt");
-    struct fuse_file_info create = {O_CREAT};
+    struct fuse_file_info create = {O_CREAT,0,0,1,1,0,1,1,27,0,0};
     int res = kfs_create(path, 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
-    struct fuse_file_info fi = {O_RDWR};
+    struct fuse_file_info fi = {O_RDWR,0,0,1,1,0,1,1,27,0,0};
     res = kfs_open(path, &fi);
     fail_if(fi.fh == 0);
     fail_if(res != 0);
@@ -97,7 +97,7 @@ START_TEST(kfs_truncate_chmod) {
     char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("chmod.txt") + 1];
     strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
     char *path = strcat(dir_path, "chmod.txt");
-    struct fuse_file_info create = {O_CREAT};
+    struct fuse_file_info create = {O_CREAT,0,0,1,1,0,1,1,27,0,0};
     int res = kfs_create(path, 0111, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);

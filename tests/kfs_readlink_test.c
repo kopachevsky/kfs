@@ -20,11 +20,11 @@ START_TEST(kfs_readlink_fs_file) {
     char dir_path_source_file[strlen(LOCAL_DISC_CACHE_PATH) + strlen("source.txt") + 1];
     strcpy(dir_path_source_file, LOCAL_DISC_CACHE_PATH);
     char *source_path = strcat(dir_path_source_file, "source.txt");
-    struct fuse_file_info create = {O_CREAT};
+    struct fuse_file_info create = {O_CREAT,0,0,1,1,0,1,1,27,0,0};
     int res = kfs_create(source_path, 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res,0);
-    struct fuse_file_info fi = {O_RDWR};
+    struct fuse_file_info fi = {O_RDWR,0,0,1,1,0,1,1,27,0,0};
     res = kfs_open(source_path, &fi);
     fail_if(fi.fh == 0);
     fail_if(res != 0);
@@ -61,11 +61,11 @@ START_TEST(kfs_readlink_os_fs_file) {
     char dir_path_source_file[strlen(MOUNT_PATH) + strlen("source.txt") + 1];
     strcpy(dir_path_source_file, MOUNT_PATH);
     char *source_path = strcat(dir_path_source_file, "source.txt");
-    struct fuse_file_info create = {O_CREAT};
+    struct fuse_file_info create = {O_CREAT,0,0,1,1,0,1,1,27,0,0};
     int res = kfs_create(source_path, 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res,0);
-    struct fuse_file_info fi = {O_RDWR};
+    struct fuse_file_info fi = {O_RDWR,0,0,1,1,0,1,1,27,0,0};
     res = kfs_open(source_path, &fi);
     fail_if(fi.fh == 0);
     fail_if(res != 0);

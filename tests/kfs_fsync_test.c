@@ -19,9 +19,9 @@ START_TEST(kfs_fsync_opened_file) {
     char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("opened.txt") + 1];
     strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
     char *path = strcat(dir_path, "opened.txt");
-    struct fuse_file_info create = {O_CREAT};
+    struct fuse_file_info create = {O_CREAT,0,0,1,1,0,1,1,27,0,0};
     int res = kfs_create(path, 0777, &create);
-    struct fuse_file_info fi = {O_RDWR};
+    struct fuse_file_info fi = {O_RDWR,0,0,1,1,0,1,1,27,0,0};
     res = kfs_open(path, &fi);
     char *buf = "qwerty\n";
     res = kfs_write(path,buf, strlen(buf), 0, &fi);
@@ -36,9 +36,9 @@ START_TEST(kfs_fsync_flushed_file)  {
     char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("flushed.txt") + 1];
     strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
     char *path = strcat(dir_path, "flushed.txt");
-    struct fuse_file_info create = {O_CREAT};
+    struct fuse_file_info create = {O_CREAT,0,0,1,1,0,1,1,27,0,0};
     int res = kfs_create(path, 0777, &create);
-    struct fuse_file_info fi = {O_RDWR};
+    struct fuse_file_info fi = {O_RDWR,0,0,1,1,0,1,1,27,0,0};
     res = kfs_open(path, &fi);
     char *buf = "qwerty\n";
     res = kfs_write(path,buf, strlen(buf), 0, &fi);
