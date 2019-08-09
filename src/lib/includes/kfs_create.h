@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_create(const char* original_path, mode_t mode, struct fuse_file_info *fi);
+int kfs_create(const char* path, mode_t mode, struct fuse_file_info *fi);
 
 #endif //KFS_KFS_CREATE_H

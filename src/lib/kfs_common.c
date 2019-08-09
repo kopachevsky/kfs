@@ -27,7 +27,7 @@ char *str_replace(char const *const original, char const *const pattern, char co
     const char * patloc;
 
     // find how many times the pattern occurs in the original string
-    for (oriptr = original; patloc = (strstr(oriptr, pattern)); oriptr = patloc + patlen) {
+    for (oriptr = original; (patloc = (strstr(oriptr, pattern))); oriptr = patloc + patlen) {
         patcnt++;
     }
 
@@ -39,7 +39,7 @@ char *str_replace(char const *const original, char const *const pattern, char co
         // copy the original string,
         // replacing all the instances of the pattern
         char * retptr = returned;
-        for (oriptr = original; patloc = (strstr(oriptr, pattern)); oriptr = patloc + patlen) {
+        for (oriptr = original; (patloc = (strstr(oriptr, pattern))); oriptr = patloc + patlen) {
             size_t const skplen = patloc - oriptr;
             // copy the section until the occurence of the pattern
             strncpy(retptr, oriptr, skplen);
