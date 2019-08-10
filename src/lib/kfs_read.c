@@ -7,5 +7,6 @@ int kfs_read(const char* original_path, char* buf, size_t size, off_t offset, st
     if (res == -1) {
         return -errno;
     }
+    free(path);
     return res;
 }

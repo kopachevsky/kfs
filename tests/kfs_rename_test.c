@@ -17,7 +17,7 @@ START_TEST(kfs_rename_exist_file) {
     char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("created_file.txt") + 1];
     strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
     char *path = strcat(dir_path, "created_file.txt.txt");
-    struct fuse_file_info create = {O_CREAT,0,0,1,1,0,1,1,27,0,0};
+    struct fuse_file_info create = init_struct(O_CREAT);
     int res = kfs_create(path, 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res,0);
@@ -26,7 +26,7 @@ START_TEST(kfs_rename_exist_file) {
     char *renamed_file_path = strcat(dir_path_renamed, "renamed_file.txt");
     res = kfs_rename(path, renamed_file_path);
     ck_assert_int_eq(res,0);
-    struct fuse_file_info open = {O_RDWR,0,0,1,1,0,1,1,27,0,0};
+    struct fuse_file_info open = init_struct(O_RDWR);
     res = kfs_open(path, &open);
     ck_assert_int_eq(res, -ENOENT);
     res = kfs_open(renamed_file_path, &open);

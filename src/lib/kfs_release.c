@@ -7,5 +7,6 @@ int kfs_release(const char *original_path, struct fuse_file_info *fi) {
     if (fd == -1) {
         return -errno;
     }
+    free(path);
     return 0;
 }

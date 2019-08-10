@@ -7,5 +7,6 @@ int kfs_create(const char* original_path, mode_t mode, struct fuse_file_info *fi
         return -errno;
     }
     fi->fh = fd;
+    free(path);
     return 0;
 }

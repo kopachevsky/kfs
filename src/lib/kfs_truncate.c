@@ -6,5 +6,6 @@ int kfs_truncate(const char* original_path, off_t size) {
     if (res == -1) {
         return -errno;
     }
+    free(path);
     return 0;
 }

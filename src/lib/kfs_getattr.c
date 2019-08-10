@@ -1,6 +1,7 @@
 #include <kfs_getattr.h>
 
-int kfs_getattr(const char *path, struct stat *st) {
+int kfs_getattr(const char *original_path, struct stat *st) {
+    char *path = local_disk_cache_path(original_path);
     st->st_uid = getuid();
     st->st_gid = getgid();
     st->st_atime = time( NULL );
@@ -12,6 +13,6 @@ int kfs_getattr(const char *path, struct stat *st) {
         st->st_mode = S_IFREG | S_IRWXU;
         st->st_nlink = 1;
     }
-
+    free(path);
     return 0;
 }

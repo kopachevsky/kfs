@@ -5,6 +5,12 @@
 
 #include "kfs_suites.h"
 
+struct fuse_file_info init_struct(int flag) {
+    struct fuse_file_info s = {0};
+    s.flags = flag;
+    return  s;
+}
+
 void main_setup(void) {
     MOUNT_PATH = "/ext/data1/";
 

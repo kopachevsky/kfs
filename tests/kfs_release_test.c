@@ -18,11 +18,11 @@ START_TEST(kfs_release_opened_file) {
     char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("opened_file.txt") + 1];
     strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
     char *path = strcat(dir_path, "opened_file.txt");
-    struct fuse_file_info create = {O_CREAT,0,0,1,1,0,1,1,27,0,0};
+    struct fuse_file_info create = init_struct(O_CREAT);
     int res = kfs_create(path, 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
-    struct fuse_file_info fi = {O_WRONLY,0,0,1,1,0,1,1,27,0,0};
+    struct fuse_file_info fi = init_struct(O_WRONLY);
     res = kfs_open(path, &fi);
     fail_if(fi.fh == 0);
     fail_if(res != 0);

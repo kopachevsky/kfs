@@ -23,7 +23,7 @@ START_TEST(kfs_chmod_directory_decrease_permissions) {
     res = kfs_chmod(dir_path, 0111);
     fail_if(res != 0);
     char *path_file = strcat(dir_path, "chmod.txt");
-    struct fuse_file_info create = {O_CREAT,0,0,1,1,0,1,1,27,0,0};
+    struct fuse_file_info create = init_struct(O_CREAT);
     res = kfs_create(path_file, 0777, &create);
     fail_if(create.fh != 0);
     ck_assert_int_eq(res,-EACCES);
@@ -39,7 +39,7 @@ START_TEST(kfs_chmod_directory_increase_permissions) {
     res = kfs_chmod(dir_path, 0777);
     fail_if(res != 0);
     char *path_file = strcat(dir_path, "chmod.txt");
-    struct fuse_file_info create = {O_CREAT,0,0,1,1,0,1,1,27,0,0};
+    struct fuse_file_info create = init_struct(O_CREAT);
     res = kfs_create(path_file, 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res,0);
@@ -50,10 +50,10 @@ START_TEST(kfs_chmod_file) {
     char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("chmod.txt") + 1];
     strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
     char *path = strcat(dir_path, "chmod.txt");
-    struct fuse_file_info create = {O_CREAT,0,0,1,1,0,1,1,27,0,0};
+    struct fuse_file_info create = init_struct(O_CREAT);
     int res = kfs_create(path, 0111, &create);
     ck_assert_int_eq(res, 0);
-    struct fuse_file_info open = {O_RDWR,0,0,1,1,0,1,1,27,0,0};
+    struct fuse_file_info open = init_struct(O_RDWR);
     res = kfs_open(path, &open);
     ck_assert_int_eq(res, -EACCES);
     fail_if(path == NULL);

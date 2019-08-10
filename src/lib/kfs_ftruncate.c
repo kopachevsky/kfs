@@ -7,6 +7,7 @@ int kfs_ftruncate(const char* original_path, off_t size, struct fuse_file_info *
     if (res == -1) {
         return -errno;
     }
+    free(path);
     return 0;
 }
 

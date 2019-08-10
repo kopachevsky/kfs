@@ -6,5 +6,6 @@ int kfs_flush(const char* original_path, struct fuse_file_info *fi) {
     int res = close(fi->fh);
     if (res == -1)
         return -errno;
+    free(path);
     return 0;
 }
