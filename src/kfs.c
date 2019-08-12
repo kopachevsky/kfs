@@ -21,7 +21,8 @@ struct fuse_operations kfs_ops = {
                 .flush      = kfs_flush,
                 .ftruncate  = kfs_ftruncate,
                 .readlink   = kfs_readlink,
-                .fsync      = kfs_fsync
+                .fsync      = kfs_fsync,
+                .opendir    = kfs_opendir
 };
 
 int main(int argc, char *argv[]) {

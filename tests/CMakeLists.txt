@@ -31,7 +31,8 @@ add_executable(kfs_fuse
         kfs_truncate.c
         kfs_ftruncate_test.c
         kfs_readlink_test.c
-        kfs_fsync_test.c)
+        kfs_fsync_test.c
+        kfs_opendir_test.c)
 target_link_libraries(kfs_fuse fuse_cache ${CHECK_LIBRARIES} pthread)
 
 add_test(NAME kfs_fuse COMMAND kfs_fuse WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Testing)
