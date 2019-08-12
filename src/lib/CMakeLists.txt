@@ -22,6 +22,7 @@ add_library(
         kfs_readlink.c
         kfs_fsync.c
         kfs_common.c
+        kfs_opendir.c
 )
 
 target_include_directories(fuse_cache PUBLIC includes)

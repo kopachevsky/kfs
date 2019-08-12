@@ -19,3 +19,4 @@ Suite* kfs_truncate_suite(void);
 Suite* kfs_ftruncate_suite(void);
 Suite* kfs_readlink_suite(void);
 Suite* kfs_fsync_suite(void);
+Suite* kfs_opendir_suite(void);
