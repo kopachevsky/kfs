@@ -23,10 +23,4 @@ char *local_disk_cache_path(const char *path);
 
 int remove_directory(const char *path);
 
-struct kfs_dirp {
-    DIR *dp;
-    struct dirent *entry;
-    off_t offset;
-};
-
 #endif //KFS_COMMON
