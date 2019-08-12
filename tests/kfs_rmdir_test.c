@@ -21,6 +21,7 @@ START_TEST(kfs_rmdir_base) {
     char *dir_path = str_concat(LOCAL_DISC_CACHE_PATH, "test");
     DIR* dir = opendir(dir_path);
     fail_if(dir != NULL);
+    free(dir_path);
 }
 END_TEST
 
@@ -31,6 +32,7 @@ START_TEST(kfs_rmdir_not_existing_folder) {
     char *dir_path = str_concat(LOCAL_DISC_CACHE_PATH, "test");
     DIR* dir = opendir(dir_path);
     fail_if(dir != NULL);
+    free(dir_path);
 }
 END_TEST
 

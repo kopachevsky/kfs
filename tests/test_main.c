@@ -5,6 +5,12 @@
 
 #include "kfs_suites.h"
 
+struct fuse_file_info init_struct(int flag) {
+    struct fuse_file_info s = {0};
+    s.flags = flag;
+    return  s;
+}
+
 void main_setup(void) {
     MOUNT_PATH = "/ext/data1/";
 
@@ -15,6 +21,7 @@ void main_setup(void) {
     }
     LOCAL_DISC_CACHE_PATH = malloc(sizeof(template));
     strcpy(LOCAL_DISC_CACHE_PATH, tmp_file);
+    free(tmp_file);
 }
 
 void main_teardown(void) {

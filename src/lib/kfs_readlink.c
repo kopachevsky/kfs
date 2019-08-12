@@ -7,5 +7,6 @@ int kfs_readlink(const char* original_path, char* buf, size_t size) {
         return -errno;
     }
     buf[res] = '\0';
+    free(path);
     return 0;
 }

@@ -21,6 +21,7 @@ START_TEST(kfs_mkdir_creation) {
     char *dir_path = str_concat(LOCAL_DISC_CACHE_PATH, "mydir");
     DIR* dir = opendir(dir_path);
     fail_if(dir == NULL);
+    free(dir_path);
 }
 END_TEST
 

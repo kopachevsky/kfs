@@ -6,6 +6,7 @@ int kfs_rmdir(const char* original_path) {
     if(res == -1) {
         return errno;
     }
+    free(path);
     return 0;
 }
 

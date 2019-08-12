@@ -6,5 +6,6 @@ int kfs_mkdir(const char* original_path, const mode_t mode) {
     if (res == -1) {
         return -errno;
     }
+    free(path);
     return 0;
 }

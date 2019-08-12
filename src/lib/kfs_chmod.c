@@ -6,5 +6,6 @@ int kfs_chmod(const char *original_path, mode_t mode) {
     if (res == -1) {
         return -errno;
     }
+    free(path);
     return 0;
 }

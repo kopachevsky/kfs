@@ -17,11 +17,11 @@ START_TEST(kfs_write_exist) {
     char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("exist.txt") + 1];
     strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
     char *path = strcat(dir_path, "exist.txt");
-    struct fuse_file_info create = {O_CREAT};
+    struct fuse_file_info create = init_struct(O_CREAT);
     int res = kfs_create(path, 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
-    struct fuse_file_info fi = {O_WRONLY};
+    struct fuse_file_info fi = init_struct(O_WRONLY);
     res = kfs_open(path, &fi);
     fail_if(fi.fh == 0);
     fail_if(res != 0);
@@ -38,11 +38,11 @@ START_TEST(kfs_write_file_not_opened) {
     char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("not_opened.txt") + 1];
     strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
     char *path = strcat(dir_path, "not_opened.txt");
-    struct fuse_file_info create = {O_CREAT};
+    struct fuse_file_info create = init_struct(O_CREAT);
     int res = kfs_create(path, 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
-    struct fuse_file_info fi = {O_RDWR|O_RDONLY|O_WRONLY};
+    struct fuse_file_info fi = init_struct(O_RDWR|O_RDONLY|O_WRONLY);
     res = kfs_open(path, &fi);
     ck_assert_int_eq(res, 0);
     close(fi.fh);

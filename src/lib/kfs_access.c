@@ -6,5 +6,6 @@ int kfs_access(const char* original_path, int mode) {
     if (res == -1) {
         return -errno;
     }
+    free(path);
     return 0;
 }
