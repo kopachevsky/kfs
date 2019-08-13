@@ -23,7 +23,8 @@ struct fuse_operations kfs_ops = {
                 .readlink   = kfs_readlink,
                 .fsync      = kfs_fsync,
                 .opendir    = kfs_opendir,
-                .releasedir = kfs_releasedir
+                .releasedir = kfs_releasedir,
+                .chown      = kfs_chown
 };
 
 int main(int argc, char *argv[]) {
