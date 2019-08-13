@@ -52,6 +52,7 @@ int main(void) {
     srunner_add_suite(sr, kfs_readlink_suite());
     srunner_add_suite(sr, kfs_fsync_suite());
     srunner_add_suite(sr, kfs_opendir_suite());
+    srunner_add_suite(sr, kfs_releasedir_suite());
     srunner_set_fork_status(sr, CK_NOFORK);
     srunner_set_log (sr, "test.log");
     srunner_set_xml (sr, "test.xml");
