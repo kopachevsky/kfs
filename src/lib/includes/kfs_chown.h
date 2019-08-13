@@ -8,6 +8,6 @@
 
 #pragma once
 
-static int kfs_chown(const char *path, uid_t uid, gid_t gid);
+int kfs_chown(const char *path, uid_t uid, gid_t gid);
 
 #endif //KFS_KFS_CHOWN_H
