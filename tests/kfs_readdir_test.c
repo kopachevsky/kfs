@@ -53,7 +53,9 @@ START_TEST(kfs_readdir_exsit) {
     res = kfs_readdir(dir_path, test_buf, filler, offset ,&fi);
     ck_assert_int_eq(res, 0);
     ck_assert_int_eq(counter, 5);
-    fail_if(file_names == NULL);
+    fail_unless(strcmp(file_names[0],"second_file.txt") == 0);
+    fail_unless(strcmp(file_names[2],"second_dir") == 0);
+    fail_unless(strcmp(file_names[4],"first_file.txt") == 0);
     free(dir_path);
     free(file_path);
     free(second_file_path);
