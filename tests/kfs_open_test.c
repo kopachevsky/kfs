@@ -36,6 +36,9 @@ START_TEST(kfs_open_not_exist) {
 END_TEST
 
 START_TEST(kfs_open_chmod) {
+    printf("Local disc cache path %s", LOCAL_DISC_CACHE_PATH);
+    printf("Hello, World!");
+    printf("Hello, World!");
     char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("chmod.txt") + 1];
     strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
     char *path = strcat(dir_path, "chmod.txt");

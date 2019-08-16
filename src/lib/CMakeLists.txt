@@ -30,10 +30,10 @@ add_library(
 target_include_directories(fuse_cache PUBLIC includes)
 
 find_package(GlusterfsApi)
-
 target_link_libraries(fuse_cache
         pthread
         rt
+        zlog
         ${GLUSTERFS-API_LIBRARIES}
 )
 
