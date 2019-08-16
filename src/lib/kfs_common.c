@@ -1,4 +1,6 @@
 #include <kfs_common.h>
+#include "zlog.h"
+
 
 char *str_concat(const char* s1, const char* s2) {
     assert(s1 && s2);
@@ -108,4 +110,17 @@ int remove_directory(const char *path) {
     }
 
     return r;
+}
+
+int log(const char *msg) {
+    LOG_CONFIG_PATH = "/1-prj/projects/kubehub/kfs/tests/assets/zlog.conf";
+    static int rc;
+    if (!rc) {
+        rc = dzlog_init(LOG_CONFIG_PATH, "default");
+    }
+    if (rc) {
+        printf("init failed\n");
+        return -1;
+    }
+    dzlog_info(msg);
 }
