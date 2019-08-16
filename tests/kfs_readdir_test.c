@@ -17,11 +17,15 @@ void kfs_readdir_teardown(void) {
 }
 
 void *test_buf;
-const char *test_name;
-off_t offset = 1;
+static const char *test_name;
+off_t offset;
 const struct stat *test_stbuf;
+static int counter;
+const char *file_names[5] = {0, 0, 0, 0, 0};
 
-int filler (void *buf, const char *name,const struct stat *stbuf, off_t off) {
+int filler (void *buf, const char *name, const struct stat *stbuf, off_t off) {
+    file_names[counter] = name;
+    counter++;
     test_buf = buf;
     test_name = name;
     test_stbuf = stbuf;
@@ -49,6 +53,8 @@ START_TEST(kfs_readdir_exsit) {
     ck_assert_int_eq(res, 0);
     res = kfs_readdir(dir_path, test_buf, filler, offset ,&fi);
     ck_assert_int_eq(res, 0);
+    ck_assert_int_eq(counter, 5);
+    fail_if(file_names == NULL);
     free(dir_path);
     free(file_path);
     free(second_file_path);
