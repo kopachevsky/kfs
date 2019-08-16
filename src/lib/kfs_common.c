@@ -113,7 +113,7 @@ int remove_directory(const char *path) {
 }
 
 int log(const char *msg) {
-    LOG_CONFIG_PATH = "/1-prj/projects/kubehub/kfs/tests/assets/zlog.conf";
+    LOG_CONFIG_PATH = "/home/donelkostino/kfs/tests/assets/zlog.conf";
     static int rc;
     if (!rc) {
         rc = dzlog_init(LOG_CONFIG_PATH, "default");
