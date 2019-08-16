@@ -22,3 +22,4 @@ Suite* kfs_fsync_suite(void);
 Suite* kfs_opendir_suite(void);
 Suite* kfs_releasedir_suite(void);
 Suite* kfs_mknod_suite(void);
+Suite* kfs_readdir_suite(void);
