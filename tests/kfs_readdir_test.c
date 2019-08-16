@@ -33,7 +33,6 @@ int filler (void *buf, const char *name, const struct stat *stbuf, off_t off) {
     return 0;
 }
 
-
 START_TEST(kfs_readdir_exsit) {
     int res = kfs_mkdir("mydir/", 0777);
     ck_assert_int_eq(res, 0);
