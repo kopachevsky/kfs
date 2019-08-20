@@ -9,6 +9,10 @@ RUN set -e && \
     git clone https://github.com/HardySimpson/zlog.git && \
     cd zlog && make && make install && cd .. && cd /usr/local/lib && /sbin/ldconfig -v && cd -
 
-RUN mkdir /workdir
+RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 ubuntu
 
-WORKDIR /workdir
+USER ubuntu
+
+RUN mkdir /home/ubuntu/workdir
+
+WORKDIR /home/ubuntu/workdir
