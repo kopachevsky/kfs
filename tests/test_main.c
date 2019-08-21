@@ -25,7 +25,7 @@ void main_setup(void) {
 }
 
 void main_teardown(void) {
-    remove_directory(LOCAL_DISC_CACHE_PATH);
+    rmdir(LOCAL_DISC_CACHE_PATH);
     free(LOCAL_DISC_CACHE_PATH);
 }
 

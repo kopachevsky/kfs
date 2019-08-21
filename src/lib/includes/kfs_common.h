@@ -22,8 +22,6 @@ char *str_replace(char const *original, char const *pattern, char const *replace
 
 char *local_disk_cache_path(const char *path);
 
-int remove_directory(const char *path);
-
 int log(const char *msg);
 
 #endif //KFS_COMMON
