@@ -18,9 +18,7 @@ char *LOG_CONFIG_PATH;
 
 char *str_concat(const char* s1, const char* s2);
 
-char *str_replace(char const *original, char const *pattern, char const *replacement);
-
-char *local_disk_cache_path(const char *path);
+void fullpath(char fpath[PATH_MAX], const char *path);
 
 int log(const char *msg);
 
