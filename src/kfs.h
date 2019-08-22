@@ -38,5 +38,6 @@
 #include "lib/includes/kfs_opendir.h"
 #include "lib/includes/kfs_releasedir.h"
 #include "lib/includes/kfs_chown.h"
+#include "lib/includes/kfs_fgetattr.h"
 
 #endif //KFS_KFS_H

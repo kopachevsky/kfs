@@ -1,9 +1,7 @@
 #include <kfs_chmod.h>
 
 int kfs_chmod(const char *path, mode_t mode) {
-    char fpath[PATH_MAX];
-    fullpath(fpath, path);
-    int res = chmod(fpath, mode);
+    int res = chmod(path, mode);
     if (res == -1) {
         return -errno;
     }

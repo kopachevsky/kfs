@@ -1,9 +1,8 @@
 #include <kfs_readdir.h>
 
 int kfs_readdir(const char *path, void* buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi) {
-    char fpath[PATH_MAX];
-    fullpath(fpath, path);
     (void) offset;
+    (void) path;
     DIR *dp =(DIR *) (uintptr_t) fi->fh;
     struct dirent *de = readdir(dp);
     if (de == 0) {

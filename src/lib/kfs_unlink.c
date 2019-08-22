@@ -1,9 +1,7 @@
 #include <kfs_unlink.h>
 
 int kfs_unlink(const char* path) {
-    char fpath[PATH_MAX];
-    fullpath(fpath, path);
-    int res = unlink(fpath);
+    int res = unlink(path);
     if (res == -1) {
         return -errno;
     }

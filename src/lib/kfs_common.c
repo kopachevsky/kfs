@@ -1,6 +1,4 @@
 #include <kfs_common.h>
-#include "zlog.h"
-
 
 char *str_concat(const char* s1, const char* s2) {
     assert(s1 && s2);
@@ -17,12 +15,6 @@ char *str_concat(const char* s1, const char* s2) {
     }
     strcat(path, s2);
     return path;
-}
-
-void fullpath(char fpath[PATH_MAX], const char *path) {
-    LOCAL_DISC_CACHE_PATH = "/tmp/cache";
-    strcpy(fpath, LOCAL_DISC_CACHE_PATH);
-    strncat(fpath, path, PATH_MAX);
 }
 
 int log(const char *msg) {
