@@ -13,12 +13,13 @@ void kfs_create_teardown(void) {
 }
 
 START_TEST(kfs_create_creation) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("creation.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "creation.txt");
+//    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("creation.txt") + 1];
+//    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
+//    char *path = strcat(dir_path, "creation.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0777, &create);
+    int res = kfs_create("creation.txt", 0777, &create);
     fail_if(create.fh == 0);
+    char *path = str_concat(LOCAL_DISC_CACHE_PATH, "creation.txt");
     ck_assert_int_eq(res,0);
     struct fuse_file_info open = init_struct(O_RDWR);
     res = kfs_open(path, &open);

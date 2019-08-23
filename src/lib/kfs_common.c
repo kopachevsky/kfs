@@ -17,7 +17,12 @@ char *str_concat(const char* s1, const char* s2) {
     return path;
 }
 
-int log(const char *msg) {
+void fullpath(char fpath[PATH_MAX], const char *path) {
+    strcpy(fpath, LOCAL_DISC_CACHE_PATH);
+    strncat(fpath, path, PATH_MAX);
+}
+
+int logging(const char *msg) {
     LOG_CONFIG_PATH = "/home/donelkostino/kfs/tests/assets/zlog.conf";
     static int rc;
     if (!rc) {
@@ -27,6 +32,6 @@ int log(const char *msg) {
         printf("init failed\n");
         return -1;
     }
-    dzlog_info(msg);
+    dzlog_info("%s", msg);
     return 0;
 }

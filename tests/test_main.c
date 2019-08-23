@@ -30,7 +30,7 @@ void main_teardown(void) {
 }
 
 int main(void) {
-    log("start test");
+    logging("start test");
     int number_failed;
     SRunner *sr;
     sr = srunner_create(kfs_rmdir_suite());
