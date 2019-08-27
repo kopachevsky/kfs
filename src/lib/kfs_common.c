@@ -18,7 +18,7 @@ char *str_concat(const char* s1, const char* s2) {
 }
 
 void fullpath(char fpath[PATH_MAX], const char *path) {
-    strcpy(fpath, LOCAL_DISC_CACHE_PATH);
+    strcpy(fpath, "/tmp/CACHE");
     strncat(fpath, path, PATH_MAX);
 }
 

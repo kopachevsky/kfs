@@ -1,2 +1,2 @@
 mkdir mountpoint
-./build/KFS -d -s -f mountpoint/
+ ./build/src/kfs -d -s mountpoint/
