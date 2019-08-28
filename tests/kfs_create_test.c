@@ -13,16 +13,12 @@ void kfs_create_teardown(void) {
 }
 
 START_TEST(kfs_create_creation) {
-//    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("creation.txt") + 1];
-//    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-//    char *path = strcat(dir_path, "creation.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
     int res = kfs_create("creation.txt", 0777, &create);
-    fail_if(create.fh == 0);
-    char *path = str_concat(LOCAL_DISC_CACHE_PATH, "creation.txt");
     ck_assert_int_eq(res,0);
+    fail_if(create.fh == 0);
     struct fuse_file_info open = init_struct(O_RDWR);
-    res = kfs_open(path, &open);
+    res = kfs_open("creation.txt", &open);
     fail_if(open.fh == 0);
     ck_assert_int_eq(res, 0);
     close(create.fh);
@@ -41,9 +37,9 @@ END_TEST
 
 START_TEST(kfs_create_chmod) {
     struct fuse_file_info fi = init_struct(O_CREAT);
-    int res = kfs_create("chmod.txt", 0111, &fi);
+    int res = kfs_create("chmod_test.txt", 0111, &fi);
     ck_assert_int_eq(res, 0);
-    res = kfs_create("chmod.txt", 0777, &fi);
+    res = kfs_create("chmod_test.txt", 0777, &fi);
     ck_assert_int_eq(res, -EACCES);
 }
 END_TEST

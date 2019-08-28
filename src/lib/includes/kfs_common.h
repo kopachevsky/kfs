@@ -15,12 +15,12 @@
 
 char *MOUNT_PATH;
 char *LOCAL_DISC_CACHE_PATH;
-char *LOG_CONFIG_PATH;
+char LOG_CONFIG_PATH[PATH_MAX];
 
 char *str_concat(const char* s1, const char* s2);
 
 void fullpath(char fpath[PATH_MAX], const char *path);
 
-int logging(const char *msg);
+int logger(const char *msg);
 
 #endif //KFS_COMMON
