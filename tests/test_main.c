@@ -25,12 +25,12 @@ void main_setup(void) {
 }
 
 void main_teardown(void) {
-    remove_directory(LOCAL_DISC_CACHE_PATH);
+    rmdir(LOCAL_DISC_CACHE_PATH);
     free(LOCAL_DISC_CACHE_PATH);
 }
 
 int main(void) {
-    log("start test");
+    logger("start test");
     int number_failed;
     SRunner *sr;
     sr = srunner_create(kfs_rmdir_suite());

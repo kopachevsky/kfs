@@ -14,86 +14,71 @@ void kfs_access_teardown(void) {
 }
 
 START_TEST(kfs_access_execute_only) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("execute_only.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "execute_only.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0111, &create);
+    int res = kfs_create("execute_only.txt", 0111, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res,0);
-    res = kfs_access(path, R_OK);
+    res = kfs_access("execute_only.txt", R_OK);
     ck_assert_int_eq(res,-EACCES);
-    res = kfs_access(path, X_OK);
+    res = kfs_access("execute_only.txt", X_OK);
     ck_assert_int_eq(res,0);
     close(create.fh);
 }
 END_TEST
 
 START_TEST(kfs_access_read_only) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("read_only.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "read_only.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0444, &create);
+    int res = kfs_create("read_only.txt", 0444, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res,0);
-    res = kfs_access(path, X_OK);
+    res = kfs_access("read_only.txt", X_OK);
     ck_assert_int_eq(res,-EACCES);
-    res = kfs_access(path, W_OK);
+    res = kfs_access("read_only.txt", W_OK);
     ck_assert_int_eq(res,-EACCES);
-    res = kfs_access(path, R_OK);
+    res = kfs_access("read_only.txt", R_OK);
     ck_assert_int_eq(res,0);
     close(create.fh);
 }
 END_TEST
 
 START_TEST(kfs_access_write_only) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("write_only.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "write_only.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0222, &create);
+    int res = kfs_create("write_only.txt", 0222, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res,0);
-    res = kfs_access(path, X_OK);
+    res = kfs_access("write_only.txt", X_OK);
     ck_assert_int_eq(res,-EACCES);
-    res = kfs_access(path, R_OK);
+    res = kfs_access("write_only.txt", R_OK);
     ck_assert_int_eq(res,-EACCES);
-    res = kfs_access(path, W_OK);
+    res = kfs_access("write_only.txt", W_OK);
     ck_assert_int_eq(res,0);
     close(create.fh);
 }
 END_TEST
 
 START_TEST(kfs_access_rwx) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("rwx.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "rwx.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0111, &create);
+    int res = kfs_create("rwx.txt", 0111, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res,0);
-    res = kfs_access(path, R_OK|W_OK|X_OK);
+    res = kfs_access("rwx.txt", R_OK|W_OK|X_OK);
     ck_assert_int_eq(res,-EACCES);
-    res = kfs_chmod(path, 0777);
+    res = kfs_chmod("rwx.txt", 0777);
     ck_assert_int_eq(res,0);
-    res = kfs_access(path, R_OK|W_OK|X_OK);
+    res = kfs_access("rwx.txt", R_OK|W_OK|X_OK);
     ck_assert_int_eq(res,0);
     close(create.fh);
 }
 END_TEST
 
 START_TEST(kfs_access_file_existence) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("file_existence.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "file_existence.txt");
-    int res = kfs_access(path, F_OK);
+    int res = kfs_access("file_existence.txt", F_OK);
     ck_assert_int_eq(res,-ENOENT);
     struct fuse_file_info create = init_struct(O_CREAT);
-    res = kfs_create(path, 0777, &create);
+    res = kfs_create("file_existence.txt", 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res,0);
-    res = kfs_access(path, F_OK);
+    res = kfs_access("file_existence.txt", F_OK);
     ck_assert_int_eq(res,0);
     close(create.fh);
 }

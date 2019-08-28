@@ -1,11 +1,11 @@
 #include <kfs_mkdir.h>
 
-int kfs_mkdir(const char* original_path, const mode_t mode) {
-    char *path = local_disk_cache_path(original_path);
-    int res = mkdir(path, mode);
+int kfs_mkdir(const char* path, const mode_t mode) {
+    char fpath[PATH_MAX];
+    fullpath(fpath, path);
+    int res = mkdir(fpath, mode);
     if (res == -1) {
         return -errno;
     }
-    free(path);
     return 0;
 }

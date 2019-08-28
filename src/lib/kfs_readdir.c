@@ -1,8 +1,10 @@
 #include <kfs_readdir.h>
 
-int kfs_readdir(const char *original_path, void* buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi) {
-    char *path = local_disk_cache_path(original_path);
+int kfs_readdir(const char *path, void* buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi) {
+    char fpath[PATH_MAX];
+    fullpath(fpath, path);
     (void) offset;
+    (void) fpath;
     DIR *dp =(DIR *) (uintptr_t) fi->fh;
     struct dirent *de = readdir(dp);
     if (de == 0) {
@@ -13,6 +15,5 @@ int kfs_readdir(const char *original_path, void* buf, fuse_fill_dir_t filler, of
             return -ENOMEM;
         }
     } while ((de = readdir(dp)) != NULL);
-    free(path);
     return 0;
 }

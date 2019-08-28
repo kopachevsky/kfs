@@ -9,21 +9,18 @@
 #include <zconf.h>
 #include <dirent.h>
 #include <assert.h>
+#include "zlog.h"
 
 #pragma once
 
 char *MOUNT_PATH;
 char *LOCAL_DISC_CACHE_PATH;
-char *LOG_CONFIG_PATH;
+char LOG_CONFIG_PATH[PATH_MAX];
 
 char *str_concat(const char* s1, const char* s2);
 
-char *str_replace(char const *original, char const *pattern, char const *replacement);
+void fullpath(char fpath[PATH_MAX], const char *path);
 
-char *local_disk_cache_path(const char *path);
-
-int remove_directory(const char *path);
-
-int log(const char *msg);
+int logger(const char *msg);
 
 #endif //KFS_COMMON

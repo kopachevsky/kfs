@@ -85,7 +85,7 @@ START_TEST(kfs_readdir_double_call_of_function) {
     res = kfs_readdir(dir_path,test_buf,filler,offset,&fi);
     ck_assert_int_eq(res,0);
     res = kfs_readdir(dir_path,test_buf,filler,offset,&fi);
-    ck_assert_int_eq(res,-EBADF);
+    ck_assert_int_eq(res,-errno);
     free(dir_path);
     close(fi.fh);
 }

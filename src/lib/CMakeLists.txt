@@ -2,6 +2,7 @@ add_library(
    fuse_cache
         kfs_access.c
         kfs_getattr.c
+        kfs_fgetattr.c
         kfs_mkdir.c
         kfs_mknod.c
         kfs_open.c

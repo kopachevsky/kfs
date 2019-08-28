@@ -1,11 +1,11 @@
 #include <kfs_access.h>
 
-int kfs_access(const char* original_path, int mode) {
-    char *path = local_disk_cache_path(original_path);
-    int res = access(path, mode);
+int kfs_access(const char* path, int mask) {
+    char fpath[PATH_MAX];
+    fullpath(fpath, path);
+    int res = access(fpath, mask);
     if (res == -1) {
         return -errno;
     }
-    free(path);
     return 0;
 }

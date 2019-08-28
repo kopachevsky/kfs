@@ -1,12 +1,12 @@
 #include <kfs_rmdir.h>
 
-int kfs_rmdir(const char* original_path) {
-    char *path = local_disk_cache_path(original_path);
-    int res = rmdir(path);
+int kfs_rmdir(const char* path) {
+    char fpath[PATH_MAX];
+    fullpath(fpath, path);
+    int res = rmdir(fpath);
     if(res == -1) {
-        return errno;
+        return -errno;
     }
-    free(path);
     return 0;
 }
 

@@ -2,6 +2,7 @@
 
 struct fuse_operations kfs_ops = {
                 .getattr    = kfs_getattr,
+                .fgetattr   = kfs_fgetattr,
                 .access     = kfs_access,
                 .open       = kfs_open,
                 .read       = kfs_read,

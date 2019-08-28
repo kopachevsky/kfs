@@ -1,11 +1,11 @@
 #include <kfs_chown.h>
 
-int kfs_chown(const char *original_path, uid_t uid, gid_t gid) {
-    char *path = local_disk_cache_path(original_path);
-    int res = lchown(path, uid, gid);
+int kfs_chown(const char *path, uid_t uid, gid_t gid) {
+    char fpath[PATH_MAX];
+    fullpath(fpath, path);
+    int res = lchown(fpath, uid, gid);
     if (res == -1) {
         return -errno;
     }
-    free(path);
     return 0;
 }

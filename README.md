@@ -10,11 +10,11 @@ Build:
 
 Mount:
 
-    ./build/KFS -d -s -f <directory>
+    ./build/src/kfs -d -s <directory>
 
 Unmount:
 
-    fusermount -uz <directory>
+    fusermount -u <directory>
 
 How to check mount:
 
@@ -22,7 +22,7 @@ How to check mount:
 
 Test:
 
-    make & make test
+    cd /build && make && make test
 
 To check tests results:
 
