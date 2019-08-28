@@ -15,9 +15,9 @@ void kfs_read_teardown(void) {
 }
 
 START_TEST(kfs_read_exist_file_with_content) {
-//    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("exist_content.txt") + 1];
-//    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-//    char *path = strcat(dir_path, "exist_content.txt");
+    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("exist_content.txt") + 1];
+    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
+    char *path = strcat(dir_path, "exist_content.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
     int res = kfs_create("exist_content.txt", 0777, &create);
     fail_if(create.fh == 0);
