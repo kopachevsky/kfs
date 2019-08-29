@@ -14,19 +14,19 @@ struct fuse_file_info init_struct(int flag) {
 void main_setup(void) {
     MOUNT_PATH = "/ext/data1/";
 
-    char template[] = "/tmp/kfs_tests.XXXXXX";
+    char template[] = "/tmp/CACHE/kfs_tests.XXXXXX";
     char *tmp_file = str_concat(mkdtemp(template), "/");
     if(tmp_file == NULL) {
         perror("mkdtemp failed: ");
     }
-    LOCAL_DISC_CACHE_PATH = malloc(sizeof(template));
-    strcpy(LOCAL_DISC_CACHE_PATH, tmp_file);
+    CACHE = malloc(sizeof(template));
+    strcpy(CACHE, tmp_file);
     free(tmp_file);
 }
 
 void main_teardown(void) {
-    rmdir(LOCAL_DISC_CACHE_PATH);
-    free(LOCAL_DISC_CACHE_PATH);
+    rmdir(CACHE);
+    free(CACHE);
 }
 
 int main(void) {
