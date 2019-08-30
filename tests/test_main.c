@@ -35,7 +35,7 @@ int main(void) {
     srunner_add_suite(sr, kfs_release_suite());
     srunner_add_suite(sr, kfs_chmod_suite());
     srunner_add_suite(sr, kfs_link_suite());
-//    srunner_add_suite(sr, kfs_unlink_suite());
+    srunner_add_suite(sr, kfs_unlink_suite());
 //    srunner_add_suite(sr, kfs_rename_suite());
 //    srunner_add_suite(sr, kfs_symlink_suite());
 //    srunner_add_suite(sr, kfs_flush_suite());
