@@ -14,36 +14,36 @@ void kfs_create_teardown(void) {
 
 START_TEST(kfs_create_creation) {
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create("creation.txt" , 0777, &create);
+    int res = kfs_create("create_creation.txt" , 0777, &create);
     ck_assert_int_eq(res,0);
     fail_if(create.fh == 0);
     struct fuse_file_info open = init_struct(O_RDWR);
-    res = kfs_open("creation.txt", &open);
+    res = kfs_open("create_creation.txt", &open);
     fail_if(open.fh == 0);
     ck_assert_int_eq(res, 0);
     close(create.fh);
     close(open.fh);
-    remove("/tmp/CACHE/creation.txt");
+    remove("/tmp/CACHE/create_creation.txt");
 }
 END_TEST
 
 START_TEST(kfs_create_exist) {
     struct fuse_file_info fi = init_struct(O_CREAT|O_EXCL);
-    int res = kfs_create("exist.txt", 0777, &fi);
+    int res = kfs_create("create_exist.txt", 0777, &fi);
     ck_assert_int_eq(res, 0);
-    res = kfs_create("exist.txt", 0777, &fi);
+    res = kfs_create("create_exist.txt", 0777, &fi);
     ck_assert_int_eq(res, -EEXIST);
-    remove("/tmp/CACHE/exist.txt");
+    remove("/tmp/CACHE/create_exist.txt");
 }
 END_TEST
 
 START_TEST(kfs_create_chmod) {
     struct fuse_file_info fi = init_struct(O_CREAT);
-    int res = kfs_create("chmod.txt", 0111, &fi);
+    int res = kfs_create("create_chmod.txt", 0111, &fi);
     ck_assert_int_eq(res, 0);
-    res = kfs_create("chmod.txt", 0777, &fi);
+    res = kfs_create("create_chmod.txt", 0777, &fi);
     ck_assert_int_eq(res, -EACCES);
-    remove("/tmp/CACHE/exist.txt");
+    remove("/tmp/CACHE/create_chmod.txt");
 }
 END_TEST
 
