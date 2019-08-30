@@ -13,18 +13,15 @@ void kfs_open_teardown(void) {
 }
 
 START_TEST(kfs_open_exist) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("exist.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "exist.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0777, &create);
+    int res = kfs_create("open_exist.txt", 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info open = init_struct(O_RDONLY|O_WRONLY);
-    res = kfs_open(path, &open);
+    res = kfs_open("open_exist.txt", &open);
     fail_if(open.fh == 0);
     fail_if(res != 0);
-    fail_if(path == NULL);
+    remove(str_concat(LOCAL_DISC_CACHE_PATH, "open_exist.txt"));
 }
 END_TEST
 
@@ -36,53 +33,42 @@ START_TEST(kfs_open_not_exist) {
 END_TEST
 
 START_TEST(kfs_open_chmod) {
-    printf("Local disc cache path %s", LOCAL_DISC_CACHE_PATH);
-    printf("Hello, World!");
-    printf("Hello, World!");
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("chmod.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "chmod.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0111, &create);
+    int res = kfs_create("open_chmod.txt", 0111, &create);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info open = init_struct(O_RDWR);
-    res = kfs_open(path, &open);
+    res = kfs_open("open_chmod.txt", &open);
     ck_assert_int_eq(res, -EACCES);
-    fail_if(path == NULL);
+    remove(str_concat(LOCAL_DISC_CACHE_PATH, "open_chmod.txt"));
 }
 END_TEST
 
 START_TEST(kfs_open_read) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("read.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "read.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0444, &create);
+    int res = kfs_create("open_read.txt", 0444, &create);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info open_write = init_struct(O_WRONLY);
-    res = kfs_open(path, &open_write);
+    res = kfs_open("open_read.txt", &open_write);
     ck_assert_int_eq(res, -EACCES);
     struct fuse_file_info open_read = {O_RDONLY};
-    res = kfs_open(path, &open_read);
+    res = kfs_open("open_read.txt", &open_read);
     ck_assert_int_eq(res, 0);
-    fail_if(path == NULL);
+    remove(str_concat(LOCAL_DISC_CACHE_PATH,"open_read.txt"));
 }
 END_TEST
 
 START_TEST(kfs_open_write) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("write.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "write.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0222, &create);
+    int res = kfs_create("open_write.txt", 0222, &create);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info open_read = {O_RDONLY};
-    res = kfs_open(path, &open_read);
+    res = kfs_open("open_write.txt", &open_read);
     ck_assert_int_eq(res, -EACCES);
     struct fuse_file_info open_write = init_struct(O_WRONLY);
-    res = kfs_open(path, &open_write);
+    res = kfs_open("open_write.txt", &open_write);
     ck_assert_int_eq(res, 0);
-    fail_if(path == NULL);
+    fail_if("open_write.txt" == NULL);
+    remove(str_concat(LOCAL_DISC_CACHE_PATH,"open_write.txt"));
 }
 END_TEST
 
