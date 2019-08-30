@@ -4,11 +4,8 @@
 
 #include "test_main.h"
 
-
-
 void kfs_mkdir_setup(void) {
     main_setup();
-    ck_assert_int_eq(22, strlen(LOCAL_DISC_CACHE_PATH));
 }
 
 void kfs_mkdir_teardown(void) {
@@ -16,20 +13,20 @@ void kfs_mkdir_teardown(void) {
 }
 
 START_TEST(kfs_mkdir_creation) {
-    int res = kfs_mkdir("mydir", 0777);
+    int res = kfs_mkdir("mkdir_creation/", 0777);
     ck_assert_int_eq(res, 0);
-    char *dir_path = str_concat(LOCAL_DISC_CACHE_PATH, "mydir");
-    DIR* dir = opendir(dir_path);
+    DIR* dir = opendir(str_concat(LOCAL_DISC_CACHE_PATH, "mkdir_creation/"));
     fail_if(dir == NULL);
-    free(dir_path);
+    rmdir(str_concat(LOCAL_DISC_CACHE_PATH,"mkdir_creation/"));
 }
 END_TEST
 
 START_TEST(kfs_mkdir_exist) {
-    int res = kfs_mkdir("test", 0777);
+    int res = kfs_mkdir("mkdir_exist/", 0777);
     ck_assert_int_eq(res, 0);
-    res = kfs_mkdir("test", 0777);
+    res = kfs_mkdir("mkdir_exist/", 0777);
     ck_assert_int_eq(res, -EEXIST);
+    rmdir(str_concat(LOCAL_DISC_CACHE_PATH,"mkdir_exist/"));
 }
 END_TEST
 

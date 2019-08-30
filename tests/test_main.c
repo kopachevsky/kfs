@@ -26,7 +26,7 @@ int main(void) {
     SRunner *sr;
     sr = srunner_create(kfs_rmdir_suite());
     srunner_add_suite(sr, kfs_common_suite());
-//    srunner_add_suite(sr, kfs_mkdir_suite());
+    srunner_add_suite(sr, kfs_mkdir_suite());
 //    srunner_add_suite(sr, kfs_open_suite());
 //    srunner_add_suite(sr, kfs_create_suite());
 //    srunner_add_suite(sr, kfs_access_suite());
