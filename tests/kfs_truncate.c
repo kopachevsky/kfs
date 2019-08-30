@@ -18,54 +18,50 @@ void kfs_truncate_teardown(void) {
 }
 
 START_TEST(kfs_truncate_increase_size_of_exist_file) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("exist.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "exist.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0777, &create);
+    int res = kfs_create("truncate_increase_size_of_exist_file.txt", 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info fi = init_struct(O_RDWR);
-    res = kfs_open(path, &fi);
+    res = kfs_open("truncate_increase_size_of_exist_file.txt", &fi);
     fail_if(fi.fh == 0);
     fail_if(res != 0);
     char *buf = "qwerty\n";
-    res = kfs_write(path,buf, strlen(buf), 0, &fi);
+    res = kfs_write("truncate_increase_size_of_exist_file.txt",buf, strlen(buf), 0, &fi);
     fail_if(fi.fh == 0 );
     ck_assert_int_eq(res, strlen(buf));
     char *new_buf = "qwery000000000000\n";
-    res = kfs_truncate(path, strlen(new_buf));
+    res = kfs_truncate("truncate_increase_size_of_exist_file.txt", strlen(new_buf));
     ck_assert_int_eq(res,0);
     char buf_read [strlen(new_buf)];
-    res = kfs_read(path, buf_read, strlen(new_buf), 0, &fi);
+    res = kfs_read("truncate_increase_size_of_exist_file.txt", buf_read, strlen(new_buf), 0, &fi);
     ck_assert_int_eq(res, strlen(new_buf));
+    remove(str_concat(LOCAL_DISC_CACHE_PATH,"truncate_increase_size_of_exist_file.txt"));
     close(create.fh);
     close(fi.fh);
 }
 END_TEST
 
 START_TEST(kfs_truncate_decrease_size_of_exist_file) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("exist.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "exist.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0777, &create);
+    int res = kfs_create("truncate_decrease_size_of_exist_file.txt", 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info fi = init_struct(O_RDWR);
-    res = kfs_open(path, &fi);
+    res = kfs_open("truncate_decrease_size_of_exist_file.txt", &fi);
     fail_if(fi.fh == 0);
     fail_if(res != 0);
     char *buf = "qwerty\n";
-    res = kfs_write(path,buf, strlen(buf), 0, &fi);
+    res = kfs_write("truncate_decrease_size_of_exist_file.txt",buf, strlen(buf), 0, &fi);
     fail_if(fi.fh == 0 );
     ck_assert_int_eq(res, strlen(buf));
     char *new_buf = "q\n";
-    res = kfs_truncate(path, strlen(new_buf));
+    res = kfs_truncate("truncate_decrease_size_of_exist_file.txt", strlen(new_buf));
     ck_assert_int_eq(res,0);
     char buf_read [strlen(new_buf)];
-    res = kfs_read(path, buf_read, strlen(new_buf), 0, &fi);
+    res = kfs_read("truncate_decrease_size_of_exist_file.txt", buf_read, strlen(new_buf), 0, &fi);
     ck_assert_int_eq(res, strlen(new_buf));
+    remove(str_concat(LOCAL_DISC_CACHE_PATH,"truncate_decrease_size_of_exist_file.txt"));
     close(create.fh);
     close(fi.fh);
 }
@@ -82,28 +78,25 @@ START_TEST(kfs_trucate_not_exist_file) {
 END_TEST
 
 START_TEST(kfs_truncate_not_file) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("directory/") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "directory/");
-    int res = kfs_mkdir(path, 0777);
+    int res = kfs_mkdir("truncate_not_file/", 0777);
     ck_assert_int_eq(res,0);
     char *new_buf = "000000000000\n";
-    res = kfs_truncate(path, strlen(new_buf));
+    res = kfs_truncate("truncate_not_file/", strlen(new_buf));
     ck_assert_int_eq(res,-EISDIR);
+    rmdir(str_concat(LOCAL_DISC_CACHE_PATH,"truncate_not_file/"));
 }
 END_TEST
 
 START_TEST(kfs_truncate_chmod) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("chmod.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "chmod.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0111, &create);
+    int res = kfs_create("truncate_chmod.txt", 0111, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
     char *new_buf = "000000000000\n";
-    res = kfs_truncate(path, strlen(new_buf));
+    res = kfs_truncate("truncate_chmod.txt", strlen(new_buf));
     ck_assert_int_eq(res,-EACCES);
+    remove(str_concat(LOCAL_DISC_CACHE_PATH,"truncate_chmod.txt"));
+    close(create.fh);
 }
 END_TEST
 

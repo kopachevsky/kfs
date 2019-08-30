@@ -4,6 +4,7 @@
 #include <kfs_open.h>
 #include <kfs_symlink.h>
 #include <kfs_mkdir.h>
+#include <kfs_unlink.h>
 
 #include "test_main.h"
 
@@ -27,22 +28,17 @@ START_TEST(kfs_symlink_fs_files) {
     res = kfs_write("source.txt",buf, strlen(buf), 0, &fi);
     fail_if(fi.fh == 0 );
     ck_assert_int_eq(res, strlen(buf));
-    res = kfs_mkdir("target/", 0777);
-    ck_assert_int_eq(res, 0);
-    char *target_path = str_concat("target/", "target.txt");
-    fail_if(target_path == NULL);
-    res = kfs_symlink("source.txt",target_path);
+    res = kfs_symlink("source.txt","target.txt");
     ck_assert_int_eq(res,0);
     res = remove(str_concat(LOCAL_DISC_CACHE_PATH,"source.txt"));
     ck_assert_int_eq(res, 0);
-    res = kfs_open(target_path, &fi);
+    res = kfs_open("target.txt", &fi);
     ck_assert_int_eq(res, -ENOENT);
+    res = kfs_unlink("target.txt");
+    remove(str_concat(LOCAL_DISC_CACHE_PATH,"source.txt" ));
+    remove(str_concat(LOCAL_DISC_CACHE_PATH, "target.txt"));
     close(create.fh);
     close(fi.fh);
-    remove(str_concat(LOCAL_DISC_CACHE_PATH,"source.txt" ));
-    remove(str_concat(LOCAL_DISC_CACHE_PATH, "target/target.txt"));
-    rmdir(str_concat(LOCAL_DISC_CACHE_PATH, "target/"));
-    free(target_path);
 }
 END_TEST
 

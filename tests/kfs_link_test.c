@@ -39,7 +39,7 @@ START_TEST(kfs_link_fs_files) {
     ck_assert_int_eq(res, strlen(buf));
     close(create.fh);
     close(fi.fh);
-    remove(str_concat(LOCAL_DISC_CACHE_PATH, target_path));
+    remove(str_concat(LOCAL_DISC_CACHE_PATH, "target/target.txt"));
     rmdir(str_concat(LOCAL_DISC_CACHE_PATH, "target/"));
     remove(str_concat(LOCAL_DISC_CACHE_PATH,"source.txt" ));
     free(target_path);
