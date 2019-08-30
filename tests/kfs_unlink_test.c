@@ -52,14 +52,12 @@ START_TEST(kfs_unlink_fs_files) {
 }
 END_TEST
 
-
 START_TEST(kfs_unlink_not_exist) {
     char dir_path_source_file[strlen(MOUNT_PATH) + strlen("source.txt") + 1];
     strcpy(dir_path_source_file, MOUNT_PATH);
     char *source_path = strcat(dir_path_source_file, "source.txt");
     int res = kfs_unlink(source_path);
     ck_assert_int_eq(res,-ENOENT);
-
 }
 END_TEST
 
