@@ -16,35 +16,32 @@ void kfs_fsync_teardown(void) {
 }
 
 START_TEST(kfs_fsync_opened_file) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("opened.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "opened.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0777, &create);
+    int res = kfs_create("fsync_opened_file.txt", 0777, &create);
     struct fuse_file_info fi = init_struct(O_RDWR);
-    res = kfs_open(path, &fi);
+    res = kfs_open("fsync_opened_file.txt", &fi);
     char *buf = "qwerty\n";
-    res = kfs_write(path,buf, strlen(buf), 0, &fi);
-    res = kfs_fsync(path, 0, &fi);
+    res = kfs_write("fsync_opened_file.txt",buf, strlen(buf), 0, &fi);
+    res = kfs_fsync("fsync_opened_file.txt", 0, &fi);
     ck_assert_int_eq(res,0);
+    remove(str_concat(LOCAL_DISC_CACHE_PATH, "fsync_opened_file.txt"));
     close(create.fh);
     close(fi.fh);
 }
 END_TEST
 
 START_TEST(kfs_fsync_flushed_file)  {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("flushed.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "flushed.txt");
     struct fuse_file_info create = init_struct(O_CREAT);;
-    int res = kfs_create(path, 0777, &create);
+    int res = kfs_create("fsync_flushed_file.txt", 0777, &create);
     struct fuse_file_info fi = init_struct(O_RDWR);
-    res = kfs_open(path, &fi);
+    res = kfs_open("fsync_flushed_file.txt", &fi);
     char *buf = "qwerty\n";
-    res = kfs_write(path,buf, strlen(buf), 0, &fi);
-    res = kfs_flush(path, &fi);
-    res = kfs_fsync(path, 0, &fi);
+    res = kfs_write("fsync_flushed_file.txt",buf, strlen(buf), 0, &fi);
+    res = kfs_flush("fsync_flushed_file.txt", &fi);
+    res = kfs_fsync("fsync_flushed_file.txt", 0, &fi);
     ck_assert_int_eq(res,-EBADF);
+    remove(str_concat(LOCAL_DISC_CACHE_PATH,"fsync_flushed_file.txt"));
+    close(fi.fh);
     close(create.fh);
 }
 END_TEST
