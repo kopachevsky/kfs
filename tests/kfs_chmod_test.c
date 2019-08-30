@@ -15,57 +15,53 @@ void kfs_chmod_teardown(void) {
 }
 
 START_TEST(kfs_chmod_directory_decrease_permissions) {
-    char path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("chmod_directory/") + 1];
-    strcpy(path, LOCAL_DISC_CACHE_PATH);
-    char *dir_path = strcat(path, "chmod_directory/");
-    int res = kfs_mkdir(dir_path, 0777);
+    int res = kfs_mkdir("chmod_directory_decrease_permissions/", 0777);
     ck_assert_int_eq(res, 0);
-    res = kfs_chmod(dir_path, 0111);
+    res = kfs_chmod("chmod_directory_decrease_permissions/", 0111);
     fail_if(res != 0);
-    char *path_file = strcat(dir_path, "chmod.txt");
+    char *path_file = str_concat("chmod_directory_decrease_permissions/", "chmod.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
     res = kfs_create(path_file, 0777, &create);
     fail_if(create.fh != 0);
     ck_assert_int_eq(res,-EACCES);
+    free(path_file);
+    rmdir(str_concat(LOCAL_DISC_CACHE_PATH,"chmod_directory_decrease_permissions/"));
 }
 END_TEST
 
 START_TEST(kfs_chmod_directory_increase_permissions) {
-    char path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("chmod_directory/") + 1];
-    strcpy(path, LOCAL_DISC_CACHE_PATH);
-    char *dir_path = strcat(path, "chmod_directory/");
-    int res = kfs_mkdir(dir_path, 0111);
+    int res = kfs_mkdir("chmod_directory_increase_permissions/", 0111);
     ck_assert_int_eq(res, 0);
-    res = kfs_chmod(dir_path, 0777);
+    res = kfs_chmod("chmod_directory_increase_permissions/", 0777);
     fail_if(res != 0);
-    char *path_file = strcat(dir_path, "chmod.txt");
+    char *path_file = str_concat("chmod_directory_increase_permissions/", "chmod.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
     res = kfs_create(path_file, 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res,0);
+    remove(str_concat(LOCAL_DISC_CACHE_PATH, path_file));
+    rmdir(str_concat(LOCAL_DISC_CACHE_PATH,"chmod_directory_increase_permissions/"));
+    free(path_file);
 }
 END_TEST
 
 START_TEST(kfs_chmod_file) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("chmod.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "chmod.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0111, &create);
+    int res = kfs_create("chmod_file.txt", 0111, &create);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info open = init_struct(O_RDWR);
-    res = kfs_open(path, &open);
+    res = kfs_open("chmod_file.txt", &open);
     ck_assert_int_eq(res, -EACCES);
-    fail_if(path == NULL);
-    res = kfs_chmod(path, 0777);
+    res = kfs_chmod("chmod_file.txt", 0777);
     fail_if(res != 0);
-    res = kfs_open(path, &open);
+    res = kfs_open("chmod_file.txt", &open);
     ck_assert_int_eq(res, 0);
     close(open.fh);
-    res = kfs_chmod(path, 0111);
+    res = kfs_chmod("chmod_file.txt", 0111);
     fail_if(res != 0);
-    res = kfs_open(path, &open);
+    res = kfs_open("chmod_file.txt", &open);
     ck_assert_int_eq(res, -EACCES);
+    remove(str_concat(LOCAL_DISC_CACHE_PATH,"chmod_file.txt"));
 }
 END_TEST
 
