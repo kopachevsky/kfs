@@ -17,13 +17,12 @@ void kfs_releasedir_teardown(void) {
 }
 
 START_TEST(kfs_releasedir_exsit) {
-    int res = kfs_mkdir("exist/", 0777);
-    char *dir_path = str_concat(LOCAL_DISC_CACHE_PATH, "exist/");
+    int res = kfs_mkdir("releasedir_exsit/", 0777);
     struct fuse_file_info open = init_struct(O_DIRECTORY);
-    res = kfs_opendir(dir_path,&open);
-    res = kfs_releasedir(dir_path, &open);
+    res = kfs_opendir("releasedir_exsit/",&open);
+    res = kfs_releasedir("releasedir_exsit/", &open);
     ck_assert_int_eq(res,0);
-    free(dir_path);
+    rmdir(str_concat(LOCAL_DISC_CACHE_PATH,"releasedir_exsit/"));
     close(open.fh);
 }
 END_TEST
@@ -38,16 +37,13 @@ START_TEST(kfs_releasedir_not_exist) {
 END_TEST
 
 START_TEST(kfs_releasedir_not_a_directory) {
-    int res = kfs_mkdir("dir/", 0777);
-    char *dir_path = str_concat(LOCAL_DISC_CACHE_PATH, "dir/");
     struct fuse_file_info create = init_struct(O_CREAT);
-    char *file_path = str_concat(dir_path, "not_a_dir.txt");
-    res = kfs_create(file_path, 0777, &create);
+    int res = kfs_create("releasedir_not_a_directory.txt", 0777, &create);
     struct fuse_file_info open = init_struct(O_DIRECTORY);
-    res = kfs_releasedir(file_path,&open);
+    res = kfs_releasedir("releasedir_not_a_directory.txt",&open);
     ck_assert_int_eq(res,-EINVAL);
-    free(dir_path);
-    free(file_path);
+    remove(str_concat(LOCAL_DISC_CACHE_PATH, "releasedir_not_a_directory.txt"));
+    close(open.fh);
 }
 END_TEST
 

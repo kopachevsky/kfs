@@ -14,25 +14,22 @@ void kfs_rmdir_teardown(void) {
 }
 
 START_TEST(kfs_rmdir_base) {
-    int res = kfs_mkdir("test", 0777);
+    int res = kfs_mkdir("rmdir_base/", 0777);
     ck_assert_int_eq(res, 0);
-    res = kfs_rmdir("test");
+    res = kfs_rmdir("rmdir_base/");
     ck_assert_int_eq(res, 0);
-    char *dir_path = str_concat(LOCAL_DISC_CACHE_PATH, "test");
-    DIR* dir = opendir(dir_path);
+    DIR* dir = opendir("rmdir_base/");
     fail_if(dir != NULL);
-    free(dir_path);
+    rmdir(str_concat(LOCAL_DISC_CACHE_PATH, "rmdir_base/" ));
 }
 END_TEST
 
 
 START_TEST(kfs_rmdir_not_existing_folder) {
-    int res = kfs_rmdir("test");
-    ck_assert_int_eq(res, ENOENT);
-    char *dir_path = str_concat(LOCAL_DISC_CACHE_PATH, "test");
-    DIR* dir = opendir(dir_path);
+    int res = kfs_rmdir("rmdir_not_existing_folder/");
+    ck_assert_int_eq(res, -ENOENT);
+    DIR* dir = opendir("rmdir_not_existing_folder/");
     fail_if(dir != NULL);
-    free(dir_path);
 }
 END_TEST
 

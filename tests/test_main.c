@@ -1,7 +1,6 @@
 #include <check.h>
 #include <stdlib.h>
 #include <kfs_common.h>
-#include <stdio.h>
 
 #include "kfs_suites.h"
 
@@ -13,20 +12,12 @@ struct fuse_file_info init_struct(int flag) {
 
 void main_setup(void) {
     MOUNT_PATH = "/ext/data1/";
-
-    char template[] = "/tmp/kfs_tests.XXXXXX";
-    char *tmp_file = str_concat(mkdtemp(template), "/");
-    if(tmp_file == NULL) {
-        perror("mkdtemp failed: ");
-    }
-    LOCAL_DISC_CACHE_PATH = malloc(sizeof(template));
-    strcpy(LOCAL_DISC_CACHE_PATH, tmp_file);
-    free(tmp_file);
+    LOCAL_DISC_CACHE_PATH = "/tmp/CACHE/";
 }
 
 void main_teardown(void) {
     rmdir(LOCAL_DISC_CACHE_PATH);
-    free(LOCAL_DISC_CACHE_PATH);
+    mkdir(LOCAL_DISC_CACHE_PATH, 0777);
 }
 
 int main(void) {

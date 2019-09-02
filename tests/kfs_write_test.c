@@ -14,41 +14,37 @@ void kfs_write_teardown(void) {
 }
 
 START_TEST(kfs_write_exist) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("exist.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "exist.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0777, &create);
+    int res = kfs_create("kfs_write_exist.txt", 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info fi = init_struct(O_WRONLY);
-    res = kfs_open(path, &fi);
+    res = kfs_open("kfs_write_exist.txt", &fi);
     fail_if(fi.fh == 0);
     fail_if(res != 0);
     char *buf = "qwerty\n";
-    res = kfs_write(path,buf, strlen(buf), 0, &fi);
+    res = kfs_write("kfs_write_exist.txt", buf, strlen(buf),0, &fi);
     fail_if(fi.fh == 0 );
     ck_assert_int_eq(res, strlen(buf));
     close(create.fh);
     close(fi.fh);
+    remove(str_concat(LOCAL_DISC_CACHE_PATH,"kfs_write_exist.txt"));
 }
 END_TEST
 
 START_TEST(kfs_write_file_not_opened) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("not_opened.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "not_opened.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0777, &create);
+    int res = kfs_create("write_file_not_opened.txt", 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info fi = init_struct(O_RDWR|O_RDONLY|O_WRONLY);
-    res = kfs_open(path, &fi);
+    res = kfs_open("write_file_not_opened.txt", &fi);
     ck_assert_int_eq(res, 0);
     close(fi.fh);
     char *buf = "qwerty";
-    res = kfs_write(path,buf, strlen(buf), 0, &fi);
+    res = kfs_write("write_file_not_opened.txt",buf, strlen(buf), 0, &fi);
     ck_assert_int_eq(res, -EBADF);
+    remove(str_concat(LOCAL_DISC_CACHE_PATH,"write_file_not_opened.txt"));
 }
 END_TEST
 

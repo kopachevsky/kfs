@@ -15,25 +15,22 @@ void kfs_flush_teardown(void) {
 }
 
 START_TEST(kfs_flush_opened_file) {
-    char dir_path[strlen(LOCAL_DISC_CACHE_PATH) + strlen("opened.txt") + 1];
-    strcpy(dir_path, LOCAL_DISC_CACHE_PATH);
-    char *path = strcat(dir_path, "opened.txt");
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create(path, 0777, &create);
+    int res = kfs_create("flush_opened_file.txt", 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res, 0);
     struct fuse_file_info fi = init_struct(O_RDWR);
-    res = kfs_open(path, &fi);
+    res = kfs_open("flush_opened_file.txt", &fi);
     fail_if(fi.fh == 0);
     fail_if(res != 0);
-    fail_if(path == NULL);
     char *buf = "qwerty\n";
-    res = kfs_write(path,buf, strlen(buf), 0, &fi);
+    res = kfs_write("flush_opened_file.txt",buf, strlen(buf), 0, &fi);
     ck_assert_int_eq(res, strlen(buf));
-    res = kfs_flush(path, &fi);
+    res = kfs_flush("flush_opened_file.txt", &fi);
     ck_assert_int_eq(res, 0);
-    res = kfs_write(path,buf, strlen(buf), 0, &fi);
+    res = kfs_write("flush_opened_file.txt",buf, strlen(buf), 0, &fi);
     ck_assert_int_eq(res, -EBADF);
+    remove(str_concat(LOCAL_DISC_CACHE_PATH, "flush_opened_file.txt"));
 }
 END_TEST
 
