@@ -1,4 +1,4 @@
-#include <kfs_open.h>
+#include "kfs_open.h"
 
 int kfs_open(const char* path, struct fuse_file_info *fi) {
     char fpath[PATH_MAX];

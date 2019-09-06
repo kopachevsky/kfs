@@ -1,4 +1,4 @@
-#include <kfs_releasedir.h>
+#include "kfs_releasedir.h"
 
 int kfs_releasedir(const char *path, struct fuse_file_info* fi) {
     char fpath[PATH_MAX];
