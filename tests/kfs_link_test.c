@@ -33,7 +33,7 @@ START_TEST(kfs_link_fs_files) {
     close(create.fh);
     close(fi.fh);
     remove("/tmp/CACHE/target.txt");
-    remove("/tmp/CACHE/source.txt" );
+    remove("/tmp/CACHE/source.txt");
 }
 END_TEST
 
