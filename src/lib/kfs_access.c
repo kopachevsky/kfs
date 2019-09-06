@@ -1,4 +1,4 @@
-#include <kfs_access.h>
+#include "kfs_access.h"
 
 int kfs_access(const char* path, int mask) {
     char fpath[PATH_MAX];

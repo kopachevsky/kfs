@@ -1,4 +1,4 @@
-#include <kfs_truncate.h>
+#include "kfs_truncate.h"
 
 int kfs_truncate(const char* path, off_t size) {
     char fpath[PATH_MAX];

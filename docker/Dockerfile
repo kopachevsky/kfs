@@ -9,6 +9,8 @@ RUN set -e && \
     git clone https://github.com/HardySimpson/zlog.git && \
     cd zlog && make && make install && cd .. && cd /usr/local/lib && /sbin/ldconfig -v && cd -
 
+RUN rm -rf /var/lib/apt/lists/*
+
 RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 ubuntu
 
 USER ubuntu

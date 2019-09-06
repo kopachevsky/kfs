@@ -1,4 +1,4 @@
-#include <kfs_ftruncate.h>
+#include "kfs_ftruncate.h"
 
 int kfs_ftruncate(const char* path, off_t size, struct fuse_file_info *fi) {
     char fpath[PATH_MAX];

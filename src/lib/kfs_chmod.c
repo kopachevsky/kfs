@@ -1,4 +1,4 @@
-#include <kfs_chmod.h>
+#include "kfs_chmod.h"
 
 int kfs_chmod(const char *path, mode_t mode) {
     char fpath[PATH_MAX];

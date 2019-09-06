@@ -1,4 +1,4 @@
-#include <kfs_readlink.h>
+#include "kfs_readlink.h"
 
 int kfs_readlink(const char* path, char* buf, size_t size) {
     char fpath[PATH_MAX];
