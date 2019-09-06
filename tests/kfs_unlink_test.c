@@ -3,8 +3,6 @@
 #include <kfs_write.h>
 #include <kfs_open.h>
 #include <kfs_link.h>
-#include <kfs_mkdir.h>
-#include <kfs_read.h>
 #include <kfs_unlink.h>
 
 #include "test_main.h"
@@ -18,45 +16,37 @@ void kfs_unlink_teardown(void) {
 }
 START_TEST(kfs_unlink_fs_files) {
     struct fuse_file_info create = init_struct(O_CREAT);
-    int res = kfs_create("source.txt", 0777, &create);
+    int res = kfs_create("unlink_source.txt", 0777, &create);
     fail_if(create.fh == 0);
     ck_assert_int_eq(res,0);
     struct fuse_file_info fi = init_struct(O_RDWR);
-    res = kfs_open("source.txt", &fi);
+    res = kfs_open("unlink_source.txt", &fi);
     fail_if(fi.fh == 0);
     fail_if(res != 0);
     char *buf = "qwerty";
-    res = kfs_write("source.txt",buf, strlen(buf), 0, &fi);
+    res = kfs_write("unlink_source.txt",buf, strlen(buf), 0, &fi);
     fail_if(fi.fh == 0 );
     ck_assert_int_eq(res, strlen(buf));
-    res = kfs_mkdir("target/", 0777);
-    ck_assert_int_eq(res, 0);
-    char *target_path = str_concat("target/", "target.txt");
-    fail_if(target_path == NULL);
-    res = kfs_link("source.txt",target_path);
+    res = kfs_link("unlink_source.txt","unlink_target.txt");
     ck_assert_int_eq(res,0);
-    char buf_read [strlen(buf)];
-    res = kfs_read(target_path, buf_read, strlen(buf_read), 0, &fi);
-    ck_assert_int_eq(res, strlen(buf));
-    res = kfs_unlink("source.txt");
+    res =  remove("unlink_target.txt");
+    ck_assert_int_eq(res,-EPERM);
+    res = kfs_unlink("unlink_source.txt");
     ck_assert_int_eq(res, 0);
-    res =  remove(str_concat(LOCAL_DISC_CACHE_PATH, target_path));
-    ck_assert_int_eq(res,0);
-    res = kfs_open("source.txt", &fi);
+    remove("/tmp/CACHE/unlink_target.txt");
+    res = kfs_open("unlink_target.txt", &fi);
     ck_assert_int_eq(res, -ENOENT);
-    rmdir(str_concat(LOCAL_DISC_CACHE_PATH, "target/"));
-    remove(str_concat(LOCAL_DISC_CACHE_PATH,"source.txt" ));
-    remove(str_concat(LOCAL_DISC_CACHE_PATH, "target/target.txt"));
-    free(target_path);
+    res = kfs_unlink("unlink_target.txt");
+    remove("/tmp/CACHE/unlink_source.txt");
     close(create.fh);
     close(fi.fh);
 }
 END_TEST
 
 START_TEST(kfs_unlink_not_exist) {
-    char dir_path_source_file[strlen(MOUNT_PATH) + strlen("source.txt") + 1];
+    char dir_path_source_file[strlen(MOUNT_PATH) + strlen("unlink_source.txt") + 1];
     strcpy(dir_path_source_file, MOUNT_PATH);
-    char *source_path = strcat(dir_path_source_file, "source.txt");
+    char *source_path = strcat(dir_path_source_file, "unlink_source.txt");
     int res = kfs_unlink(source_path);
     ck_assert_int_eq(res,-ENOENT);
 }

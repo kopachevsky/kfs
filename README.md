@@ -28,6 +28,10 @@ To check tests results:
 
     ${BUILD_DIR}/Testings/test.log
 
+Docker:
+
+    to run image - docker run -it --privileged —rm -v /PATH_TO_kfs/:/home/ubuntu/workdir IMAGE_NAME /bin/bash
+
 Build issues:
 
     zlog:

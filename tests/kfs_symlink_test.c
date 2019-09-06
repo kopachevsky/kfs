@@ -34,8 +34,8 @@ START_TEST(kfs_symlink_fs_files) {
     res = kfs_open("target.txt", &fi);
     ck_assert_int_eq(res, -ENOENT);
     res = kfs_unlink("target.txt");
-    remove(str_concat(LOCAL_DISC_CACHE_PATH,"source.txt" ));
-    remove(str_concat(LOCAL_DISC_CACHE_PATH, "target.txt"));
+    remove("/tmp/CACHE/source.txt");
+    remove("/tmp/CACHE/target.txt");
     close(create.fh);
     close(fi.fh);
 }
@@ -49,7 +49,7 @@ START_TEST(kfs_symlink_chmod) {
     char *target_path = "/home/chmod.txt";
     res = kfs_symlink("source.txt", target_path);
     ck_assert_int_eq(res, -ENOENT);
-    remove(str_concat(LOCAL_DISC_CACHE_PATH, "source.txt"));
+    remove("/tmp/CACHE/source.txt");
 }
 END_TEST
 
