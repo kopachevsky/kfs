@@ -20,7 +20,7 @@ START_TEST(kfs_rmdir_base) {
     ck_assert_int_eq(res, 0);
     DIR* dir = opendir("rmdir_base/");
     fail_if(dir != NULL);
-    rmdir(str_concat(LOCAL_DISC_CACHE_PATH, "rmdir_base/" ));
+    rmdir("/tmp/CACHE/rmdir_base/");
 }
 END_TEST
 

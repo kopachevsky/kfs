@@ -3,8 +3,7 @@
 #include <kfs_write.h>
 #include <kfs_open.h>
 #include <kfs_link.h>
-#include <kfs_mkdir.h>
-#include <kfs_read.h>
+#include <kfs_unlink.h>
 
 #include "test_main.h"
 
@@ -28,21 +27,13 @@ START_TEST(kfs_link_fs_files) {
     res = kfs_write("source.txt",buf, strlen(buf), 0, &fi);
     fail_if(fi.fh == 0 );
     ck_assert_int_eq(res, strlen(buf));
-    res = kfs_mkdir("target/", 0777);
-    ck_assert_int_eq(res, 0);
-    char *target_path = str_concat("target/", "target.txt");
-    fail_if(target_path == NULL);
-    res = kfs_link("source.txt",target_path);
+    res = kfs_link("source.txt","target.txt");
     ck_assert_int_eq(res,0);
-    char buf_read [strlen(buf)];
-    res = kfs_read(target_path, buf_read, strlen(buf_read), 0, &fi);
-    ck_assert_int_eq(res, strlen(buf));
+    res = kfs_unlink("target.txt");
     close(create.fh);
     close(fi.fh);
-    remove(str_concat(LOCAL_DISC_CACHE_PATH, "target/target.txt"));
-    rmdir(str_concat(LOCAL_DISC_CACHE_PATH, "target/"));
-    remove(str_concat(LOCAL_DISC_CACHE_PATH,"source.txt" ));
-    free(target_path);
+    remove("/tmp/CACHE/target.txt");
+    remove("/tmp/CACHE/source.txt" );
 }
 END_TEST
 

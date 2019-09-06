@@ -47,8 +47,8 @@ START_TEST(kfs_readlink_fs_file) {
     res = kfs_read("target.txt", buf_read, strlen(new_buf), 0, &fi);
     ck_assert_int_eq(res, strlen(new_buf));
     res = kfs_unlink("target.txt");
-    remove(str_concat(LOCAL_DISC_CACHE_PATH,"source.txt" ));
-    remove(str_concat(LOCAL_DISC_CACHE_PATH, "target.txt"));
+    remove("/tmp/CACHE/source.txt");
+    remove("/tmp/CACHE/target.txt");
     close(create.fh);
     close(fi.fh);
 }
