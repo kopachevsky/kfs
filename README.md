@@ -30,7 +30,7 @@ To check tests results:
 
 Docker:
 
-    to run image - docker run -it --privileged —rm -v /PATH_TO_kfs/:/home/ubuntu/workdir IMAGE_NAME /bin/bash
+    to run image - docker run -it --privileged --rm -v /PATH_TO_kfs/:/home/ubuntu/workdir IMAGE_NAME /bin/bash
 
 Build issues:
 
