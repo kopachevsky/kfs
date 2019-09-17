@@ -32,6 +32,7 @@ target_include_directories(fuse_cache PUBLIC includes)
 
 find_package(GlusterfsApi)
 target_link_libraries(fuse_cache
+        gluster_client
         pthread
         rt
         zlog

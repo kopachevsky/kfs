@@ -10,6 +10,7 @@
 #include <dirent.h>
 #include <assert.h>
 #include "zlog.h"
+#include "xglfs_fuse_operations.h"
 
 #pragma once
 
