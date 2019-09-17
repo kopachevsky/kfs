@@ -39,6 +39,6 @@
 #include "lib/includes/kfs_releasedir.h"
 #include "lib/includes/kfs_chown.h"
 #include "lib/includes/kfs_fgetattr.h"
-//#include "glusterfs_client/"
+#include "glusterfs_client/includes/xglfs_fuse_operations.h"
 
 #endif //KFS_KFS_H

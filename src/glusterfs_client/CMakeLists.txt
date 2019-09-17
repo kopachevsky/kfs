@@ -19,7 +19,6 @@ add_library(
         xglfs_rmdir.c
         xglfs_symlink.c
         xglfs_unlink.c
-        xglfs_fuse_operations.c
 )
 
 target_include_directories(gluster_client PUBLIC includes)
@@ -29,13 +28,15 @@ target_link_libraries(gluster_client
         pthread
         rt
         zlog
+        ${FUSE_LIBRARIES}
+        ${GB_LD_EXTRA}
         ${GLUSTERFS-API_LIBRARIES}
-        )
+)
 
 install(TARGETS gluster_client
         RUNTIME DESTINATION bin
-        LIBRARY DESTINATION lib
-        ARCHIVE DESTINATION lib
+        LIBRARY DESTINATION gluster_client
+        ARCHIVE DESTINATION gluster_client
         PUBLIC_HEADER DESTINATION include
-        )
+)
 

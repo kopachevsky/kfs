@@ -3,6 +3,7 @@
 
 #pragma once
 
+#include "xglfs.h"
 #include "xglfs_access.h"
 #include "xglfs_chmod.h"
 #include "xglfs_chown.h"
