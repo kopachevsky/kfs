@@ -35,8 +35,8 @@ target_link_libraries(gluster_client
 
 install(TARGETS gluster_client
         RUNTIME DESTINATION bin
-        LIBRARY DESTINATION gluster_client
-        ARCHIVE DESTINATION gluster_client
+        LIBRARY DESTINATION lib
+        ARCHIVE DESTINATION lib
         PUBLIC_HEADER DESTINATION include
 )
 
