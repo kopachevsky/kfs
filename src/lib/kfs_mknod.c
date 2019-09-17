@@ -7,5 +7,9 @@ int kfs_mknod(const char* path, mode_t mode, dev_t rdev) {
     if (res == -1) {
         return - errno;
     }
+    res = xglfs_mknod(path, mode, rdev);
+    if (res == -1) {
+        return -errno;
+    }
     return 0;
 }
