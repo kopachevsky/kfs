@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
     if (!xglfs_state->server || !xglfs_state->volume || !xglfs_state->mountpoint) {
         exit(EX_USAGE);
     }
-    // Check optional values
+
     if (!xglfs_state->protocol) {
         xglfs_state->protocol = strdup(GLFS_DEFAULT_PROTOCOL);
     }
