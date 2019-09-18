@@ -20,6 +20,7 @@ add_library(
         xglfs_symlink.c
         xglfs_unlink.c
         xglfs_write.c
+        xglfs_fsync.c
 )
 
 target_include_directories(gluster_client PUBLIC includes)

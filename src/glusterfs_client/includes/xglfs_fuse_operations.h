@@ -24,5 +24,6 @@
 #include "xglfs_symlink.h"
 #include "xglfs_unlink.h"
 #include "xglfs_write.h"
+#include "xglfs_fsync.h"
 
 #endif //KFS_XGLFS_FUSE_OPERATIONS_H
