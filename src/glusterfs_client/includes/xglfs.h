@@ -7,12 +7,14 @@
 #include <glusterfs/api/glfs.h>
 #include <string.h>
 
-#define GLFS_DEFAULT_CACHE      "/tmp/CACHE"
-#define GLFS_DEFAULT_PORT		24007
-#define GLFS_DEFAULT_PROTOCOL	"tcp"
-#define GLFS_DEFAULT_VERBOSITY	7
-#define DEV_NULL				"/dev/null"
-#define DEV_STDERR				"/dev/stderr"
+#define GLFS_DEFAULT_VOLUME         "/tmp/kfs/VOLUME"
+#define GLFS_DEFAULT_MOUNTPOINT     "/tmp/kfs/MOUNTPOINT"
+#define GLFS_DEFAULT_CACHE_DISK     "/tmp/kfs/CACHE"
+#define GLFS_DEFAULT_PORT		    24007
+#define GLFS_DEFAULT_PROTOCOL	    "tcp"
+#define GLFS_DEFAULT_VERBOSITY	    7
+#define DEV_NULL				    "/dev/null"
+#define DEV_STDERR				    "/dev/stderr"
 
 #ifdef __GNUC__
 #define likely(x)				__builtin_expect(!!(x), 1)

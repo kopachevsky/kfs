@@ -1,8 +1,6 @@
 #ifndef KFS_XGLFS_FUSE_OPERATIONS_H
 #define KFS_XGLFS_FUSE_OPERATIONS_H
 
-#pragma once
-
 #include "xglfs.h"
 #include "xglfs_access.h"
 #include "xglfs_chmod.h"

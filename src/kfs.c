@@ -97,12 +97,17 @@ int main(int argc, char** argv) {
         }
     }
 
-    // Check mandatory options
-    if (!xglfs_state->server || !xglfs_state->volume || !xglfs_state->mountpoint) {
+    if (xglfs_state->server == 0) {
         exit(EX_USAGE);
     }
+    if (xglfs_state->volume == 0) {
+        xglfs_state->volume = GLFS_DEFAULT_VOLUME;
+    }
+    if (xglfs_state->mountpoint == 0) {
+        xglfs_state->mountpoint = GLFS_DEFAULT_MOUNTPOINT;
+    }
     if (xglfs_state->cache == 0) {
-        xglfs_state->cache = GLFS_DEFAULT_CACHE;
+        xglfs_state->cache = GLFS_DEFAULT_CACHE_DISK;
     }
     if (!xglfs_state->protocol) {
         xglfs_state->protocol = strdup(GLFS_DEFAULT_PROTOCOL);
@@ -125,6 +130,5 @@ int main(int argc, char** argv) {
         args[index++] = strdup("-f");
     args[index++] = xglfs_state->mountpoint;
 
-    getcwd(LOCAL_DISC_CACHE_PATH, sizeof(LOCAL_DISC_CACHE_PATH));
     exit(fuse_main(index, args, &kfs_ops, xglfs_state));
 }
