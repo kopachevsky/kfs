@@ -16,7 +16,6 @@
 
 char *MOUNT_PATH;
 char *LOCAL_DISC_CACHE_PATH;
-char *CACHE;
 char LOG_CONFIG_PATH[PATH_MAX];
 
 char *str_concat(const char* s1, const char* s2);

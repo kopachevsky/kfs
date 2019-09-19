@@ -8,9 +8,5 @@ int kfs_fsync(const char* path, int datasync, struct fuse_file_info *fi) {
     if (res == -1) {
         return -errno;
     }
-    res = xglfs_fsync(path, datasync, fi);
-    if (res == -1) {
-        return -errno;
-    }
     return 0;
 }

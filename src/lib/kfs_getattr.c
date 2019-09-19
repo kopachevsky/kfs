@@ -7,9 +7,5 @@ int kfs_getattr(const char *path, struct stat *stbuf) {
     if (res == -1) {
         return -errno;
     }
-    res = xglfs_getattr(path, stbuf);
-    if (res == -1) {
-        return -errno;
-    }
     return 0;
 }

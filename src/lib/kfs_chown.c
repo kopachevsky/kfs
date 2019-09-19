@@ -7,9 +7,5 @@ int kfs_chown(const char *path, uid_t uid, gid_t gid) {
     if (res == -1) {
         return -errno;
     }
-    res = xglfs_chown(path, uid, gid);
-    if (res == -1) {
-        return -errno;
-    }
     return 0;
 }

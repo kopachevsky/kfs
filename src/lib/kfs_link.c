@@ -9,9 +9,5 @@ int kfs_link(const char* source_path, const char* target_path) {
     if (res == -1) {
         return -errno;
     }
-    res = xglfs_link(source_path, target_path);
-    if (res == -1) {
-        return -errno;
-    }
     return 0;
 }

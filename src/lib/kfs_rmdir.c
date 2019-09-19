@@ -7,10 +7,6 @@ int kfs_rmdir(const char* path) {
     if(res == -1) {
         return -errno;
     }
-    res = xglfs_rmdir(path);
-    if (res == -1) {
-        return -errno;
-    }
     return 0;
 }
 

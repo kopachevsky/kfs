@@ -36,9 +36,10 @@ int main(int argc, char** argv) {
             { "protocol",	required_argument,	NULL,	't' },
             { "server",		required_argument,	NULL,	's' },
             { "port",		required_argument,	NULL,	'p' },
-            { "volume",		required_argument,	NULL,	'l'	},
+            { "volume",		required_argument,	NULL,	'l' },
             { "mountpoint",	required_argument,	NULL,	'm' },
-            { "logfile",	required_argument,	NULL,	'o' },
+            { "cache",	    required_argument,	NULL,	'c' },
+            { "logfile",	    required_argument,	NULL,	'o' },
             { "verbosity",	required_argument,	NULL,	'v' },
             { "foreground",	no_argument,		NULL,	'f' },
             { 0, 0, 0, 0}
@@ -70,6 +71,9 @@ int main(int argc, char** argv) {
             case 'm':
                 xglfs_state->mountpoint = strdup(optarg);
                 break;
+            case 'c':
+                xglfs_state->cache = strdup(optarg);
+                break;
             case 'o':
                 if (strcmp(optarg, "null") == 0) {
                     xglfs_state->glfs_logfile = strdup(DEV_NULL);
@@ -97,7 +101,9 @@ int main(int argc, char** argv) {
     if (!xglfs_state->server || !xglfs_state->volume || !xglfs_state->mountpoint) {
         exit(EX_USAGE);
     }
-
+    if (xglfs_state->cache == 0) {
+        xglfs_state->cache = GLFS_DEFAULT_CACHE;
+    }
     if (!xglfs_state->protocol) {
         xglfs_state->protocol = strdup(GLFS_DEFAULT_PROTOCOL);
     }

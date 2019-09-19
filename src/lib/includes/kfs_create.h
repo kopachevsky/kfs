@@ -6,7 +6,6 @@
 
 #include "kfs_common.h"
 
-
 #pragma once
 
 int kfs_create(const char* path, mode_t mode, struct fuse_file_info *fi);

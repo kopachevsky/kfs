@@ -8,9 +8,5 @@ int kfs_write(const char *path, const char *buf, size_t size, off_t offset, stru
     if (res == -1) {
         return -errno;
     }
-    res = xglfs_write(path, buf, size, offset, fi);
-    if (res == -1) {
-        return -errno;
-    }
     return res;
 }

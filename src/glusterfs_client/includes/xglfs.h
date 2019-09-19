@@ -7,7 +7,7 @@
 #include <glusterfs/api/glfs.h>
 #include <string.h>
 
-
+#define GLFS_DEFAULT_CACHE      "/tmp/CACHE"
 #define GLFS_DEFAULT_PORT		24007
 #define GLFS_DEFAULT_PROTOCOL	"tcp"
 #define GLFS_DEFAULT_VERBOSITY	7
@@ -30,6 +30,7 @@ struct xglfs_state
     int port;
     char* volume;
     char* mountpoint;
+    char *cache;
     char* glfs_logfile;
     int glfs_verbosity;
 };
