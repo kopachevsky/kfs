@@ -20,7 +20,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -D_FILE_OFFSET_BITS=64 -Wall -Wextra")
 add_subdirectory(src)
 
 enable_testing()
-add_subdirectory(tests)
-add_subdirectory(xglfs_test)
+add_subdirectory(tests/kfs_test)
+add_subdirectory(tests/xglfs_test)
 
 

@@ -12,8 +12,6 @@ void xglfs_mkdir_teardown(void) {
 }
 
 START_TEST(xglfs_mkdir_creation) {
-    int res = xglfs_mkdir("dir",0777);
-    ck_assert_int_eq(res,0);
 }
 END_TEST
 
