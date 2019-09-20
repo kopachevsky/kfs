@@ -45,7 +45,7 @@ int main(int argc, char** argv) {
             { 0, 0, 0, 0}
     };
 
-    struct xglfs_state* xglfs_state = calloc(1, sizeof(struct xglfs_state));
+    struct xglfs_state* xglfs_state = malloc(sizeof(struct xglfs_state));
 
     while ((options = getopt_long(argc, argv, "t:s:p:l:m:o:v:f", client_options, NULL)) != -1) {
         switch (options) {
