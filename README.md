@@ -10,7 +10,7 @@ Build:
 
 Mount:
 
-    ./build/src/kfs -d -s <directory>
+    ./build/src/kfs --server=<IP|DOMAIN> --volume=VOLUME --mountpoint=MOUNTPOINT --cache=CACHE_DISK [--protocol=<tcp|udp>] [--port=24007] [--logfile=<file|stderr|null>] [--verbosity=7] [--foreground]
 
 Unmount:
 
@@ -30,7 +30,7 @@ To check tests results:
 
 Docker:
 
-    to run image - docker run -it --privileged —rm -v /PATH_TO_kfs/:/home/ubuntu/workdir IMAGE_NAME /bin/bash
+    to run image - docker run -it --privileged --rm -v /PATH_TO_kfs/:/home/ubuntu/workdir IMAGE_NAME /bin/bash
 
 Build issues:
 
