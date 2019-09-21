@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_symlink(const char* _path1, const char* _path2);
+int xglfs_symlink(const char* source_path, const char* target_path);
 
 #endif //KFS_XGLFS_SYMLINK_H
