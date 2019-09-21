@@ -1,9 +1,9 @@
 #include "xglfs_symlink.h"
 
-int xglfs_symlink(const char* _path1, const char* _path2) {
-    int ret = glfs_symlink(XGLFS_STATE->fs, _path1, _path2);
-    if (unlikely(ret < 0)) {
-        ret = -errno;
+int xglfs_symlink(const char* source_path, const char* target_path) {
+    int res = glfs_symlink(XGLFS_STATE->fs, source_path, target_path);
+    if (unlikely(res < 0)) {
+        res = -errno;
     }
-    return ret;
+    return res;
 }

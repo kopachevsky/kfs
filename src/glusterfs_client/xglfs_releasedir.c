@@ -2,10 +2,10 @@
 
 int xglfs_releasedir(const char* _path, struct fuse_file_info* _info) {
     (void)_path;
-    int ret = glfs_closedir(FH_TO_FD(_info->fh));
-    if (unlikely(ret < 0)) {
-        ret = -errno;
+    int res = glfs_closedir(FH_TO_FD(_info->fh));
+    if (unlikely(res < 0)) {
+        res = -errno;
     }
-    return ret;
+    return res;
 }
 
