@@ -38,3 +38,56 @@ Build issues:
 
 error while loading shared libraries: libzlog.so.1.2: cannot open shared object file: No such file or directory - resolved by running sudo /sbin/ldconfig -v in /usr/local/lib
 
+
+# setup server docker
+
+Start server docker in priveleged mode
+
+    docker run -it --rm --privileged=true --hostname=server1 --name server1  gluster/gluster-centos 
+
+    docker exec -it server1 bash
+
+Find out server ip and add it to hosts file
+
+    ip a | grep inet
+
+    inet 127.0.0.1/8 scope host lo
+    inet 172.18.0.2/16 brd 172.18.255.255 scope global eth0
+
+    echo '172.18.0.2 server1' >> /etc/hosts
+
+Create volume and start it
+
+    mkdir -p /data/brick1
+
+    gluster volume create gv0  server1:/data/brick1/gv0 force
+
+    gluster volume start gv0
+
+    gluster volume status gv0
+
+
+Now we can run test client to check our server
+
+    docker run -it --rm gluster/glusterfs-client bash
+
+Put server IP from above to hots file
+
+    echo '172.18.0.2 server1' >> /etc/hosts
+
+Mount and create test file in /mnt/gluster 
+
+    mkdir /mnt/gluster
+    mount -t glusterfs server1:/gv0 /mnt/gluster   
+
+    thouch /mnt/gluster/test
+
+Exit glusterfs-client docker and start it again to have new and clean one.
+Repeat setup and check chat "test" file will exists in /mnt/gluster folder
+
+
+
+ 
+
+
+
