@@ -33,11 +33,11 @@ START_TEST(kfs_unlink_fs_files) {
     ck_assert_int_eq(res,-EPERM);
     res = kfs_unlink("unlink_source.txt");
     ck_assert_int_eq(res, 0);
-    remove("/tmp/CACHE/unlink_target.txt");
+    remove("/tmp/kfs/CACHE/unlink_target.txt");
     res = kfs_open("unlink_target.txt", &fi);
     ck_assert_int_eq(res, -ENOENT);
     res = kfs_unlink("unlink_target.txt");
-    remove("/tmp/CACHE/unlink_source.txt");
+    remove("/tmp/kfs/CACHE/unlink_source.txt");
     close(create.fh);
     close(fi.fh);
 }
