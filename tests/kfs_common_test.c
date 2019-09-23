@@ -15,7 +15,7 @@ START_TEST(kfs_common_local_disc_cache_path_relative) {
     char fpath[PATH_MAX];
     char *cache_path = "dir/file.txt";
     fullpath(fpath, cache_path);
-    ck_assert_str_eq("/tmp/CACHE/dir/file.txt", fpath);
+    ck_assert_str_eq("/tmp/kfs/CACHE/dir/file.txt", fpath);
 }
 END_TEST
 
