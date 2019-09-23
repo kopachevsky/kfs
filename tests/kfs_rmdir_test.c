@@ -14,13 +14,11 @@ void kfs_rmdir_teardown(void) {
 }
 
 START_TEST(kfs_rmdir_base) {
-    int res = kfs_mkdir("rmdir_base/", 0777);
+    char *path = "kfs_rmdir_base/";
+    int res = kfs_mkdir(path, 777);
     ck_assert_int_eq(res, 0);
-    res = kfs_rmdir("rmdir_base/");
-    ck_assert_int_eq(res, 0);
-    DIR* dir = opendir("rmdir_base/");
-    fail_if(dir != NULL);
-    rmdir("/tmp/CACHE/rmdir_base/");
+    res = kfs_rmdir(path);
+    ck_assert_int_eq(res,0);
 }
 END_TEST
 
