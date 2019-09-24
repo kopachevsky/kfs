@@ -19,6 +19,8 @@ START_TEST(kfs_rmdir_base) {
     ck_assert_int_eq(res, 0);
     res = kfs_rmdir(path);
     ck_assert_int_eq(res,0);
+    DIR *dir = opendir(path);
+    fail_if(dir != NULL);
 }
 END_TEST
 
