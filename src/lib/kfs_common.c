@@ -18,8 +18,13 @@ char *str_concat(const char* s1, const char* s2) {
 }
 
 void fullpath(char fpath[PATH_MAX], const char *path) {
-    strcpy(fpath, XGLFS_STATE->cache);
-    strncat(fpath, path, PATH_MAX);
+    if (XGLFS_STATE == NULL) {
+        strcpy(fpath, GLFS_DEFAULT_CACHE_DISK);
+        strncat(fpath, path, PATH_MAX);
+    } else {
+        strcpy(fpath, XGLFS_STATE->cache);
+        strncat(fpath, path, PATH_MAX);
+    }
 }
 
 int logger(const char *msg) {

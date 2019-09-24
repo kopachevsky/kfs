@@ -12,7 +12,7 @@ struct fuse_file_info init_struct(int flag) {
 
 void main_setup(void) {
     MOUNT_PATH = "/ext/data1/";
-    LOCAL_DISC_CACHE_PATH = "/tmp/CACHE/";
+    LOCAL_DISC_CACHE_PATH = GLFS_DEFAULT_CACHE_DISK;
 }
 
 void main_teardown(void) {
@@ -21,7 +21,6 @@ void main_teardown(void) {
 }
 
 int main(void) {
-    logger("start test");
     int number_failed;
     SRunner *sr;
     sr = srunner_create(kfs_rmdir_suite());

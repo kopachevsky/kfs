@@ -23,7 +23,7 @@ START_TEST(kfs_create_creation) {
     ck_assert_int_eq(res, 0);
     close(create.fh);
     close(open.fh);
-    remove("/tmp/CACHE/create_creation.txt");
+    remove("/tmp/kfs/CACHE/create_creation.txt");
 }
 END_TEST
 
@@ -33,7 +33,7 @@ START_TEST(kfs_create_exist) {
     ck_assert_int_eq(res, 0);
     res = kfs_create("create_exist.txt", 0777, &fi);
     ck_assert_int_eq(res, -EEXIST);
-    remove("/tmp/CACHE/create_exist.txt");
+    remove("/tmp/kfs/CACHE/create_exist.txt");
 }
 END_TEST
 
@@ -43,7 +43,7 @@ START_TEST(kfs_create_chmod) {
     ck_assert_int_eq(res, 0);
     res = kfs_create("create_chmod.txt", 0777, &fi);
     ck_assert_int_eq(res, -EACCES);
-    remove("/tmp/CACHE/create_chmod.txt");
+    remove("/tmp/kfs/CACHE/create_chmod.txt");
 }
 END_TEST
 
