@@ -8,5 +8,9 @@ int kfs_open(const char* path, struct fuse_file_info *fi) {
         return -errno;
     }
     fi ->fh = fd;
+    fd = xglfs_open(path, fi);
+    if (fd == -1) {
+        return -errno;
+    }
     return 0;
 }
