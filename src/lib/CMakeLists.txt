@@ -1,5 +1,6 @@
 add_library(
    fuse_cache
+        kfs_init.c
         kfs_access.c
         kfs_getattr.c
         kfs_fgetattr.c
@@ -26,6 +27,7 @@ add_library(
         kfs_opendir.c
         kfs_releasedir.c
         kfs_chown.c
+        kfs_destroy.c
 )
 
 target_include_directories(fuse_cache PUBLIC includes)

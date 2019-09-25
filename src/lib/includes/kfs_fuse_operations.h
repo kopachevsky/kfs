@@ -1,6 +1,7 @@
 #ifndef KFS_KFS_FUSE_OPERATIONS_H
 #define KFS_KFS_FUSE_OPERATIONS_H
 
+#include "kfs_init.h"
 #include "kfs_getattr.h"
 #include "kfs_access.h"
 #include "kfs_open.h"
@@ -26,5 +27,6 @@
 #include "kfs_releasedir.h"
 #include "kfs_chown.h"
 #include "kfs_fgetattr.h"
+#include "kfs_destroy.h"
 
 #endif //KFS_KFS_FUSE_OPERATIONS_H

@@ -1,6 +1,7 @@
 #include "kfs.h"
 
 struct fuse_operations kfs_ops = {
+                .init       = kfs_init,
                 .getattr    = kfs_getattr,
                 .fgetattr   = kfs_fgetattr,
                 .access     = kfs_access,
@@ -25,7 +26,8 @@ struct fuse_operations kfs_ops = {
                 .fsync      = kfs_fsync,
                 .opendir    = kfs_opendir,
                 .releasedir = kfs_releasedir,
-                .chown      = kfs_chown
+                .chown      = kfs_chown,
+                .destroy    = kfs_destroy
 };
 
 int main(int argc, char** argv) {
