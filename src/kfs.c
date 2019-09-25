@@ -46,6 +46,10 @@ int main(int argc, char** argv) {
             { "foreground",	no_argument,		NULL,	'f' },
             { 0, 0, 0, 0}
     };
+    if (getuid() != 0 || geteuid() != 0) {
+        fprintf(stderr, "You must be root to mount kfs\n");
+        exit(EX_NOPERM);
+    }
 
     struct xglfs_state* xglfs_state = malloc(sizeof(struct xglfs_state));
 
