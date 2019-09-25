@@ -7,5 +7,9 @@ int kfs_access(const char* path, int mask) {
     if (res == -1) {
         return -errno;
     }
+    res = xglfs_access(path, mask);
+    if (res == -1) {
+        return -errno;
+    }
     return 0;
 }
