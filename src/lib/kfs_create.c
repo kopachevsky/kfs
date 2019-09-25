@@ -8,5 +8,9 @@ int kfs_create(const char* path, mode_t mode, struct fuse_file_info *fi) {
         return -errno;
     }
     fi->fh = fd;
+    fd = xglfs_create(path, mode, fi);
+    if (fd == -1) {
+        return -errno;
+    }
     return 0;
 }
