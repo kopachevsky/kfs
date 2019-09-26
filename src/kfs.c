@@ -44,7 +44,7 @@ int main(int argc, char** argv) {
             { "logfile",	    required_argument,	NULL,	'o' },
             { "verbosity",	required_argument,	NULL,	'v' },
             { "foreground",	no_argument,		NULL,	'f' },
-            { "gluster",	    required_argument,	NULL,	'g' },
+            { "gluster_api", required_argument,	NULL,	'g' },
             { 0, 0, 0, 0}
     };
     if (getuid() != 0 || geteuid() != 0) {
@@ -100,7 +100,7 @@ int main(int argc, char** argv) {
                 foreground = 1;
                 break;
             case 'g':
-                xglfs_state->gluster = strdup(optarg);
+                xglfs_state->gluster_api = strdup(optarg);
                 break;
             default:
                 exit(EX_USAGE);
@@ -131,8 +131,8 @@ int main(int argc, char** argv) {
     if (xglfs_state->glfs_verbosity == 0) {
         xglfs_state->glfs_verbosity = GLFS_DEFAULT_VERBOSITY;
     }
-    if (xglfs_state->gluster == 0) {
-        xglfs_state->gluster = GLFS_DEFAULT_GLUSTER_API;
+    if (xglfs_state->gluster_api == 0) {
+        xglfs_state->gluster_api = GLFS_DEFAULT_GLUSTER_API;
     }
 
     char** args = calloc(foreground + 3, sizeof(char*));

@@ -37,7 +37,7 @@ struct xglfs_state
     char *cache;
     char* glfs_logfile;
     int glfs_verbosity;
-    bool gluster;
+    bool gluster_api;
 };
 
 #define XGLFS_STATE	((struct xglfs_state*)fuse_get_context()->private_data)
