@@ -6,6 +6,7 @@
 #include <fuse.h>
 #include <glusterfs/api/glfs.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define GLFS_DEFAULT_VOLUME         "/tmp/kfs/VOLUME/"
 #define GLFS_DEFAULT_MOUNTPOINT     "/tmp/kfs/MOUNTPOINT/"
@@ -13,6 +14,7 @@
 #define GLFS_DEFAULT_PORT		    24007
 #define GLFS_DEFAULT_PROTOCOL	    "tcp"
 #define GLFS_DEFAULT_VERBOSITY	    7
+#define GLFS_DEFAULT_GLUSTER_API    false
 #define DEV_NULL				    "/dev/null"
 #define DEV_STDERR				    "/dev/stderr"
 
@@ -35,6 +37,7 @@ struct xglfs_state
     char *cache;
     char* glfs_logfile;
     int glfs_verbosity;
+    bool gluster;
 };
 
 #define XGLFS_STATE	((struct xglfs_state*)fuse_get_context()->private_data)
