@@ -8,7 +8,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define GLFS_DEFAULT_VOLUME         "/tmp/kfs/VOLUME/"
 #define GLFS_DEFAULT_MOUNTPOINT     "/tmp/kfs/MOUNTPOINT/"
 #define GLFS_DEFAULT_CACHE_DISK     "/tmp/kfs/CACHE/"
 #define GLFS_DEFAULT_PORT		    24007
