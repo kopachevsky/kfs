@@ -1,8 +1,4 @@
-#include <check.h>
-#include <stdlib.h>
-#include <kfs_common.h>
-
-#include "kfs_suites.h"
+#include "test_main.h"
 
 struct fuse_file_info init_struct(int flag) {
     struct fuse_file_info s = {0};

@@ -111,7 +111,8 @@ int main(int argc, char** argv) {
         exit(EX_USAGE);
     }
     if (xglfs_state->volume == 0) {
-        xglfs_state->volume = GLFS_DEFAULT_VOLUME;
+        fprintf(stderr, "%s\n", "To mount FS you need to specify volume");
+        exit(EX_USAGE);
     }
     if (xglfs_state->mountpoint == 0) {
         xglfs_state->mountpoint = GLFS_DEFAULT_MOUNTPOINT;

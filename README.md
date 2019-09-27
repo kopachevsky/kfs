@@ -1,3 +1,5 @@
+# KFS
+
 Dependencies:
 
     sudo ./install_dependencies.sh
@@ -10,11 +12,11 @@ Build:
 
 Mount:
 
-    ./build/src/kfs --server=<IP|DOMAIN> --volume=VOLUME --mountpoint=MOUNTPOINT --cache=CACHE_DISK [--protocol=<tcp|udp>] [--port=24007] [--logfile=<file|stderr|null>] [--verbosity=7] [--foreground]
+    sudo ./build/src/kfs --server=<IP|DOMAIN> --volume=VOLUME --mountpoint=MOUNTPOINT --cache=CACHE_DISK --gluster_api=true [--protocol=<tcp|udp>] [--port=24007] [--logfile=<file|stderr|null>] [--verbosity=7] [--foreground]
 
 Unmount:
 
-    fusermount -u <directory>
+    sudo fusermount -u <directory>
 
 How to check mount:
 
@@ -43,7 +45,7 @@ error while loading shared libraries: libzlog.so.1.2: cannot open shared object 
 
 Start server docker in priveleged mode
 
-    docker run -it --rm --privileged=true --hostname=server1 --name server1  gluster/gluster-centos 
+    docker run -it -d --rm --privileged=true --hostname=server1 --name server1  gluster/gluster-centos 
 
     docker exec -it server1 bash
 
@@ -71,7 +73,7 @@ Now we can run test client to check our server
 
     docker run -it --rm gluster/glusterfs-client bash
 
-Put server IP from above to hots file
+Put server IP from above to hosts file
 
     echo '172.18.0.2 server1' >> /etc/hosts
 

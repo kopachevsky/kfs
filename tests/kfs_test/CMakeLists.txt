@@ -38,6 +38,9 @@ add_executable(
         kfs_mknod_test.c
         kfs_readdir_test.c
 )
+
+target_include_directories(kfs_fuse PUBLIC includes)
+
 target_link_libraries(kfs_fuse fuse_cache ${CHECK_LIBRARIES} pthread)
 
 add_test(NAME kfs_fuse COMMAND kfs_fuse WORKING_DIRECTORY ${CMAKE_BINARY_DIR}/Testing)
