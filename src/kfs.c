@@ -132,9 +132,6 @@ int main(int argc, char** argv) {
     if (xglfs_state->glfs_verbosity == 0) {
         xglfs_state->glfs_verbosity = GLFS_DEFAULT_VERBOSITY;
     }
-    if (xglfs_state->gluster_api == 0) {
-        xglfs_state->gluster_api = GLFS_DEFAULT_GLUSTER_API;
-    }
 
     char** args = calloc(foreground + 3, sizeof(char*));
     size_t index = 0;
