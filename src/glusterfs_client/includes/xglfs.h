@@ -13,7 +13,7 @@
 #define GLFS_DEFAULT_PORT		    24007
 #define GLFS_DEFAULT_PROTOCOL	    "tcp"
 #define GLFS_DEFAULT_VERBOSITY	    7
-#define GLFS_DEFAULT_GLUSTER_API    false
+//#define GLFS_DEFAULT_GLUSTER_API    false
 #define DEV_NULL				    "/dev/null"
 #define DEV_STDERR				    "/dev/stderr"
 
