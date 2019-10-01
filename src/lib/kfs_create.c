@@ -7,6 +7,12 @@ int kfs_create(const char* path, mode_t mode, struct fuse_file_info *fi) {
     if (fd == -1) {
         return -errno;
     }
+    if (XGLFS_STATE->gluster_api) {
+        fd = xglfs_create(path, mode, fi);
+        if (fd == -1) {
+            return -errno;
+        }
+    }
     fi->fh = fd;
     return 0;
 }
