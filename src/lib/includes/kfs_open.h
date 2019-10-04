@@ -5,6 +5,7 @@
 #include <glusterfs/api/glfs.h>
 
 #include "kfs_common.h"
+#include "kfs_create.h"
 
 #pragma once
 
