@@ -28,14 +28,16 @@ void fullpath(char fpath[PATH_MAX], const char *path) {
 }
 
 int logger(const char *msg) {
+    LOG_CONFIG_PATH = "/home/donelkostino/kfs/tests/assets/zlog.conf";
     static int rc;
     if (!rc) {
-        rc = dzlog_init(getcwd(LOG_CONFIG_PATH, sizeof(LOG_CONFIG_PATH)), "default");
+        rc = dzlog_init(LOG_CONFIG_PATH,  "default");
     }
     if (rc) {
         printf("init failed\n");
         return -1;
     }
     dzlog_info("%s", msg);
+    dzlog_error("%d", errno);
     return 0;
 }
