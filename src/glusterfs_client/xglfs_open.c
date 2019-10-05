@@ -11,5 +11,6 @@ int xglfs_open(const char* _pathname, struct fuse_file_info* _info) {
     if (likely(res == 0)) {
         _info->fh = FD_TO_FH(fd);
     }
+    printf("xglfs gluster fd : %lu ",  FD_TO_FH(fd));
     return res;
 }

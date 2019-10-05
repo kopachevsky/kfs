@@ -10,17 +10,14 @@ int kfs_open(const char* path, struct fuse_file_info *fi) {
         }
     } else {
         int fd = open(fpath, fi->flags);
-        fprintf(stderr, "%s\n", "kfs open");
-        fprintf(stderr, "%d\n", -errno);
         if (fd == -1) {
             return -errno;
         }
         fi->fh = fd;
+        printf("kfs_open local fd : %d ", fd);
         if (XGLFS_STATE->gluster_api) {
-            fd = xglfs_open(path, fi);
-            fprintf(stderr, "%s\n", "xglfs open");
-            fprintf(stderr, "%d\n", -errno);
-            if (fd == -1) {
+            int g_fd = xglfs_open(path, fi);
+            if (g_fd == -1) {
                 return -errno;
             }
         }

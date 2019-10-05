@@ -1,20 +1,18 @@
 #include "kfs_create.h"
 
 int kfs_create(const char* path, mode_t mode, struct fuse_file_info *fi) {
+    logger("KFS_CREATE:");
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     int fd = open(fpath, fi->flags, mode);
-    fprintf(stderr, "%s\n", "kfs create");
-    fprintf(stderr, "%d\n", -errno);
-    if (fd == -1) {
+     if (fd == -1) {
         return -errno;
     }
     fi->fh = fd;
+    printf("kfs create local fd : %d ", fd);
     if (XGLFS_STATE->gluster_api) {
-        fd = xglfs_create(path, mode, fi);
-        fprintf(stderr, "%s\n", "xglfs create");
-        fprintf(stderr, "%d\n", -errno);
-        if (fd == -1) {
+        int g_fd = xglfs_create(path, mode, fi);
+        if (g_fd == -1) {
             return -errno;
         }
     }
