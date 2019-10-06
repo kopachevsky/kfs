@@ -5,7 +5,7 @@ int kfs_write(const char *path, const char *buf, size_t size, off_t offset, stru
     fullpath(fpath, path);
     (void) fpath;
     int res = pwrite(fi->fh, buf, size, offset);
-    printf("kfs write to local fd : %lu ",  fi->fh);
+    printf("kfs write to local fd : %lu ", fi->fh);
     if (res == -1) {
         return -errno;
     }
