@@ -31,6 +31,7 @@ struct fuse_operations kfs_ops = {
 };
 
 int main(int argc, char** argv) {
+    logger("KFS START");
     int options = 0;
     unsigned short int foreground = 0;
     char* invalid = NULL;
@@ -140,6 +141,6 @@ int main(int argc, char** argv) {
     if (foreground)
         args[index++] = strdup("-f");
     args[index++] = xglfs_state->mountpoint;
-
+    logger((const char *) xglfs_state);
     exit(fuse_main(index, args, &kfs_ops, xglfs_state));
 }

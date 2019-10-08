@@ -2,8 +2,8 @@
 
 int xglfs_rename(const char* _oldpath, const char* _newpath) {
     int res= glfs_rename(XGLFS_STATE->fs, _oldpath, _newpath);
-    if (unlikely(res < 0)) {
-        res = -errno;
+    if (res == -1) {
+        return  -errno;
     }
-    return res;
+    return 0;
 }

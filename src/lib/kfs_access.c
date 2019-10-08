@@ -7,6 +7,5 @@ int kfs_access(const char* path, int mask) {
     if (res == -1) {
         return -errno;
     }
-
     return 0;
 }

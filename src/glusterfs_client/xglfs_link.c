@@ -2,8 +2,8 @@
 
 int xglfs_link(const char* _path1, const char* _path2) {
     int res = glfs_link(XGLFS_STATE->fs, _path1, _path2);
-    if (unlikely(res < 0)) {
-        res = -errno;
+    if (res == -1) {
+        return -errno;
     }
-    return res;
+    return 0;
 }
