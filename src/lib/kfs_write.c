@@ -9,11 +9,14 @@ int kfs_write(const char *path, const char *buf, size_t size, off_t offset, stru
     if (res == -1) {
         return -errno;
     }
+    int tmp = fi->fh;
+    fi->fh = fi->fh_old;
     if (XGLFS_STATE->gluster_api) {
         int ret = xglfs_write(path, buf, size, offset, fi);
         if (ret == -1) {
             return -errno;
         }
     }
-    return res;
+    fi->fh = tmp;
+    return 0;
 }
