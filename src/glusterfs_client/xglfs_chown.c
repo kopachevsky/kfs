@@ -5,5 +5,5 @@ int xglfs_chown(const char* _path, uid_t _owner, gid_t _group) {
     if (unlikely(res < 0)) {
         res = -errno;
     }
-    return res;
+    return 0;
 }

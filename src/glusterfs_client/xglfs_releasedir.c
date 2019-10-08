@@ -6,6 +6,6 @@ int xglfs_releasedir(const char* _path, struct fuse_file_info* _info) {
     if (unlikely(res < 0)) {
         res = -errno;
     }
-    return res;
+    return 0;
 }
 

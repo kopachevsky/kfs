@@ -10,6 +10,6 @@ int xglfs_fgetattr(const char* _path, struct stat* _statbuf, struct fuse_file_in
             res = -errno;
         }
     }
-    return res;
+    return 0;
 }
 

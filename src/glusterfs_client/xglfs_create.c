@@ -2,13 +2,13 @@
 
 int xglfs_create(const char* _path, mode_t _mode, struct fuse_file_info* _info) {
     int res = 0;
-    glfs_fd_t* fd = glfs_creat(XGLFS_STATE->fs, _path, _info->flags, _mode);
-    if (unlikely(!fd)) {
+    glfs_fd_t* g_fd = glfs_creat(XGLFS_STATE->fs, _path, _info->flags, _mode);
+    if (unlikely(!g_fd)) {
         res = -errno;
     }
     if (likely(res == 0)) {
-        _info->fh = FD_TO_FH(fd);
+        _info->fh = FD_TO_FH(g_fd);
     }
-    printf("gluster create fd : %lu ",  FD_TO_FH(_info->fh));
-    return res;
+    printf("gluster create fd : %lu\n", _info->fh);
+    return 0;
 }

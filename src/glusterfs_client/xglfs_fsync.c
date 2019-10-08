@@ -6,5 +6,5 @@ int xglfs_fsync(const char* _path, int _datasync, struct fuse_file_info* _info) 
     if (unlikely(res < 0)) {
         res = -errno;
     }
-    return res;
+    return 0;
 }

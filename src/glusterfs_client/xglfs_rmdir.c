@@ -5,6 +5,6 @@ int xglfs_rmdir(const char* _path) {
     if (unlikely(ret < 0)) {
         ret = -errno;
     }
-    return ret;
+    return 0;
 }
 

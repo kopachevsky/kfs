@@ -5,6 +5,6 @@ int xglfs_getattr(const char* _path, struct stat* _buffer) {
     if (unlikely(res < 0)) {
         res = -errno;
     }
-    return res;
+    return 0;
 }
 

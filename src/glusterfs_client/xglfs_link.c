@@ -5,5 +5,5 @@ int xglfs_link(const char* _path1, const char* _path2) {
     if (unlikely(res < 0)) {
         res = -errno;
     }
-    return res;
+    return 0;
 }

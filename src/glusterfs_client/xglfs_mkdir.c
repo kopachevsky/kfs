@@ -5,5 +5,5 @@ int xglfs_mkdir(const char* _path, mode_t _mode) {
     if (unlikely(res < 0)) {
         res = -errno;
     }
-    return res;
+    return 0;
 }

@@ -9,7 +9,7 @@ int kfs_create(const char* path, mode_t mode, struct fuse_file_info *fi) {
         return -errno;
     }
     fi->fh = fd;
-    printf("kfs create local fd : %d ", fd);
+    printf("kfs create local fd : %lu\n", fi->fh);
     if (XGLFS_STATE->gluster_api) {
         int g_fd = xglfs_create(path, mode, fi);
         if (g_fd == -1) {

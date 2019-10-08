@@ -5,5 +5,5 @@ int xglfs_symlink(const char* source_path, const char* target_path) {
     if (unlikely(res < 0)) {
         res = -errno;
     }
-    return res;
+    return 0;
 }

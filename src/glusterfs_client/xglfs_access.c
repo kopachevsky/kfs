@@ -5,5 +5,5 @@ int xglfs_access(const char* _path, int _mask) {
     if (unlikely(res < 0)) {
         res = -errno;
     }
-    return res;
+    return 0;
 }

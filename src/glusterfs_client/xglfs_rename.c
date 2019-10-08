@@ -5,5 +5,5 @@ int xglfs_rename(const char* _oldpath, const char* _newpath) {
     if (unlikely(res < 0)) {
         res = -errno;
     }
-    return res;
+    return 0;
 }

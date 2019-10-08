@@ -5,6 +5,6 @@ int xglfs_mknod(const char* _path, mode_t _mode, dev_t _dev) {
     if (unlikely(res < 0)) {
         res = -errno;
     }
-    return res;
+    return 0;
 }
 
