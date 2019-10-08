@@ -8,13 +8,5 @@ int kfs_releasedir(const char *path, struct fuse_file_info* fi) {
     if (fd == -1) {
         return -errno;
     }
-//    if (XGLFS_STATE->gluster_api) {
-//        fd = xglfs_releasedir(path, fi);
-//        fprintf(stderr,"%s\n", "xglfs releaseDIR");
-//        fprintf(stderr, "%d\n", -errno);
-//        if (fd == -1) {
-//            return -errno;
-//        }
-//    }
     return 0;
 }
