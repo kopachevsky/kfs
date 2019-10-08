@@ -9,11 +9,11 @@ int kfs_release(const char *path, struct fuse_file_info *fi) {
     if (fd == -1) {
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
-        int g_fd = xglfs_release(path, fi);
-        if (g_fd == -1) {
+//    if (XGLFS_STATE->gluster_api) {
+        int ret = xglfs_release(path, fi);
+        if (ret == -1) {
             return -errno;
         }
-    }
+//    }
     return 0;
 }
