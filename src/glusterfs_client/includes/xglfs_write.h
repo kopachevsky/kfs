@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_write(const char* _path, const char* _buf, size_t _size, off_t _offset, struct fuse_file_info* _info);
+int xglfs_write(const char *path, const char *buf, size_t _size, off_t offset, struct fuse_file_info *fi);
 
 #endif //KFS_XGLFS_WRITE_H

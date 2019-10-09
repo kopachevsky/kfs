@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_create(const char* _path, mode_t _mode, struct fuse_file_info* _info);
+int xglfs_create(const char *path, mode_t mode, struct fuse_file_info *fi);
 
 #endif //KFS_XGLFS_CREATE_H
