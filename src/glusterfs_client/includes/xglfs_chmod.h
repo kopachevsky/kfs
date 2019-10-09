@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_chmod(const char* _path, mode_t _mode);
+int xglfs_chmod(const char* path, mode_t mode);
 
 #endif //KFS_XGLFS_CHMOD_H
