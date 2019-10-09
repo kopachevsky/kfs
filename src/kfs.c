@@ -1,21 +1,21 @@
 #include "kfs.h"
 
 struct fuse_operations kfs_ops = {
-//                .init       = kfs_init,
-//                .getattr    = kfs_getattr,
-//                .fgetattr   = kfs_fgetattr,
+                .init       = kfs_init,
+                .getattr    = kfs_getattr,
+                .fgetattr   = kfs_fgetattr,
 //                .access     = kfs_access,
-//                .open       = kfs_open,
+                .open       = kfs_open,
 //                .read       = kfs_read,
-//                .write      = kfs_write,
+                .write      = kfs_write,
 //                .truncate   = kfs_truncate,
-//                .release    = kfs_release,
-//                .readdir    = kfs_readdir,
-//                .unlink     = kfs_unlink,
+                .release    = kfs_release,
+                .readdir    = kfs_readdir,
+                .unlink     = kfs_unlink,
 //                .rename     = kfs_rename,
 //                .mkdir      = kfs_mkdir,
 //                .rmdir      = kfs_rmdir,
-//                .create     = kfs_create,
+                .create     = kfs_create,
 //                .mknod      = kfs_mknod,
 //                .chmod      = kfs_chmod,
 //                .link       = kfs_link,
@@ -24,18 +24,10 @@ struct fuse_operations kfs_ops = {
 //                .ftruncate  = kfs_ftruncate,
 //                .readlink   = kfs_readlink,
 //                .fsync      = kfs_fsync,
-//                .opendir    = kfs_opendir,
-//                .releasedir = kfs_releasedir,
+                .opendir    = kfs_opendir,
+                .releasedir = kfs_releasedir,
 //                .chown      = kfs_chown,
 //                .destroy    = kfs_destroy
-
-        .init       = kfs_init,
-        .getattr    = kfs_getattr,
-        .open       = kfs_open,
-        .write      = kfs_write,
-        .release    = kfs_release,
-        .unlink     = xglfs_unlink,
-        .create     = kfs_create,
 };
 
 int main(int argc, char** argv) {

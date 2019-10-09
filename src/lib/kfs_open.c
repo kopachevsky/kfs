@@ -13,12 +13,12 @@ int kfs_open(const char* path, struct fuse_file_info *fi) {
         if (fd == -1) {
             return -errno;
         }
-//        if (XGLFS_STATE->gluster_api) {
+        if (XGLFS_STATE->gluster_api) {
             int ret = xglfs_open(path, fi);
             if (ret == -1) {
                 return -errno;
             }
-//        }
+        }
         fi->fh = fd;
         printf("kfs_open local fd : %lu\n", fi->fh);
     }
