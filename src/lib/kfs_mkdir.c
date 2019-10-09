@@ -10,7 +10,6 @@ int kfs_mkdir(const char* path, const mode_t mode) {
     }
     if (XGLFS_STATE->gluster_api) {
         int ret = xglfs_mkdir(path, mode);
-        printf("XGLFS_MKDIR execute result : %d\n  ", ret);
         if (ret == -1) {
             return -errno;
         }

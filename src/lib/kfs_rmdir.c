@@ -10,7 +10,6 @@ int kfs_rmdir(const char* path) {
     }
     if (XGLFS_STATE->gluster_api) {
         int ret = xglfs_rmdir(path);
-        printf("XGLFS_RMDIR execute result : %d  ", ret);
         if (ret == -1) {
             return -errno;
         }
