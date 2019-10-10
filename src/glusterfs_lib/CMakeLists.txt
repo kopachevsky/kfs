@@ -1,5 +1,5 @@
 add_library(
-    gluster_client
+    glusterfs_lib
         xglfs_access.c
         xglfs_chmod.c
         xglfs_chown.c
@@ -23,10 +23,10 @@ add_library(
         xglfs_fsync.c
 )
 
-target_include_directories(gluster_client PUBLIC includes)
+target_include_directories(glusterfs_lib PUBLIC includes)
 
 find_package(GlusterfsApi)
-target_link_libraries(gluster_client
+target_link_libraries(glusterfs_lib
         pthread
         rt
         zlog
@@ -35,7 +35,7 @@ target_link_libraries(gluster_client
         ${GLUSTERFS-API_LIBRARIES}
 )
 
-install(TARGETS gluster_client
+install(TARGETS glusterfs_lib
         RUNTIME DESTINATION bin
         LIBRARY DESTINATION lib
         ARCHIVE DESTINATION lib

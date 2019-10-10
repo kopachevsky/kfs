@@ -15,6 +15,6 @@
 #include <sysexits.h>
 
 #include "lib/includes/kfs_fuse_operations.h"
-#include "glusterfs_client/includes/xglfs_fuse_operations.h"
+#include "glusterfs_lib/includes/xglfs_fuse_operations.h"
 
 #endif //KFS_KFS_H
