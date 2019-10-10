@@ -1,13 +1,11 @@
 #include "xglfs_unlink.h"
 
-int xglfs_unlink(const char* _path) {
-    int ret = 0;
-
-    ret = glfs_unlink(XGLFS_STATE->fs, _path);
-    if (unlikely(ret < 0))
-        ret = -errno;
-
-    return ret;
+int xglfs_unlink(const char *path) {
+    int res = glfs_unlink(XGLFS_STATE->fs, path);
+    if (res == -1) {
+        return -errno;
+    }
+    return 0;
 }
 
 

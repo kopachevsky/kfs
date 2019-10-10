@@ -1,11 +1,9 @@
 #include "xglfs_chown.h"
 
-int xglfs_chown(const char* _path, uid_t _owner, gid_t _group) {
-    int ret = 0;
-
-    ret = glfs_chown(XGLFS_STATE->fs, _path, _owner, _group);
-    if (unlikely(ret < 0))
-        ret = -errno;
-
-    return ret;
+int xglfs_chown(const char *path, uid_t uid, gid_t gid) {
+    int res = glfs_chown(XGLFS_STATE->fs, path, uid, gid);
+    if (res == -1) {
+        return -errno;
+    }
+    return 0;
 }

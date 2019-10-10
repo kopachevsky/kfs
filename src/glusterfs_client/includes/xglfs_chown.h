@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_chown(const char* _path, uid_t _owner, gid_t _group);
+int xglfs_chown(const char *path, uid_t uid, gid_t gid);
 
 #endif //KFS_XGLFS_CHOWN_H

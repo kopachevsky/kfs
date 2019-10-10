@@ -8,6 +8,6 @@
 
 #pragma once
 
-void xglfs_destroy(void* _userdata);
+void xglfs_destroy(void *userdata);
 
 #endif //KFS_XGLFS_DESTROY_H

@@ -1,7 +1,7 @@
 #include "xglfs_destroy.h"
 
-void xglfs_destroy(void* _userdata) {
-    (void) _userdata;
+void xglfs_destroy(void *userdata) {
+    (void) userdata;
     glfs_fini(XGLFS_STATE->fs);
 
     free(XGLFS_STATE->protocol);

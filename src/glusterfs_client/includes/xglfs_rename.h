@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_rename(const char* _oldpath, const char* _newpath);
+int xglfs_rename(const char *source_path, const char *target_path);
 
 #endif //KFS_XGLFS_RENAME_H

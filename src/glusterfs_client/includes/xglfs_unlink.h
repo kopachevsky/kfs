@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_unlink(const char* _path);
+int xglfs_unlink(const char *path);
 
 #endif //KFS_XGLFS_UNLINK_H

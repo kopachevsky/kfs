@@ -1,17 +1,16 @@
 #include "xglfs_fgetattr.h"
 
-int xglfs_fgetattr(const char* _path, struct stat* _statbuf, struct fuse_file_info* _info) {
-    int ret = 0;
-
-    if (!strcmp(_path, "/"))
-        ret = xglfs_getattr(_path, _statbuf);
-    else
-    {
-        ret = glfs_fstat(FH_TO_FD(_info->fh), _statbuf);
-        if (unlikely(ret < 0))
-            ret = -errno;
+int xglfs_fgetattr(const char *path, struct stat *stbuf,struct fuse_file_info *fi) {
+    (void)fi;
+    int res = 0;
+    if (!strcmp(path, "/")) {
+        res = xglfs_getattr(path, stbuf);
+    } else {
+        res = glfs_fstat(FH_TO_FD(XGLFS_STATE->g_fh), stbuf);
+        if (res == -1) {
+            return -errno;
+        }
     }
-
-    return ret;
+    return 0;
 }
 

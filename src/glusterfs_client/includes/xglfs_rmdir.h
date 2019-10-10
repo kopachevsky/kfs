@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_rmdir(const char* _path);
+int xglfs_rmdir(const char *path);
 
 #endif //KFS_XGLFS_RMDIR_H

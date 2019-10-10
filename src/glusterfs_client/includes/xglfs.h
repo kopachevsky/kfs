@@ -25,8 +25,7 @@
 #define unlikely(x)				(x)
 #endif /* __GNUC__ */
 
-struct xglfs_state
-{
+struct xglfs_state {
     glfs_t* fs;
     char* protocol;
     char* server;

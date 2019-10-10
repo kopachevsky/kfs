@@ -1,7 +1,7 @@
 #include "xglfs_init.h"
 
-void* xglfs_init(struct fuse_conn_info* _connection) {
-    (void)_connection;
+void *xglfs_init(struct fuse_conn_info *connection) {
+    (void)connection;
     XGLFS_STATE->fs = glfs_new(XGLFS_STATE->volume);
     if (unlikely(!XGLFS_STATE->fs)) {
         fprintf(stderr, "%s\n", "Unable to create GlusterFS instance");

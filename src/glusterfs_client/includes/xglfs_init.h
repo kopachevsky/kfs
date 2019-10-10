@@ -10,6 +10,6 @@
 
 #pragma once
 
-void* xglfs_init(struct fuse_conn_info* _connection);
+void *xglfs_init(struct fuse_conn_info *connection);
 
 #endif //KFS_XGLFS_INIT_H

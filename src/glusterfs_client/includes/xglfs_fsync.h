@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_fsync(const char* _path, int _datasync, struct fuse_file_info* _info);
+int xglfs_fsync(const char *path, int datasync, struct fuse_file_info *fi);
 
 #endif //KFS_XGLFS_FSYNC_H

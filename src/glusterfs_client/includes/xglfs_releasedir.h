@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_releasedir(const char* _path, struct fuse_file_info* _info);
+int xglfs_releasedir(const char *path, struct fuse_file_info *fi);
 
 #endif //KFS_XGLFS_RELEASEDIR_H

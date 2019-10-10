@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_open(const char* _pathname, struct fuse_file_info* _info);
+int xglfs_open(const char *path, struct fuse_file_info *fi);
 
 #endif //KFS_XGLFS_OPEN_H

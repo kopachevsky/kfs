@@ -1,11 +1,9 @@
 #include "xglfs_rename.h"
 
-int xglfs_rename(const char* _oldpath, const char* _newpath) {
-    int ret = 0;
-
-    ret = glfs_rename(XGLFS_STATE->fs, _oldpath, _newpath);
-    if (unlikely(ret < 0))
-        ret = -errno;
-
-    return ret;
+int xglfs_rename(const char *source_path, const char *target_path) {
+    int res = glfs_rename(XGLFS_STATE->fs, source_path, target_path);
+    if (res == -1) {
+        return -errno;
+    }
+    return 0;
 }

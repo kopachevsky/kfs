@@ -1,10 +1,9 @@
 #include "xglfs_access.h"
 
-int xglfs_access(const char* _path, int _mask) {
-    int ret = 0;
-    ret = glfs_access(XGLFS_STATE->fs, _path, _mask);
-    if (unlikely(ret < 0))
-        ret = -errno;
-
-    return ret;
+int xglfs_access(const char *path, int mask) {
+    int res = glfs_access(XGLFS_STATE->fs, path, mask);
+    if (res == -1) {
+        return -errno;
+    }
+    return 0;
 }

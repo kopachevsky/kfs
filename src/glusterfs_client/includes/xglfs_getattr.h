@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_getattr(const char* _path, struct stat* _buffer);
+int xglfs_getattr(const char *path, struct stat *stbuf);
 
 #endif //KFS_XGLFS_GETATTR_H

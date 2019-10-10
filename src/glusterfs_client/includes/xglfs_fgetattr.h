@@ -10,6 +10,6 @@
 
 #pragma once
 
-int xglfs_fgetattr(const char* _path, struct stat* _statbuf, struct fuse_file_info* _info);
+int xglfs_fgetattr(const char *path, struct stat *stbuf,struct fuse_file_info *fi);
 
 #endif //KFS_XGLFS_FGETATTR_H

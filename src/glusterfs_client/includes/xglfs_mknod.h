@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_mknod(const char* _path, mode_t _mode, dev_t _dev);
+int xglfs_mknod(const char *path, mode_t mode, dev_t rdev);
 
 #endif //KFS_XGLFS_MKNOD_H

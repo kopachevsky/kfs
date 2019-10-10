@@ -8,6 +8,6 @@
 
 #pragma once
 
-int xglfs_access(const char* _path, int _mask);
+int xglfs_access(const char *path, int mask);
 
 #endif //KFS_XGLFS_ACCESS_H
