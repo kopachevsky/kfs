@@ -7,5 +7,11 @@ int kfs_truncate(const char* path, off_t size) {
     if (res == -1) {
         return -errno;
     }
+    if (XGLFS_STATE->gluster_api) {
+        int ret = xglfs_truncate(path, size);
+        if (ret == -1) {
+            return -errno;
+        }
+    }
     return 0;
 }
