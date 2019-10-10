@@ -24,5 +24,6 @@
 #include "xglfs_write.h"
 #include "xglfs_fsync.h"
 #include "xglfs_truncate.h"
+#include "xglfs_ftruncate.h"
 
 #endif //KFS_XGLFS_FUSE_OPERATIONS_H
