@@ -21,6 +21,7 @@ add_library(
         xglfs_unlink.c
         xglfs_write.c
         xglfs_fsync.c
+        xglfs_truncate.c
 )
 
 target_include_directories(glusterfs_lib PUBLIC includes)
