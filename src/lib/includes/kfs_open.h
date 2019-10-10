@@ -9,6 +9,6 @@
 
 #pragma once
 
-int kfs_open(const char* path, struct fuse_file_info *fi);
+int kfs_open(const char *path, struct fuse_file_info *fi);
 
 #endif //KFS_KFS_OPEN_H

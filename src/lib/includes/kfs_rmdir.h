@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_rmdir(const char* path);
+int kfs_rmdir(const char *path);
 
 #endif //KFS_KFS_RMDIR_H

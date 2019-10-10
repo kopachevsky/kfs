@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_mkdir(const char* path, mode_t mode);
+int kfs_mkdir(const char *path, mode_t mode);
 
 #endif //KFS_KFS_MKDIR_H

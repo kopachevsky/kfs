@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_link(const char* source_path, const char* target_path);
+int kfs_link(const char *source_path, const char *target_path);
 
 #endif //KFS_KFS_LINK_H

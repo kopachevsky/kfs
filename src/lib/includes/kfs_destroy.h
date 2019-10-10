@@ -8,6 +8,6 @@
 
 #pragma once
 
-void kfs_destroy (void *_userdata);
+void kfs_destroy (void *userdata);
 
 #endif //KFS_KFS_DESTROY_H

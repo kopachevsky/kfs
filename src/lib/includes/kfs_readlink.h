@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_readlink(const char* path, char* buf, size_t size);
+int kfs_readlink(const char *path, char *buf, size_t size);
 
 #endif //KFS_KFS_READLINK_H

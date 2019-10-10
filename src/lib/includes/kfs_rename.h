@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_rename(const char* source_path, const char* target_path);
+int kfs_rename(const char *source_path, const char *target_path);
 
 #endif //KFS_KFS_RENAME_H

@@ -8,6 +8,6 @@
 
 #pragma once
 
-void *kfs_init(struct fuse_conn_info *conn);
+void *kfs_init(struct fuse_conn_info *connection);
 
 #endif //KFS_KFS_INIT_H

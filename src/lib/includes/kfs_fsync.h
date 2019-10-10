@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_fsync(const char* path, int datasync, struct fuse_file_info *fi);
+int kfs_fsync(const char *path, int datasync, struct fuse_file_info *fi);
 
 #endif //KFS_KFS_FSYNC_H

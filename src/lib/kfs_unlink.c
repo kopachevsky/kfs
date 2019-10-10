@@ -1,6 +1,6 @@
 #include "kfs_unlink.h"
 
-int kfs_unlink(const char* path) {
+int kfs_unlink(const char *path) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     int res = unlink(fpath);

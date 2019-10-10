@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_unlink(const char* path);
+int kfs_unlink(const char *path);
 
 #endif //KFS_KFS_UNLINK_H

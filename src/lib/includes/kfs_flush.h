@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_flush(const char* path, struct fuse_file_info *fi);
+int kfs_flush(const char *path, struct fuse_file_info *fi);
 
 #endif //KFS_KFS_FLUSH_H

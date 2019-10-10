@@ -1,6 +1,6 @@
 #include "kfs_common.h"
 
-char *str_concat(const char* s1, const char* s2) {
+char *str_concat(const char *s1, const char *s2) {
     assert(s1 && s2);
     size_t s1len = strlen(s1);
     size_t s2len = strlen(s2);

@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_access(const char* path, int mask);
+int kfs_access(const char *path, int mask);
 
 #endif //KFS_KFS_ACCESS_H

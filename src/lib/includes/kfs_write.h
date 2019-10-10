@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_write(const char* path, const char* buf, size_t size, off_t offset, struct fuse_file_info* fi);
+int kfs_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi);
 
 #endif //KFS_KFS_WRITE_H

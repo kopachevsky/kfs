@@ -1,6 +1,6 @@
 #include "kfs_access.h"
 
-int kfs_access(const char* path, int mask) {
+int kfs_access(const char *path, int mask) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     int res = access(fpath, mask);

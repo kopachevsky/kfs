@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_mknod(const char* path, mode_t mode, dev_t rdev);
+int kfs_mknod(const char *path, mode_t mode, dev_t rdev);
 
 #endif //KFS_KFS_MKNOD_H

@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_ftruncate(const char* path, off_t size, struct fuse_file_info *fi);
+int kfs_ftruncate(const char *path, off_t size, struct fuse_file_info *fi);
 
 #endif //KFS_KFS_FTRUNCATE_H

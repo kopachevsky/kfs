@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_readdir(const char* path, void* buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info* fi);
+int kfs_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offset, struct fuse_file_info *fi);
 
 #endif //KFS_KFS_READDIR_H

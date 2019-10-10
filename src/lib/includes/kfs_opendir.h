@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_opendir(const char* path, struct fuse_file_info *fi);
+int kfs_opendir(const char *path, struct fuse_file_info *fi);
 
 #endif //KFS_KFS_OPENDIR_H

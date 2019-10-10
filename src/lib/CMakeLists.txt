@@ -33,7 +33,8 @@ add_library(
 target_include_directories(fuse_cache PUBLIC includes)
 
 find_package(GlusterfsApi)
-target_link_libraries(fuse_cache
+target_link_libraries(
+        fuse_cache
         glusterfs_lib
         pthread
         rt

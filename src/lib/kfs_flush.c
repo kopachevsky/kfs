@@ -1,6 +1,6 @@
 #include "kfs_flush.h"
 
-int kfs_flush(const char* path, struct fuse_file_info *fi) {
+int kfs_flush(const char *path, struct fuse_file_info *fi) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     (void) fpath;

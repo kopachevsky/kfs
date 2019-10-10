@@ -1,6 +1,6 @@
 #include "kfs_link.h"
 
-int kfs_link(const char* source_path, const char* target_path) {
+int kfs_link(const char *source_path, const char *target_path) {
     char fs_source_path[PATH_MAX];
     char fs_target_path[PATH_MAX];
     fullpath(fs_source_path, source_path);
