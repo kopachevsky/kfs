@@ -1,7 +1,7 @@
 add_executable(kfs kfs.c)
 
 find_package(Fuse)
-add_subdirectory(lib)
+add_subdirectory(kfs_lib)
 add_subdirectory(glusterfs_lib)
 
 # Fuse specific params
