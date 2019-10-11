@@ -16,7 +16,7 @@ Mount:
 
 Unmount:
 
-    sudo fusermount -u <directory>
+    sudo fusermount -uz <directory>
 
 How to check mount:
 
