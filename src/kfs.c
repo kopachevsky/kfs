@@ -138,9 +138,9 @@ int main(int argc, char** argv) {
     size_t index = 0;
     args[index++] = strdup(argv[0]);
     args[index++] = strdup("-orw,suid,dev,direct_io,allow_other,default_permissions");
-    if (foreground)
+    if (foreground) {
         args[index++] = strdup("-f");
+    }
     args[index++] = xglfs_state->mountpoint;
-    logger((const char *) xglfs_state);
     exit(fuse_main(index, args, &kfs_ops, xglfs_state));
 }

@@ -3,7 +3,12 @@
 int kfs_mknod(const char *path, mode_t mode, dev_t rdev) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    int res = S_ISFIFO(mode) ? mkfifo(fpath, mode) : mknod(fpath, mode, rdev);
+    int res = 0;
+    if (S_ISFIFO(mode)) {
+        res = mkfifo(fpath, mode);
+    } else {
+        res = mknod(fpath, mode, rdev);
+    }
     if (res == -1) {
         return - errno;
     }

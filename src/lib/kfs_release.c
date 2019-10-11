@@ -4,17 +4,16 @@ int kfs_release(const char *path, struct fuse_file_info *fi) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     (void) fpath;
-    int ret = 0;
     printf("kfs_release local fd : %lu\n", fi->fh);
     int fd = close(fi->fh);
     if (fd == -1) {
         return -errno;
     }
     if (XGLFS_STATE->gluster_api) {
-        ret = xglfs_release(path, fi);
-        if (ret == -1) {
+        int g_fd = xglfs_release(path, fi);
+        if (g_fd == -1) {
             return -errno;
         }
     }
-    return ret;
+    return 0;
 }
