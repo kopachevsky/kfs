@@ -109,6 +109,7 @@ int main(int argc, char** argv) {
     }
 
     if (xglfs_state->server == 0) {
+        fprintf(stderr, "%s\n", "To mount FS you need to specify server");
         exit(EX_USAGE);
     }
     if (xglfs_state->volume == 0) {
