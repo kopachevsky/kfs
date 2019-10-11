@@ -4,6 +4,7 @@ int kfs_truncate(const char *path, off_t size) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     int res = truncate(fpath, size);
+    printf("kfs_truncate execute result : %d\n", res);
     if (res == -1) {
         return -errno;
     }

@@ -4,7 +4,16 @@ int kfs_fsync(const char *path, int datasync, struct fuse_file_info *fi) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     (void) fpath;
-    int res = datasync != 0 ? fdatasync(fi->fh) : fsync(fi->fh);
+    int res;
+    if (datasync != 0) {
+        printf("kfs_fsync datasync fd : %lu\n", fi->fh);
+        res = fdatasync(fi->fh);
+        printf("kfs_fsync datasync execute result : %d\n", res);
+    } else {
+        printf("kfs_fsync fd : %lu\n", fi->fh);
+        res = fsync(fi->fh);
+        printf("kfs_fsync execute result : %d\n", res);
+    }
     if (res == -1) {
         return -errno;
     }

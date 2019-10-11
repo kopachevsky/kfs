@@ -4,6 +4,7 @@ int kfs_unlink(const char *path) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     int res = unlink(fpath);
+    printf("kfs_release execute result : %d\n", res);
     if (res == -1) {
         return -errno;
     }
@@ -15,5 +16,4 @@ int kfs_unlink(const char *path) {
     }
     return 0;
 }
-
 

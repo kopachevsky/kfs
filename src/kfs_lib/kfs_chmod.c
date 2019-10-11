@@ -4,6 +4,7 @@ int kfs_chmod(const char *path, mode_t mode) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     int res = chmod(fpath, mode);
+    printf("kfs_chmod execute result : %d\n", res);
     if (res == -1) {
         return -errno;
     }

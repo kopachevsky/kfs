@@ -8,6 +8,7 @@ int kfs_mknod(const char *path, mode_t mode, dev_t rdev) {
         res = mkfifo(fpath, mode);
     } else {
         res = mknod(fpath, mode, rdev);
+        printf("kfs_mknod execute result : %d\n", res);
     }
     if (res == -1) {
         return - errno;

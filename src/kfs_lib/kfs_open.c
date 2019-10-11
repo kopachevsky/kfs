@@ -10,6 +10,7 @@ int kfs_open(const char *path, struct fuse_file_info *fi) {
         }
     } else {
         int fd = open(fpath, fi->flags);
+        printf("kfs_open execute result : %d\n", fd);
         if (fd == -1) {
             return -errno;
         }
@@ -20,7 +21,7 @@ int kfs_open(const char *path, struct fuse_file_info *fi) {
             }
         }
         fi->fh = fd;
-        printf("kfs_open local fd : %lu\n", fi->fh);
+        printf("kfs_open fd : %lu\n", fi->fh);
     }
     return 0;
 }
