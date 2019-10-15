@@ -7,7 +7,6 @@ int xglfs_open(const char *path, struct fuse_file_info *fi) {
         fd = glfs_creat(XGLFS_STATE->fs, path, fi->flags, 0);
     } else {
         fd = glfs_open(XGLFS_STATE->fs, path, fi->flags);
-        printf("xglfs_open execute result : %lu\n", FD_TO_FH(fd));
     }
     if (unlikely(!fd)) {
         res = -errno;
