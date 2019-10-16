@@ -23,6 +23,7 @@ add_library(
         xglfs_fsync.c
         xglfs_truncate.c
         xglfs_ftruncate.c
+        xglfs_utimens.c
 )
 
 target_include_directories(glusterfs_lib PUBLIC includes)
