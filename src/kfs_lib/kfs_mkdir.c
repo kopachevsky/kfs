@@ -4,7 +4,7 @@ int kfs_mkdir(const char *path, const mode_t mode) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     int res = mkdir(fpath, mode);
-    printf("KFS_MKDIR execute result : %d\n", res);
+    printf("kfs_mkdir execute result : %d\n", res);
     if (res == -1) {
         return -errno;
     }

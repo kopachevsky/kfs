@@ -1,3 +1,4 @@
+#include <pwd.h>
 #include "kfs_common.h"
 
 char *str_concat(const char *s1, const char *s2) {
@@ -28,7 +29,13 @@ void fullpath(char fpath[PATH_MAX], const char *path) {
 }
 
 int logger(const char *msg) {
-    LOG_CONFIG_PATH = "/home/klevchenko/kfs/tests/assets/zlog.conf";
+    char *homedir_path;
+    char *config_file_path = "/kfs/tests/assets/zlog.conf";
+    if ((homedir_path = getenv("HOME")) == NULL) {
+        homedir_path = getpwuid(getuid())->pw_dir;
+    }
+    char *fullpath = str_concat(homedir_path, config_file_path);
+    LOG_CONFIG_PATH = fullpath;
     static int rc;
     if (!rc) {
         rc = dzlog_init(LOG_CONFIG_PATH,  "default");

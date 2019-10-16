@@ -4,7 +4,7 @@ int kfs_rmdir(const char *path) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     int res = rmdir(fpath);
-    printf("KFS_RMDIR execute result : %d  ", res);
+    printf("kfs_rmdir execute result : %d\n", res);
     if(res == -1) {
         return -errno;
     }

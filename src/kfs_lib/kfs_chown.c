@@ -4,6 +4,7 @@ int kfs_chown(const char *path, uid_t uid, gid_t gid) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     int res = lchown(fpath, uid, gid);
+    printf("kfs_chown execute result : %d\n", res);
     if (res == -1) {
         return -errno;
     }
