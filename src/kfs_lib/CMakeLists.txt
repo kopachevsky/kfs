@@ -28,6 +28,7 @@ add_library(
         kfs_releasedir.c
         kfs_chown.c
         kfs_destroy.c
+        kfs_utimens.c
 )
 
 target_include_directories(fuse_cache PUBLIC includes)

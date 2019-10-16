@@ -28,5 +28,6 @@
 #include "kfs_chown.h"
 #include "kfs_fgetattr.h"
 #include "kfs_destroy.h"
+#include "kfs_utimens.h"
 
 #endif //KFS_KFS_FUSE_OPERATIONS_H
