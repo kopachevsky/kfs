@@ -20,13 +20,13 @@ struct fuse_operations kfs_ops = {
                 .chmod      = kfs_chmod,
                 .link       = kfs_link,
                 .symlink    = kfs_symlink,
-                .flush      = kfs_flush,
                 .ftruncate  = kfs_ftruncate,
                 .readlink   = kfs_readlink,
                 .fsync      = kfs_fsync,
                 .opendir    = kfs_opendir,
                 .releasedir = kfs_releasedir,
                 .chown      = kfs_chown,
+                .utimens    = kfs_utimens,
                 .destroy    = kfs_destroy
 };
 
