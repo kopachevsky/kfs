@@ -27,6 +27,7 @@ struct fuse_operations kfs_ops = {
                 .releasedir = kfs_releasedir,
                 .chown      = kfs_chown,
                 .utimens    = kfs_utimens,
+                .statfs     = kfs_statfs,
                 .destroy    = kfs_destroy
 };
 
