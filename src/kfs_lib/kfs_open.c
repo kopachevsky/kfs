@@ -11,8 +11,8 @@ int kfs_open(const char *path, struct fuse_file_info *fi) {
     if (XGLFS_STATE->gluster_api) {
         int g_fd = xglfs_open(path, fi);
         printf("xglfs_open execute result : %d\n", g_fd);
-        if (g_fd == -1) {
-            return -errno;
+            if (g_fd == -1) {
+                return -errno;
             }
         }
     fi->fh = fd;
