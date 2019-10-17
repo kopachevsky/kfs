@@ -8,5 +8,11 @@ int kfs_utimens(const char *path, const struct timespec tv[2], struct fuse_file_
     if (res == -1) {
         return -errno;
     }
+    if (XGLFS_STATE->gluster_api) {
+        int ret = xglfs_utimens(path, tv);
+        if (ret == -1) {
+            return -errno;
+        }
+    }
     return 0;
 }
