@@ -4,7 +4,6 @@ int kfs_write(const char *path, const char *buf, size_t size, off_t offset, stru
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     (void) fpath;
-    int ret = 0;
     printf("kfs_write fd : %lu\n", fi->fh);
     int res = pwrite(fi->fh, buf, size, offset);
     printf("kfs_write execute result : %d\n", res);
@@ -12,7 +11,7 @@ int kfs_write(const char *path, const char *buf, size_t size, off_t offset, stru
         return -errno;
     }
     if (XGLFS_STATE->gluster_api) {
-        ret = xglfs_write(path, buf, size, offset, fi);
+        int ret = xglfs_write(path, buf, size, offset, fi);
         if (ret == -1) {
             return -errno;
         }
