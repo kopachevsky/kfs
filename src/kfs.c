@@ -28,6 +28,7 @@ struct fuse_operations kfs_ops = {
                 .chown      = kfs_chown,
                 .utimens    = kfs_utimens,
                 .statfs     = kfs_statfs,
+                .fallocate  = kfs_fallocate,
                 .destroy    = kfs_destroy
 };
 
