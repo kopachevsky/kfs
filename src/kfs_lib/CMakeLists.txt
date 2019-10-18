@@ -30,6 +30,7 @@ add_library(
         kfs_destroy.c
         kfs_utimens.c
         kfs_statfs.c
+        kfs_fallocate.c
 )
 
 target_include_directories(fuse_cache PUBLIC includes)

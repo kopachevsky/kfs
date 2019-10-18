@@ -30,5 +30,6 @@
 #include "kfs_destroy.h"
 #include "kfs_utimens.h"
 #include "kfs_statfs.h"
+#include "kfs_fallocate.h"
 
 #endif //KFS_KFS_FUSE_OPERATIONS_H
