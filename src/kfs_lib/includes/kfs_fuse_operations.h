@@ -29,5 +29,6 @@
 #include "kfs_fgetattr.h"
 #include "kfs_destroy.h"
 #include "kfs_utimens.h"
+#include "kfs_statfs.h"
 
 #endif //KFS_KFS_FUSE_OPERATIONS_H
