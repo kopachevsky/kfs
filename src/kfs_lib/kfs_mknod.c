@@ -1,7 +1,7 @@
 #include "kfs_mknod.h"
 
 int kfs_mknod(const char *path, mode_t mode, dev_t rdev) {
-    char fpath[PATH_MAX];
+    char fpath[MAX];
     fullpath(fpath, path);
     int res = 0;
     if (S_ISFIFO(mode)) {

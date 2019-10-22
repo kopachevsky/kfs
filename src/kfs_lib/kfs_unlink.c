@@ -1,7 +1,7 @@
 #include "kfs_unlink.h"
 
 int kfs_unlink(const char *path) {
-    char fpath[PATH_MAX];
+    char fpath[MAX];
     fullpath(fpath, path);
     int res = unlink(fpath);
     printf("kfs_release execute result : %d\n", res);

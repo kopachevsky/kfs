@@ -1,7 +1,7 @@
 #include "kfs_rmdir.h"
 
 int kfs_rmdir(const char *path) {
-    char fpath[PATH_MAX];
+    char fpath[MAX];
     fullpath(fpath, path);
     int res = rmdir(fpath);
     printf("kfs_rmdir execute result : %d\n", res);

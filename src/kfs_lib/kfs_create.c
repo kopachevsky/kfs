@@ -1,7 +1,7 @@
 #include "kfs_create.h"
 
 int kfs_create(const char *path, mode_t mode, struct fuse_file_info *fi) {
-    char fpath[PATH_MAX];
+    char fpath[MAX];
     fullpath(fpath, path);
     int fd = open(fpath, fi->flags, mode);
     printf("kfs_create execute result : %d\n", fd);

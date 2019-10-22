@@ -1,7 +1,7 @@
 #include "kfs_release.h"
 
 int kfs_release(const char *path, struct fuse_file_info *fi) {
-    char fpath[PATH_MAX];
+    char fpath[MAX];
     fullpath(fpath, path);
     (void) fpath;
     printf("kfs_release fd : %lu\n", fi->fh);

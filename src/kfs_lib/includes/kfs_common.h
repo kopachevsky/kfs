@@ -17,10 +17,11 @@
 char *MOUNT_PATH;
 char *LOCAL_DISC_CACHE_PATH;
 char *LOG_CONFIG_PATH;
+#define MAX       8192
 
 char *str_concat(const char *s1, const char *s2);
 
-void fullpath(char fpath[PATH_MAX], const char *path);
+void fullpath(char fpath[MAX], const char *path);
 
 int logger(const char *msg);
 
