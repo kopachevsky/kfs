@@ -1,0 +1,17 @@
+version: '3'
+services:
+  cluster:
+    image: gluster/gluster-centos
+    container_name: server1
+    hostname: server1
+    privileged: true
+    command: sleep 36000
+  kfs:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: kfs
+    privileged: true
+    volumes:
+      - /home/klevchenko/kfs:/workdir
+
