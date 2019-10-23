@@ -2,7 +2,7 @@
 
 Dependencies:
 
-    sudo ./install_dependencies.sh
+    sudo ./scripts/install_dependencies.sh
 
 Build:
     
@@ -71,7 +71,7 @@ Create volume and start it
 
 Now we can run test client to check our server
 
-    docker run -it --rm gluster/glusterfs-client bash
+    docker run -it --privileged --rm gluster/glusterfs-client bash
 
 Put server IP from above to hosts file
 
@@ -80,7 +80,7 @@ Put server IP from above to hosts file
 Mount and create test file in /mnt/gluster 
 
     mkdir /mnt/gluster
-    mount -t glusterfs server1:/gv0 /mnt/gluster   
+    mount -t glusterfs server1:/gv0 /mnt/gluster
 
     thouch /mnt/gluster/test
 
