@@ -1,7 +1,7 @@
 #include "kfs_opendir.h"
 
 int kfs_opendir(const char *path, struct fuse_file_info *fi) {
-    char fpath[MAX];
+    char fpath[MAX_PATH];
     fullpath(fpath, path);
     DIR *dp = opendir(fpath);
     if (dp == NULL) {

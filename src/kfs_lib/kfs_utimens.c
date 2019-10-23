@@ -1,7 +1,7 @@
 #include "kfs_utimens.h"
 
 int kfs_utimens(const char *path, const struct timespec tv[2], struct fuse_file_info *fi) {
-    char fpath[MAX];
+    char fpath[MAX_PATH];
     fullpath(fpath, path);
     int res = utimensat(fi->fh, fpath, tv, AT_SYMLINK_NOFOLLOW);
     printf("kfs_utimens execute result : %d\n", res);

@@ -1,7 +1,7 @@
 #include "kfs_truncate.h"
 
 int kfs_truncate(const char *path, off_t size) {
-    char fpath[MAX];
+    char fpath[MAX_PATH];
     fullpath(fpath, path);
     int res = truncate(fpath, size);
     printf("kfs_truncate execute result : %d\n", res);

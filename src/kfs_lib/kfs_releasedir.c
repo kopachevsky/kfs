@@ -1,7 +1,7 @@
 #include "kfs_releasedir.h"
 
 int kfs_releasedir(const char *path, struct fuse_file_info *fi) {
-    char fpath[MAX];
+    char fpath[MAX_PATH];
     fullpath(fpath, path);
     (void) fpath;
     int fd = closedir((DIR *) (uintptr_t) fi->fh);

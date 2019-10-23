@@ -1,8 +1,8 @@
 #include "kfs_symlink.h"
 
 int kfs_symlink(const char *source_path, const char *target_path) {
-    char fs_source_path[MAX];
-    char fs_target_path[MAX];
+    char fs_source_path[MAX_PATH];
+    char fs_target_path[MAX_PATH];
     fullpath(fs_source_path, source_path);
     fullpath(fs_target_path, target_path);
     int res = symlink(fs_source_path, fs_target_path);

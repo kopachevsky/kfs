@@ -1,7 +1,7 @@
 #include "kfs_ftruncate.h"
 
 int kfs_ftruncate(const char *path, off_t size, struct fuse_file_info *fi) {
-    char fpath[MAX];
+    char fpath[MAX_PATH];
     fullpath(fpath, path);
     (void) fpath;
     printf("kfs_truncate fd : %lu\n", fi->fh);

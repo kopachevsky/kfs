@@ -1,7 +1,7 @@
 #include "kfs_open.h"
 
 int kfs_open(const char *path, struct fuse_file_info *fi) {
-    char fpath[MAX];
+    char fpath[MAX_PATH];
     fullpath(fpath, path);
     int fd = open(fpath, fi->flags);
     printf("kfs_open execute result : %d\n", fd);
