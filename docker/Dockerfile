@@ -11,10 +11,8 @@ RUN set -e && \
 
 RUN rm -rf /var/lib/apt/lists/*
 
-RUN mkdir -p /mnt/mount && mkdir -p /mnt/cache
+RUN mkdir -p /mnt/mount && mkdir -p /mnt/cache && mkdir -p /tmp/log && touch /tmp/log/mylog.txt
 
 RUN mkdir /workdir
 
 WORKDIR /workdir
-
-CMD ["sleep","36000"]

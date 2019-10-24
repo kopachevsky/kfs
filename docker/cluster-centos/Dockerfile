@@ -1,4 +1,4 @@
-from gluster/gluster-centos
+FROM gluster/gluster-centos
 
 ADD gluster-disc-setup.service /etc/systemd/system/gluster-disc-setup.service
 ADD gluster-disc-setup.sh /usr/sbin/gluster-disc-setup.sh

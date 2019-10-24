@@ -33,7 +33,6 @@ struct fuse_operations kfs_ops = {
 };
 
 int main(int argc, char** argv) {
-    logger("KFS START");
     int options = 0;
     unsigned short int foreground = 0;
     char* invalid = NULL;
