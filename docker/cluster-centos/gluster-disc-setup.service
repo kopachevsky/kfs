@@ -1,0 +1,10 @@
+[Unit]
+Description=Setup disc!!!!!!!!!!!!!!!!!!!!!!!
+After=glusterd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/gluster-disc-setup.sh
+
+[Install]
+WantedBy=multi-user.target
