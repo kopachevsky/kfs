@@ -6,9 +6,9 @@ Dependencies:
 
 Build:
     
-    1.mkdir build && cd build
-    2.cmake.. && make
-    /or use ./scripts/build.sh 
+    mkdir build && cd build
+    cmake .. && make
+    ../scripts/build.sh 
 
 Mount:
 
