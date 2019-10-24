@@ -11,10 +11,8 @@ RUN set -e && \
 
 RUN rm -rf /var/lib/apt/lists/*
 
-RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1000 ubuntu
+RUN mkdir -p /mnt/mount && mkdir -p /mnt/cache && mkdir -p /tmp/log && touch /tmp/log/mylog.txt
 
-USER ubuntu
+RUN mkdir /workdir
 
-RUN mkdir /home/ubuntu/workdir
-
-WORKDIR /home/ubuntu/workdir
+WORKDIR /workdir

@@ -1,0 +1,19 @@
+version: '3'
+services:
+  cluster:
+    build:
+      context: ./cluster-centos
+      dockerfile: ./Dockerfile
+    container_name: server1
+    hostname: server1
+    privileged: true
+  kfs:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    container_name: kfs
+    privileged: true
+    volumes:
+      - /home/klevchenko/kfs:/workdir
+    command: sleep 36000
+
