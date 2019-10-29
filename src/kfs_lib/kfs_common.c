@@ -28,23 +28,69 @@ void fullpath(char fpath[PATH_MAX], const char *path) {
     }
 }
 
-int logger(const char *msg) {
-    char *homedir_path;
-    char *config_file_path = "/kfs/tests/assets/zlog.conf";
-    if ((homedir_path = getenv("HOME")) == NULL) {
-        homedir_path = getpwuid(getuid())->pw_dir;
+int log_init() {
+    char *LOG_CONFIG_PATH = getenv("KFS_ZLOG_CONFIG");
+    if (LOG_CONFIG_PATH == NULL) {
+        // take default home
+        char *homedir_path;
+        if ((homedir_path = getenv("HOME")) == NULL) {
+            homedir_path = getpwuid(getuid())->pw_dir;
+        }
+        LOG_CONFIG_PATH = str_concat(homedir_path, "zlog.conf");
     }
-    char *fullpath = str_concat(homedir_path, config_file_path);
-    LOG_CONFIG_PATH = fullpath;
-    static int rc;
-    if (!rc) {
-        rc = dzlog_init(LOG_CONFIG_PATH,  "default");
-    }
+    int rc = dzlog_init(LOG_CONFIG_PATH,  "default");
     if (rc) {
-        printf("init failed\n");
+        printf("zlog init failed for path %s\n", LOG_CONFIG_PATH);
         return -1;
+    } else {
+        printf("zlog init success for path %s\n", LOG_CONFIG_PATH);
+        return 0;
     }
-    dzlog_info("%s", msg);
-    dzlog_error("%d", errno);
-    return 0;
+}
+
+void log_info(const char *msg) {
+    printf("%s\n", msg);
+    dzlog_info("%s\n", msg);
+}
+
+void log_debug(const char *msg) {
+    printf("%s\n", msg);
+    dzlog_debug("%s\n", msg);
+}
+
+void log_error(const char *msg) {
+    printf("%s\n", msg);
+    dzlog_error("%s\n", msg);
+    exit(1001);
+}
+
+void log_infof(const char *fmt, ...) {
+    va_list argp;
+    va_start(argp, fmt);
+    char msg[2048];
+    vsprintf(msg, fmt, argp);
+    printf("%s\n", msg);
+    dzlog_info("%s\n", msg);
+    va_end(argp);
+}
+
+void log_debugf(const char *fmt, ...) {
+    va_list argp;
+    va_start(argp, fmt);
+    char msg[2048];
+    vsprintf(msg, fmt, argp);
+    printf("%s\n", msg);
+    dzlog_debug("%s\n", msg);
+    va_end(argp);
+}
+
+void log_errorf(const char *fmt, ...) {
+    va_list argp;
+    va_start(argp, fmt);
+    char msg[2048];
+    vsprintf(msg, fmt, argp);
+    printf("%s\n", msg);
+    dzlog_error("%s\n", msg);
+    va_end(argp);
+    exit(1001);
 }

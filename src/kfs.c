@@ -109,13 +109,15 @@ int main(int argc, char** argv) {
         }
     }
 
-    if (xglfs_state->server == 0) {
-        fprintf(stderr, "%s\n", "To mount FS you need to specify server");
-        exit(EX_USAGE);
-    }
-    if (xglfs_state->volume == 0) {
-        fprintf(stderr, "%s\n", "To mount FS you need to specify volume");
-        exit(EX_USAGE);
+    if (xglfs_state->gluster_api) {
+        if (xglfs_state->server == 0) {
+            fprintf(stderr, "%s\n", "To mount FS you need to specify server");
+            exit(EX_USAGE);
+        }
+        if (xglfs_state->volume == 0) {
+            fprintf(stderr, "%s\n", "To mount FS you need to specify volume");
+            exit(EX_USAGE);
+        }
     }
     if (xglfs_state->mountpoint == 0) {
         xglfs_state->mountpoint = GLFS_DEFAULT_MOUNTPOINT;
