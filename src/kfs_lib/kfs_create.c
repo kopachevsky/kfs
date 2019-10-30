@@ -3,9 +3,10 @@
 int kfs_create(const char *path, mode_t mode, struct fuse_file_info *fi) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    int fd = open(fpath, fi->flags, mode);
-    printf("kfs_create execute result : %d\n", fd);
+    log_debugf("kfs_create path : %s\n", fpath);
+    int fd = open(fpath,  O_CREAT|O_WRONLY|O_TRUNC, mode);
     if (fd == -1) {
+        log_errorf("Error kfs_create : %s\n", strerror( errno ));
         return -errno;
     }
     if (XGLFS_STATE->gluster_api) {
@@ -16,6 +17,6 @@ int kfs_create(const char *path, mode_t mode, struct fuse_file_info *fi) {
         }
     }
     fi->fh = fd;
-    printf("kfs_create fd : %lu\n", fi->fh);
+    log_debugf("kfs_create fd : %lu\n", fi->fh);
     return 0;
 }

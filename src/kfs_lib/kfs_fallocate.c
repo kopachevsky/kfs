@@ -1,22 +1,17 @@
 #include "kfs_fallocate.h"
 
 int kfs_fallocate(const char *path, int mode, off_t offset, off_t length, struct fuse_file_info *fi) {
-    int fd;
+    char fpath[PATH_MAX];
+    fullpath(fpath, path);
+    (void) fpath;
     if (mode) {
         return -EOPNOTSUPP;
     }
-    if(fi == NULL){
-        fd = open(path, O_WRONLY);
-    } else {
-        fd = fi->fh;
-    }
-    if (fd == -1) {
+    int res = -posix_fallocate(fi->fh, offset, length);
+    log_debugf("kfs_fallocate execute result : %d\n", res);
+    if (res == -1) {
+        log_errorf("Error kfs_fallocate : %s\n", strerror( errno ));
         return -errno;
-    }
-    int res = -posix_fallocate(fd, offset, length);
-    printf("kfs_fallocate execute result : %d\n", res);
-    if(fi == NULL) {
-        close(fd);
     }
     return res;
 }

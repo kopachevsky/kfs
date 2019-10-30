@@ -29,7 +29,7 @@ void fullpath(char fpath[PATH_MAX], const char *path) {
 }
 
 int log_init() {
-    char *LOG_CONFIG_PATH = getenv("KFS_ZLOG_CONFIG");
+    LOG_CONFIG_PATH = getenv("KFS_ZLOG_CONFIG");
     if (LOG_CONFIG_PATH == NULL) {
         // take default home
         char *homedir_path;
@@ -92,5 +92,5 @@ void log_errorf(const char *fmt, ...) {
     printf("%s\n", msg);
     dzlog_error("%s\n", msg);
     va_end(argp);
-    exit(1001);
+//    exit(1001);
 }

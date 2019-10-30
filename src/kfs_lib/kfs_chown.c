@@ -1,11 +1,14 @@
 #include "kfs_chown.h"
 
 int kfs_chown(const char *path, uid_t uid, gid_t gid) {
+    int res = 0;
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    int res = lchown(fpath, uid, gid);
-    printf("kfs_chown execute result : %d\n", res);
+    log_debugf("kfs_chown path : %s\n", fpath);
+    res = lchown(fpath, uid, gid);
+    log_debugf("kfs_chown execute result : %d\n", res);
     if (res == -1) {
+        log_errorf("Error kfs_chown %s", strerror( errno ));
         return -errno;
     }
     if (XGLFS_STATE->gluster_api) {
@@ -14,5 +17,5 @@ int kfs_chown(const char *path, uid_t uid, gid_t gid) {
             return -errno;
         }
     }
-    return 0;
+    return res;
 }

@@ -3,9 +3,11 @@
 int kfs_unlink(const char *path) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
+    log_debugf("kfs_unlink path : %s\n", fpath);
     int res = unlink(fpath);
-    printf("kfs_release execute result : %d\n", res);
+    log_debugf("kfs_unlink execute result : %d\n", res);
     if (res == -1) {
+        log_errorf("Error kfs_unlink : %s\n", strerror( errno ));
         return -errno;
     }
     if (XGLFS_STATE->gluster_api) {
