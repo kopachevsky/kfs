@@ -22,6 +22,15 @@ char *str_concat(const char *s1, const char *s2);
 
 void fullpath(char fpath[PATH_MAX], const char *path);
 
-int logger(const char *msg);
+int log_init();
+
+void log_info(const char *msg);
+void log_debug(const char *msg);
+void log_error(const char *msg);
+
+void log_infof(const char *msg, ...);
+void log_debugf(const char *msg, ...);
+void log_errorf(const char *msg, ...);
+
 
 #endif //KFS_COMMON
