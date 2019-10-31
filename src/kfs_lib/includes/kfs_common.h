@@ -9,6 +9,8 @@
 #include <zconf.h>
 #include <dirent.h>
 #include <assert.h>
+#include <pwd.h>
+
 #include "zlog.h"
 #include "xglfs_fuse_operations.h"
 

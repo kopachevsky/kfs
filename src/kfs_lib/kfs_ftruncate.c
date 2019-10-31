@@ -4,10 +4,10 @@ int kfs_ftruncate(const char *path, off_t size, struct fuse_file_info *fi) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     (void) fpath;
-    printf("kfs_truncate fd : %lu\n", fi->fh);
     int res = ftruncate(fi->fh ,size);
-    printf("kfs_ftruncate execute result : %d\n", res);
+    log_debugf("kfs_ftruncate execute result : %d\n", res);
     if (res == -1) {
+        log_errorf("Error kfs_ftruncate : %s\n", strerror( errno ));
         return -errno;
     }
     if (XGLFS_STATE->gluster_api) {

@@ -1,11 +1,14 @@
 #include "kfs_truncate.h"
 
 int kfs_truncate(const char *path, off_t size) {
+    int res = 0;
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    int res = truncate(fpath, size);
-    printf("kfs_truncate execute result : %d\n", res);
+    log_debugf("kfs_truncate path : %s\n", fpath);
+    res = truncate(fpath, size);
+    log_debugf("kfs_truncate execute result : %d\n", res);
     if (res == -1) {
+        log_errorf("kfs_truncate execute result : %s\n", strerror( errno ));
         return -errno;
     }
     if (XGLFS_STATE->gluster_api) {
@@ -14,5 +17,5 @@ int kfs_truncate(const char *path, off_t size) {
             return -errno;
         }
     }
-    return 0;
+    return res;
 }

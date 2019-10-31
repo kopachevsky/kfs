@@ -3,9 +3,11 @@
 int kfs_rmdir(const char *path) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
+    log_debugf("kfs_rmdir path : %s\n", fpath);
     int res = rmdir(fpath);
-    printf("kfs_rmdir execute result : %d\n", res);
+    log_debugf("kfs_rmdir execute result : %d\n", res);
     if(res == -1) {
+        log_errorf("Error kfs_rmdir : %s\n", strerror( errno ));
         return -errno;
     }
     if (XGLFS_STATE->gluster_api) {

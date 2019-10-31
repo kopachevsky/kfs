@@ -8,6 +8,7 @@ int kfs_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offse
     DIR *dp =(DIR *) (uintptr_t) fi->fh;
     struct dirent *de = readdir(dp);
     if (de == 0) {
+        log_errorf("Error kfs_readDIR : %s\n", strerror( errno ));
         return -errno;
     }
     do {

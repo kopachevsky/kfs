@@ -3,9 +3,10 @@
 int kfs_open(const char *path, struct fuse_file_info *fi) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
+    log_debugf("kfs_open path : %s\n", fpath);
     int fd = open(fpath, fi->flags);
-    printf("kfs_open execute result : %d\n", fd);
     if (fd == -1) {
+        log_errorf("Error kfs_open : %s\n", strerror( errno ));
         return -errno;
     }
     if (XGLFS_STATE->gluster_api) {
@@ -16,6 +17,6 @@ int kfs_open(const char *path, struct fuse_file_info *fi) {
             }
         }
     fi->fh = fd;
-    printf("kfs_open fd : %lu\n", fi->fh);
+    log_debugf("kfs_open fd : %lu\n", fi->fh);
     return 0;
 }

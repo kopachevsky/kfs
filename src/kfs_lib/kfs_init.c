@@ -1,5 +1,4 @@
 #include "kfs_init.h"
-#include "kfs_common.h"
 
 void *kfs_init(struct fuse_conn_info *connection) {
     log_init();

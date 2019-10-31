@@ -6,15 +6,13 @@ int kfs_fsync(const char *path, int datasync, struct fuse_file_info *fi) {
     (void) fpath;
     int res;
     if (datasync != 0) {
-        printf("kfs_fsync datasync fd : %lu\n", fi->fh);
         res = fdatasync(fi->fh);
-        printf("kfs_fsync datasync execute result : %d\n", res);
     } else {
-        printf("kfs_fsync fd : %lu\n", fi->fh);
         res = fsync(fi->fh);
-        printf("kfs_fsync execute result : %d\n", res);
+        log_debugf("kfs_fsync execute result : %d\n", res);
     }
     if (res == -1) {
+        log_errorf("Error kfs_fsync : %s\n", strerror( errno ));
         return -errno;
     }
     if (XGLFS_STATE->gluster_api) {

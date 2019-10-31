@@ -4,7 +4,6 @@ int kfs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     (void) fpath;
-
     struct stat sbuf;
     int x = stat (fpath, &sbuf);
     if (x != 0 ) {
