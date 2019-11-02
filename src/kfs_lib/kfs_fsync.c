@@ -5,12 +5,14 @@ int kfs_fsync(const char *path, int datasync, struct fuse_file_info *fi) {
     fullpath(fpath, path);
     (void) fpath;
     int res;
+    set_current_user();
     if (datasync != 0) {
         res = fdatasync(fi->fh);
     } else {
         res = fsync(fi->fh);
-        log_debugf("kfs_fsync execute result : %d\n", res);
     }
+    set_default_user();
+    log_debugf("kfs_fsync execute result : %d\n", res);
     if (res == -1) {
         log_errorf("Error kfs_fsync : %s\n", strerror( errno ));
         return -errno;

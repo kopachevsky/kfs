@@ -5,7 +5,9 @@ int kfs_truncate(const char *path, off_t size) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     log_debugf("kfs_truncate path : %s\n", fpath);
+    set_current_user();
     res = truncate(fpath, size);
+    set_default_user();
     log_debugf("kfs_truncate execute result : %d\n", res);
     if (res == -1) {
         log_errorf("kfs_truncate execute result : %s\n", strerror( errno ));
