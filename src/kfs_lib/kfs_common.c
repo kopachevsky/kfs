@@ -1,4 +1,3 @@
-#include <pwd.h>
 #include "kfs_common.h"
 
 char *str_concat(const char *s1, const char *s2) {
@@ -26,6 +25,17 @@ void fullpath(char fpath[PATH_MAX], const char *path) {
         strcpy(fpath, XGLFS_STATE->cache);
         strncat(fpath, path, PATH_MAX);
     }
+}
+
+void set_current_user() {
+    struct fuse_context *cxt = fuse_get_context();
+    setegid(cxt->gid);
+    seteuid(cxt->uid);
+}
+
+void set_default_user() {
+    setegid(0);
+    seteuid(0);
 }
 
 int log_init() {
