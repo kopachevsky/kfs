@@ -5,6 +5,7 @@ int kfs_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offse
     fullpath(fpath, path);
     (void) offset;
     (void) fpath;
+    set_current_user();
     DIR *dp =(DIR *) (uintptr_t) fi->fh;
     struct dirent *de = readdir(dp);
     if (de == 0) {
@@ -16,5 +17,6 @@ int kfs_readdir(const char *path, void *buf, fuse_fill_dir_t filler, off_t offse
             return -ENOMEM;
         }
     } while ((de = readdir(dp)) != NULL);
+    set_default_user();
     return 0;
 }

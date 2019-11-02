@@ -4,7 +4,9 @@ int kfs_create(const char *path, mode_t mode, struct fuse_file_info *fi) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     log_debugf("kfs_create path : %s\n", fpath);
+    set_current_user();
     int fd = open(fpath,  O_CREAT|O_WRONLY|O_TRUNC, mode);
+    set_default_user();
     if (fd == -1) {
         log_errorf("Error kfs_create : %s\n", strerror( errno ));
         return -errno;

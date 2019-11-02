@@ -10,8 +10,9 @@ int kfs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse
         fprintf(stderr, "Error reading file: %s\n", strerror( errno ));
         return -errno;
     }
-
+    set_current_user();
     int res = pread(fi->fh, buf, size, offset);
+    set_default_user();
     if (res == -1) {
         fprintf(stderr, "Error reading file: %s\n", strerror( errno ));
         return -errno;

@@ -4,7 +4,9 @@ int kfs_unlink(const char *path) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     log_debugf("kfs_unlink path : %s\n", fpath);
+    set_current_user();
     int res = unlink(fpath);
+    set_default_user();
     log_debugf("kfs_unlink execute result : %d\n", res);
     if (res == -1) {
         log_errorf("Error kfs_unlink : %s\n", strerror( errno ));

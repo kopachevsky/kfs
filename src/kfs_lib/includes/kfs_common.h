@@ -24,6 +24,9 @@ char *str_concat(const char *s1, const char *s2);
 
 void fullpath(char fpath[PATH_MAX], const char *path);
 
+void set_current_user();
+void set_default_user();
+
 int log_init();
 
 void log_info(const char *msg);
