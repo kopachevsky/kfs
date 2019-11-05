@@ -87,6 +87,11 @@ Mount and create test file in /mnt/gluster
 Exit glusterfs-client docker and start it again to have new and clean one.
 Repeat setup and check chat "test" file will exists in /mnt/gluster folder
 
+Build docker container:
+docker build -t kfs-test .
+
+Start docker container:
+docker run -it --privileged --name kfs-test --rm kfs-test /bin/bash
 
 
  
