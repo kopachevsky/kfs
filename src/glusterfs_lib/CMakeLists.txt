@@ -25,6 +25,7 @@ add_library(
         xglfs_ftruncate.c
         xglfs_utimens.c
         xglfs_statfs.c
+        xglfs_readdir.c
 )
 
 target_include_directories(glusterfs_lib PUBLIC includes)
