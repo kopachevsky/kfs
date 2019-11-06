@@ -17,6 +17,45 @@ char *str_concat(const char *s1, const char *s2) {
     return path;
 }
 
+struct fuse_file_info read_struct(int flag) {
+    struct fuse_file_info s = {0};
+    s.flags = flag;
+    return  s;
+}
+
+void copy_content(char *path) {
+    char fpath[PATH_MAX];
+    fullpath(fpath, path);
+    int in_fd, out_fd = 0, dir_fd;
+    struct fuse_file_info fi = read_struct(O_RDONLY);
+    struct fuse_file_info opendir = read_struct(O_DIRECTORY);
+    if ((in_fd = xglfs_open(path, &fi)) == -1) {
+        log_debugf("Cannot open %d\n", in_fd);
+    }
+    if ( (dir_fd = xglfs_opendir(path, &opendir)) == -1) {
+        log_debugf("Cannot open dir %d\n", dir_fd);
+    } else {
+        if ((out_fd = open(fpath,  O_CREAT|O_WRONLY|O_TRUNC, COPYMODE) == -1)) {
+            log_debugf("Cannot create %d\n", out_fd);
+        }
+    }
+    xglfs_release(path, &fi);
+}
+
+int read_cluster() {
+    struct dirent *direntp;
+    struct fuse_file_info fi = read_struct(O_DIRECTORY);
+    const char *path = "/";
+    struct stat sbuf;
+    xglfs_getattr(path, &sbuf);
+    xglfs_opendir(path, &fi);
+    while (likely((direntp = glfs_readdir(FH_TO_FD(XGLFS_STATE->g_fh))) != NULL)) {
+        copy_content(direntp->d_name);
+    }
+    xglfs_releasedir(path, &fi);
+    return 0;
+}
+
 void fullpath(char fpath[PATH_MAX], const char *path) {
     if (XGLFS_STATE == NULL) {
         strcpy(fpath, GLFS_DEFAULT_CACHE_DISK);

@@ -19,8 +19,11 @@
 char *MOUNT_PATH;
 char *LOCAL_DISC_CACHE_PATH;
 char *LOG_CONFIG_PATH;
+#define COPYMODE        0644
 
 char *str_concat(const char *s1, const char *s2);
+
+int read_cluster();
 
 void fullpath(char fpath[PATH_MAX], const char *path);
 
