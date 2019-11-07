@@ -8,6 +8,11 @@ script:
   - docker build -f docker/Dockerfile -t kfs-test .
   - docker run -d --privileged --name kfs-test --rm kfs-test /bin/bash -c "/workdir/kfs.sh"
 
+# blocklist
+branches:
+  except:
+  - master
+
 # safelist
 branches:
   only:
