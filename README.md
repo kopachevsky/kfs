@@ -91,7 +91,7 @@ Repeat setup and check chat "test" file will exists in /mnt/gluster folder
 
 Build docker container:
 
-    docker build -t kfs-test .
+    docker build -f docker/Dockerfile -t kfs-test .
 
 Start docker container:
 
@@ -99,7 +99,7 @@ Start docker container:
     
 Run script to bulld kfs and start test:
 
-    ./kfs.sh
+    /workdir/kfs.sh
 
     
  
