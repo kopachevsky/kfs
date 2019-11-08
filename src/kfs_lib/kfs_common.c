@@ -23,35 +23,51 @@ struct fuse_file_info read_struct(int flag) {
     return  s;
 }
 
+void copy_file(char *path) {
+    char fpath[PATH_MAX];
+    char buf[BUFFERSIZE];
+    fullpath(fpath, path);
+    int fd;
+    struct fuse_file_info fi = read_struct(O_RDONLY);
+    if ((xglfs_open(path, &fi)) == -1) {
+        log_errorf("Error open remote file %s\n", strerror( errno ));
+    } else {
+        if ((fd = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, COPYMODE) == -1)) {
+            log_errorf("Error create local copy %s\n", strerror( errno ));
+        } else {
+            if (xglfs_read(path, buf, BUFFERSIZE, 0, &fi) > 0) {
+                close(fd);
+                if ((open(fpath, O_WRONLY)) == -1) {
+                    log_errorf("Error open local file %s\n", strerror( errno ));
+                } else {
+                    if ((pwrite(fd, buf, strlen(buf), 0)) == -1) {
+                        log_errorf("Error write to local copy %s\n", strerror(errno));
+                    }
+                }
+            } else {
+                log_errorf("Error reading remote file %s\n", strerror(errno));
+                }
+        }
+        xglfs_release(path, &fi);
+    }
+}
+
 void copy_content(char *path) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    int in_fd, out_fd = 0, in_dir_fd, out_dir_fd;
-    struct fuse_file_info fi = read_struct(O_RDONLY);
     struct fuse_file_info opendir = read_struct(O_DIRECTORY);
     struct stat sbuf;
     if ((xglfs_getattr(path, &sbuf)) == -1) {
-        log_debugf("ERROR GETATTR %s\n", path);
+        log_errorf("Error getattr %s\n", strerror( errno ));
     } else {
-        log_debugf("GETATTR %s\n", path);
-    }
-    if ( (in_dir_fd = xglfs_opendir(path, &opendir)) != 0) {
-        log_debugf("NOT A DIR %d\n", in_dir_fd);
-        if ((in_fd = xglfs_open(path, &fi)) == -1) {
-            log_debugf("Cannot open %d\n", in_fd);
+        if ((xglfs_opendir(path, &opendir)) != 0) {
+            copy_file(path);
         } else {
-            if ((out_fd = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, COPYMODE) == -1)) {
-                log_debugf("Cannot create %d\n", out_fd);
+            if ((mkdir(fpath, COPYMODE)) == -1) {
+                log_errorf("Erorr create local dir cope  %s\n", strerror( errno ));
             }
-            xglfs_release(path, &fi);
+            xglfs_releasedir(path, &opendir);
         }
-    } else {
-        if ((out_dir_fd = mkdir(fpath, COPYMODE)) == -1) {
-            log_debugf("Cannot mkdir %d\n", out_dir_fd);
-        } else {
-            log_debugf("mkdir %d\n", fpath);
-        }
-        xglfs_releasedir(path, &opendir);
     }
 }
 
@@ -62,7 +78,7 @@ int read_cluster() {
     struct stat sbuf;
     xglfs_getattr(path, &sbuf);
     if (xglfs_opendir(path, &fi) != 0) {
-        log_debugf("ERORR OPENDIR %s\n", path);
+        log_errorf("Error opendir %s\n", strerror( errno ));
     } else {
         while (likely((direntp = glfs_readdir(FH_TO_FD(XGLFS_STATE->g_fh))) != NULL)) {
             copy_content(direntp->d_name);
