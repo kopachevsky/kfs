@@ -10,7 +10,7 @@ script:
 
 script:
   - docker pull rsuslov/kfs-test:latest
-  - docker run -it --privileged --name rsuslov/kfs-test --rm rsuslov/kfs-test /bin/bash -c "/workdir/kfs.sh"
+  - docker run -it --privileged --name kfs-test --rm rsuslov/kfs-test /bin/bash -c "/workdir/kfs.sh"
 
 # blocklist
 branches:
