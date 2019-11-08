@@ -1,12 +1,10 @@
 #include "kfs_utimens.h"
 
-int kfs_utimens(const char *path, const struct timespec tv[2], struct fuse_file_info *fi) {
+int kfs_utimens(const char *path, const struct timespec tv[2]) {
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     log_debugf("kfs_utimens path: %s\n", fpath);
-    set_current_user();
-    int res = utimensat(fi->fh, fpath, tv, AT_SYMLINK_NOFOLLOW);
-    set_default_user();
+    int res = utimensat(0, fpath, tv, AT_SYMLINK_NOFOLLOW);
     log_debugf("kfs_utimens execute result : %d\n", res);
     if (res == -1) {
         log_errorf("Error kfs_utimens : %s", strerror( errno ));
