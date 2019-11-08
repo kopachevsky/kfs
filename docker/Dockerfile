@@ -8,6 +8,6 @@ RUN set -x && \
     apt-get install -y git vim && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY conf/zlog.conf zlog.conf
+COPY conf/zlog.conf ~/zlog.conf
 
 COPY scripts/kfs.sh /workdir/kfs.sh
