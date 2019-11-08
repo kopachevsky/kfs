@@ -20,6 +20,7 @@ char *MOUNT_PATH;
 char *LOCAL_DISC_CACHE_PATH;
 char *LOG_CONFIG_PATH;
 #define COPYMODE        0644
+#define BUFFERSIZE      4096
 
 char *str_concat(const char *s1, const char *s2);
 
