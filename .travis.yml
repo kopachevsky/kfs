@@ -9,7 +9,7 @@ script:
 #  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis/run_on_non_pull_requests; fi'
 
 script:
-  - docker build -f docker/Dockerfile -t kfs-test .
+  - docker pull rsuslov/kfs-test:latest
   - docker run -it --privileged --name kfs-test --rm kfs-test /bin/bash -c "/workdir/kfs.sh"
 
 # blocklist
@@ -24,4 +24,4 @@ branches:
   - dockerfile_change
 
 notifications:
-  slack: testteam-c246404:XmuGaN04PZBk7IyJfhVTKSlj
+  slack: dedicatted:gzqgysdXYUpY4CK76n4RTeHU
