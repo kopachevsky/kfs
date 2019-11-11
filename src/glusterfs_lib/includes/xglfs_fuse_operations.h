@@ -27,5 +27,7 @@
 #include "xglfs_ftruncate.h"
 #include "xglfs_utimens.h"
 #include "xglfs_statfs.h"
+#include "xglfs_readdir.h"
+#include "xglfs_read.h"
 
 #endif //KFS_XGLFS_FUSE_OPERATIONS_H
