@@ -20,7 +20,6 @@ script:
 branches:
   only:
   - master
-#  - dockerfile_change
 
 notifications:
   slack: dedicatted:gzqgysdXYUpY4CK76n4RTeHU
