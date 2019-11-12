@@ -1,0 +1,26 @@
+sudo: true
+dist: bionic
+
+services:
+  - docker
+
+script:
+  - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./travis/run_on_pull_requests; fi'
+#  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis/run_on_non_pull_requests; fi'
+
+script:
+  - docker run -it --privileged --name kfs-test --rm rsuslov/kfs-test /bin/bash -c "/workdir/kfs.sh"
+
+# blocklist
+#branches:
+#  except:
+#  - master
+
+# safelist
+branches:
+  only:
+  - master
+#  - dockerfile_change
+
+notifications:
+  slack: dedicatted:gzqgysdXYUpY4CK76n4RTeHU
