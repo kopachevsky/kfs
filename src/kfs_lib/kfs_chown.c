@@ -7,7 +7,6 @@ int kfs_chown(const char *path, uid_t uid, gid_t gid) {
     fullpath(fpath, path);
     log_debugf("    kfs_chown path : %s\n", fpath);
     res = lchown(fpath, uid, gid);
-    log_debugf("kfs_chown execute result : %d\n", res);
     if (res == -1) {
         log_errorf("Error kfs_chown %s", strerror( errno ));
         return -errno;
