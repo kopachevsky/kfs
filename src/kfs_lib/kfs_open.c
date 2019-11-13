@@ -1,9 +1,10 @@
 #include "kfs_open.h"
 
 int kfs_open(const char *path, struct fuse_file_info *fi) {
+    log_info("kfs_open start");
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("kfs_open path : %s\n", fpath);
+    log_debugf("    kfs_open path : %s\n", fpath);
     set_current_user();
     int fd = open(fpath, fi->flags);
     set_default_user();
@@ -19,6 +20,6 @@ int kfs_open(const char *path, struct fuse_file_info *fi) {
             }
         }
     fi->fh = fd;
-    log_debugf("kfs_open fd : %lu\n", fi->fh);
+    log_debugf("kfs_open exit result : %lu\n", fi->fh);
     return 0;
 }

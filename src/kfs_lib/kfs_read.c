@@ -1,8 +1,11 @@
 #include "kfs_read.h"
 
 int kfs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
+    log_info("kfs_read start");
     char fpath[PATH_MAX];
     fullpath(fpath, path);
+    log_debugf("    kfs_read path : %s\n", fpath);
+    log_debugf("    kfs_read fd : %lu\n", fi->fh);
     (void) fpath;
     struct stat sbuf;
     int x = stat (fpath, &sbuf);
@@ -17,5 +20,6 @@ int kfs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse
         fprintf(stderr, "Error reading file: %s\n", strerror( errno ));
         return -errno;
     }
+    log_debugf("kfs_read exit result : %d\n", res);
     return res;
 }

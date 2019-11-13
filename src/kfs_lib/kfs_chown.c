@@ -1,10 +1,11 @@
 #include "kfs_chown.h"
 
 int kfs_chown(const char *path, uid_t uid, gid_t gid) {
+    log_info("kfs_chown start");
     int res = 0;
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("kfs_chown path : %s\n", fpath);
+    log_debugf("    kfs_chown path : %s\n", fpath);
     res = lchown(fpath, uid, gid);
     log_debugf("kfs_chown execute result : %d\n", res);
     if (res == -1) {
@@ -17,5 +18,6 @@ int kfs_chown(const char *path, uid_t uid, gid_t gid) {
             return -errno;
         }
     }
+    log_debugf("kfs_chown execute result : %d\n", res);
     return res;
 }

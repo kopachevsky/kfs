@@ -1,13 +1,13 @@
 #include "kfs_unlink.h"
 
 int kfs_unlink(const char *path) {
+    log_info("kfs_unlink start");
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("kfs_unlink path : %s\n", fpath);
+    log_debugf("    kfs_unlink path : %s\n", fpath);
     set_current_user();
     int res = unlink(fpath);
     set_default_user();
-    log_debugf("kfs_unlink execute result : %d\n", res);
     if (res == -1) {
         log_errorf("Error kfs_unlink : %s\n", strerror( errno ));
         return -errno;
@@ -18,6 +18,7 @@ int kfs_unlink(const char *path) {
             return -errno;
         }
     }
+    log_debugf("kfs_unlink exit result : %d\n", res);
     return 0;
 }
 

@@ -1,9 +1,10 @@
 #include "kfs_mknod.h"
 
 int kfs_mknod(const char *path, mode_t mode, dev_t rdev) {
+    log_info("kfs_mknod start");
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("kfs_mknod path : %s\n", fpath);
+    log_debugf("    kfs_mknod path : %s\n", fpath);
     int res = 0;
     set_current_user();
     if (S_ISFIFO(mode)) {
@@ -12,7 +13,6 @@ int kfs_mknod(const char *path, mode_t mode, dev_t rdev) {
         res = mknod(fpath, mode, rdev);
     }
     set_default_user();
-    log_debugf("kfs_mknod execute result : %d\n", res);
     if (res == -1) {
         log_errorf("kfs_mknod execute result : %s\n", strerror( errno ));
         return - errno;
@@ -23,5 +23,6 @@ int kfs_mknod(const char *path, mode_t mode, dev_t rdev) {
             return -errno;
         }
     }
+    log_debugf("kfs_mknod exit result : %d\n", res);
     return 0;
 }

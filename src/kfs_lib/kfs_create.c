@@ -1,9 +1,10 @@
 #include "kfs_create.h"
 
 int kfs_create(const char *path, mode_t mode, struct fuse_file_info *fi) {
+    log_info("kfs_create start");
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("kfs_create path : %s\n", fpath);
+    log_debugf("    kfs_create path : %s\n", fpath);
     set_current_user();
     int fd = open(fpath,  O_CREAT|O_WRONLY|O_TRUNC, mode);
     set_default_user();
@@ -19,6 +20,6 @@ int kfs_create(const char *path, mode_t mode, struct fuse_file_info *fi) {
         }
     }
     fi->fh = fd;
-    log_debugf("kfs_create fd : %lu\n", fi->fh);
+    log_debugf("kfs_create exit result : %lu\n", fi->fh);
     return 0;
 }

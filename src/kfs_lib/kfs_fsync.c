@@ -1,8 +1,11 @@
 #include "kfs_fsync.h"
 
 int kfs_fsync(const char *path, int datasync, struct fuse_file_info *fi) {
+    log_info("kfs_fsync start");
     char fpath[PATH_MAX];
     fullpath(fpath, path);
+    log_debugf("    kfs_fsync path : %s\n", fpath);
+    log_debugf("    kfs_fsync fd : %lu\n", fi->fh);
     (void) fpath;
     int res;
     set_current_user();
@@ -12,7 +15,6 @@ int kfs_fsync(const char *path, int datasync, struct fuse_file_info *fi) {
         res = fsync(fi->fh);
     }
     set_default_user();
-    log_debugf("kfs_fsync execute result : %d\n", res);
     if (res == -1) {
         log_errorf("Error kfs_fsync : %s\n", strerror( errno ));
         return -errno;
@@ -23,5 +25,6 @@ int kfs_fsync(const char *path, int datasync, struct fuse_file_info *fi) {
             return -errno;
         }
     }
+    log_debugf("kfs_fsync exit result : %d\n", res);
     return 0;
 }
