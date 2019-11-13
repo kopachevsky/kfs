@@ -17,6 +17,6 @@ int kfs_chown(const char *path, uid_t uid, gid_t gid) {
             return -errno;
         }
     }
-    log_debugf("kfs_chown execute result : %d\n", res);
+    log_debugf("kfs_chown exit result : %d\n", res);
     return res;
 }

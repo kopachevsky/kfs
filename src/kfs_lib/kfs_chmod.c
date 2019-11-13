@@ -7,7 +7,6 @@ int kfs_chmod(const char *path, mode_t mode) {
     fullpath(fpath, path);
     log_debugf("    kfs_chmod path : %s\n", fpath);
     res = chmod(fpath, mode);
-    log_debugf("kfs_chmod execute result : %d\n", res);
     if (res == -1) {
         log_errorf("Error kfs_chmod : %s\n", strerror( errno ));
         return -errno;
