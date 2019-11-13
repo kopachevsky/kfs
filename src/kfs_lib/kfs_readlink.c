@@ -1,12 +1,13 @@
 #include "kfs_readlink.h"
 
 int kfs_readlink(const char *path, char *buf, size_t size) {
-    log_info("kfs_readlink start");
+    log_debugf("kfs_readlink start  %s\n", path);
     char fpath[PATH_MAX];
     fullpath(fpath, path);
     int res = 0;
-    log_debugf("    kfs_readlink path : %s\n", fpath);
+    log_debugf("    kfs_readlink fullpath : %s\n", fpath);
     set_current_user();
+    fuse_context_log();
     res = readlink(fpath, buf, size-1);
     set_default_user();
     if (res == -1) {

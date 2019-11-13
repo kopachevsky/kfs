@@ -1,12 +1,15 @@
 #include "kfs_chmod.h"
 
 int kfs_chmod(const char *path, mode_t mode) {
-    log_info("kfs_chmod start");
+    log_debugf("kfs_chmod start %s\n", path);
     int res = 0;
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("    kfs_chmod path : %s\n", fpath);
+    log_debugf("    kfs_chmod fullpath : %s\n", fpath);
+    set_current_user();
+    fuse_context_log();
     res = chmod(fpath, mode);
+    set_default_user();
     if (res == -1) {
         log_errorf("Error kfs_chmod : %s\n", strerror( errno ));
         return -errno;

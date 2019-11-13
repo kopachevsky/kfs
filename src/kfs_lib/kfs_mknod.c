@@ -1,12 +1,13 @@
 #include "kfs_mknod.h"
 
 int kfs_mknod(const char *path, mode_t mode, dev_t rdev) {
-    log_info("kfs_mknod start");
+    log_debugf("kfs_mknod start  %s\n", path);
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("    kfs_mknod path : %s\n", fpath);
+    log_debugf("    kfs_mknod fullpath : %s\n", fpath);
     int res = 0;
     set_current_user();
+    fuse_context_log();
     if (S_ISFIFO(mode)) {
         res = mkfifo(fpath, mode);
     } else {

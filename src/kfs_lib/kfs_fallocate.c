@@ -1,10 +1,11 @@
 #include "kfs_fallocate.h"
 
 int kfs_fallocate(const char *path, int mode, off_t offset, off_t length, struct fuse_file_info *fi) {
-    log_info("kfs_fallocate start");
+    log_debugf("kfs_fallocate start  %s\n", path);
+    fuse_context_log();
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("    kfs_fallocate path : %s\n", fpath);
+    log_debugf("    kfs_fallocate fullpath : %s\n", fpath);
     (void) fpath;
     if (mode) {
         return -EOPNOTSUPP;

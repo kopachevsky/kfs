@@ -1,10 +1,11 @@
 #include "kfs_fgetattr.h"
 
 int kfs_fgetattr(const char *path, struct stat *stbuf,struct fuse_file_info *fi) {
-    log_info("kfs_fgetattr start");
+    log_debugf("kfs_fgetattr start %s\n", path);
+    fuse_context_log();
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("    kfs_fgetattr path : %s\n", fpath);
+    log_debugf("    kfs_fgetattr fullpath : %s\n", fpath);
     log_debugf("    kfs_fgetattr fd : %lu\n", fi->fh);
     (void) fpath;
     int res = fstat(fi->fh, stbuf);

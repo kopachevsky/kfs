@@ -1,11 +1,12 @@
 #include "kfs_mkdir.h"
 
 int kfs_mkdir(const char *path, const mode_t mode) {
-    log_info("kfs_mkdir start");
+    log_debugf("kfs_mkdir start  %s\n", path);
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("    kfs_mkdir path : %s\n", fpath);
+    log_debugf("    kfs_mkdir fullpath : %s\n", fpath);
     set_current_user();
+    fuse_context_log();
     int res = mkdir(fpath, mode);
     set_default_user();
     if (res == -1) {

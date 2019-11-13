@@ -1,12 +1,13 @@
 #include "kfs_getattr.h"
 
 int kfs_getattr(const char *path, struct stat *stbuf) {
-    log_info("kfs_getattr start");
+    log_debugf("kfs_getattr start  %s\n", path);
     int res = 0;
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("    kfs_getattr path: %s\n", fpath);
+    log_debugf("    kfs_getattr fullpath: %s\n", fpath);
     set_current_user();
+    fuse_context_log();
     res = lstat(fpath, stbuf);
     set_default_user();
     if (res == -1) {

@@ -1,12 +1,13 @@
 #include "kfs_truncate.h"
 
 int kfs_truncate(const char *path, off_t size) {
-    log_info("kfs_truncate start");
+    log_debugf("kfs_truncate start  %s\n", path);
     int res = 0;
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("    kfs_truncate path : %s\n", fpath);
+    log_debugf("    kfs_truncate fullpath : %s\n", fpath);
     set_current_user();
+    fuse_context_log();
     res = truncate(fpath, size);
     set_default_user();
     if (res == -1) {

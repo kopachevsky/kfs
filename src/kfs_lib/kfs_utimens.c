@@ -1,11 +1,12 @@
 #include "kfs_utimens.h"
 
 int kfs_utimens(const char *path, const struct timespec tv[2], struct fuse_file_info *fi) {
-    log_info("kfs_utimens start");
+    log_debugf("kfs_utimens start  %s\n", path);
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("    kfs_utimens path: %s\n", fpath);
+    log_debugf("    kfs_utimens fullpath: %s\n", fpath);
     set_current_user();
+    fuse_context_log();
     int res = utimensat(fi->fh, fpath, tv, AT_SYMLINK_NOFOLLOW);
     set_default_user();
     if (res == -1) {

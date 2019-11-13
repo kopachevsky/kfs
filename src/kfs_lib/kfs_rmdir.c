@@ -1,11 +1,12 @@
 #include "kfs_rmdir.h"
 
 int kfs_rmdir(const char *path) {
-    log_info("kfs_rmdir start");
+    log_debugf("kfs_rmdir start  %s\n", path);
     char fpath[PATH_MAX];
     fullpath(fpath, path);
-    log_debugf("    kfs_rmdir path : %s\n", fpath);
+    log_debugf("    kfs_rmdir fullpath : %s\n", fpath);
     set_current_user();
+    fuse_context_log();
     int res = rmdir(fpath);
     set_default_user();
     if(res == -1) {
