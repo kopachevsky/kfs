@@ -40,6 +40,6 @@ void log_error(const char *msg);
 void log_infof(const char *msg, ...);
 void log_debugf(const char *msg, ...);
 void log_errorf(const char *msg, ...);
-
+void fuse_context_log();
 
 #endif //KFS_COMMON

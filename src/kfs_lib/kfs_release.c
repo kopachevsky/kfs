@@ -1,14 +1,16 @@
 #include "kfs_release.h"
 
 int kfs_release(const char *path, struct fuse_file_info *fi) {
-    char fpath[PATH_MAX] = {0};
+    log_debugf("kfs_release start  %s\n", path);
+    char fpath[PATH_MAX];
     fullpath(fpath, path);
     (void) fpath;
-    log_debugf("kfs_release path : %s\n", fpath);
+    log_debugf("    kfs_release fullpath : %s\n", fpath);
+    log_debugf("    kfs_release fd : %lu\n", fi->fh);
     set_current_user();
+    fuse_context_log();
     int fd = close(fi->fh);
     set_default_user();
-    log_debugf("kfs_release execute result : %d\n", fd);
     if (fd == -1) {
         log_errorf("Error kfs_release : %s\n", strerror( errno ));
         return -errno;
@@ -19,5 +21,6 @@ int kfs_release(const char *path, struct fuse_file_info *fi) {
             return -errno;
         }
     }
+    log_debugf("kfs_release exit result : %d\n", fd);
     return 0;
 }
