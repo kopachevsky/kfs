@@ -1,7 +1,7 @@
 #include "kfs_unlink.h"
 
 int kfs_unlink(const char *path) {
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX] = {0};
     fullpath(fpath, path);
     log_debugf("kfs_unlink path : %s\n", fpath);
     set_current_user();

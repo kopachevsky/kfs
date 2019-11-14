@@ -1,7 +1,7 @@
 #include "kfs_utimens.h"
 
 int kfs_utimens(const char *path, const struct timespec tv[2], struct fuse_file_info *fi) {
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX] = {0};
     fullpath(fpath, path);
     log_debugf("kfs_utimens path: %s\n", fpath);
     set_current_user();

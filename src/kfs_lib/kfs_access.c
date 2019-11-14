@@ -1,7 +1,7 @@
 #include "kfs_access.h"
 
 int kfs_access(const char *path, int mask) {
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX] = {0};
     fullpath(fpath, path);
     log_debugf("kfs_access path : %s\n", fpath);
     set_current_user();

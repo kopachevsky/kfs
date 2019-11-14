@@ -2,7 +2,7 @@
 
 int kfs_chmod(const char *path, mode_t mode) {
     int res = 0;
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX] = {0};
     fullpath(fpath, path);
     log_debugf("kfs_chmod path : %s\n", fpath);
     res = chmod(fpath, mode);
