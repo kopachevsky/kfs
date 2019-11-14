@@ -91,10 +91,10 @@ int read_cluster() {
 void fullpath(char fpath[PATH_MAX], const char *path) {
     if (XGLFS_STATE == NULL) {
         strcpy(fpath, GLFS_DEFAULT_CACHE_DISK);
-        strncat(fpath, path, PATH_MAX);
+        strncat(fpath, path, PATH_MAX - strlen(fpath) - 1);
     } else {
         strcpy(fpath, XGLFS_STATE->cache);
-        strncat(fpath, path, PATH_MAX);
+        strncat(fpath, path, PATH_MAX - strlen(fpath) - 1);
     }
 }
 
