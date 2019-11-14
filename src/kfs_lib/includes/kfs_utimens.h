@@ -8,6 +8,6 @@
 
 #pragma once
 
-int kfs_utimens(const char *path, const struct timespec tv[2], struct fuse_file_info *fi);
+int kfs_utimens(const char *path, const struct timespec tv[2]);
 
 #endif //KFS_KFS_UTIMENS_H
