@@ -91,10 +91,10 @@ int read_cluster() {
 void fullpath(char fpath[PATH_MAX], const char *path) {
     if (XGLFS_STATE == NULL) {
         strcpy(fpath, GLFS_DEFAULT_CACHE_DISK);
-        strncat(fpath, path, PATH_MAX - strlen(fpath) - 1);
+        strncat(fpath, path, strlen(path));
     } else {
         strcpy(fpath, XGLFS_STATE->cache);
-        strncat(fpath, path, PATH_MAX - strlen(fpath) - 1);
+        strncat(fpath, path, strlen(path));
     }
 }
 
@@ -148,7 +148,7 @@ void log_error(const char *msg) {
 void log_infof(const char *fmt, ...) {
     va_list argp;
     va_start(argp, fmt);
-    char msg[2048];
+    char msg[PATH_MAX*10];
     vsprintf(msg, fmt, argp);
     printf("%s\n", msg);
     dzlog_info("%s\n", msg);
@@ -158,7 +158,7 @@ void log_infof(const char *fmt, ...) {
 void log_debugf(const char *fmt, ...) {
     va_list argp;
     va_start(argp, fmt);
-    char msg[2048];
+    char msg[PATH_MAX*10];
     vsprintf(msg, fmt, argp);
     printf("%s\n", msg);
     dzlog_debug("%s\n", msg);
@@ -168,7 +168,7 @@ void log_debugf(const char *fmt, ...) {
 void log_errorf(const char *fmt, ...) {
     va_list argp;
     va_start(argp, fmt);
-    char msg[2048];
+    char msg[PATH_MAX*10];
     vsprintf(msg, fmt, argp);
     printf("%s\n", msg);
     dzlog_error("%s\n", msg);
