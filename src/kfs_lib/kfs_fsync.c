@@ -1,7 +1,7 @@
 #include "kfs_fsync.h"
 
 int kfs_fsync(const char *path, int datasync, struct fuse_file_info *fi) {
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX] = {0};
     fullpath(fpath, path);
     (void) fpath;
     int res;

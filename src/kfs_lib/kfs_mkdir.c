@@ -1,7 +1,7 @@
 #include "kfs_mkdir.h"
 
 int kfs_mkdir(const char *path, const mode_t mode) {
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX] = {0};
     fullpath(fpath, path);
     log_debugf("kfs_mkdir path : %s\n", fpath);
     set_current_user();

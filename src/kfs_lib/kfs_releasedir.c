@@ -1,7 +1,7 @@
 #include "kfs_releasedir.h"
 
 int kfs_releasedir(const char *path, struct fuse_file_info *fi) {
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX] = {0};
     fullpath(fpath, path);
     (void) fpath;
     set_current_user();

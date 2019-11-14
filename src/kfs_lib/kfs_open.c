@@ -1,7 +1,7 @@
 #include "kfs_open.h"
 
 int kfs_open(const char *path, struct fuse_file_info *fi) {
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX] = {0};
     fullpath(fpath, path);
     log_debugf("kfs_open path : %s\n", fpath);
     set_current_user();

@@ -1,7 +1,7 @@
 #include "kfs_fallocate.h"
 
 int kfs_fallocate(const char *path, int mode, off_t offset, off_t length, struct fuse_file_info *fi) {
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX] = {0};
     fullpath(fpath, path);
     (void) fpath;
     if (mode) {

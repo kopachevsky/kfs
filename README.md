@@ -103,6 +103,7 @@ Run script to bulld kfs and start test:
 
     
  
+sudo /1-prj/dedicatted/kfs/build/src/kfs --mountpoint=/kfs/m2/ --cache=/kfs/cache --foreground
 
 
 

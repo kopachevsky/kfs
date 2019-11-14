@@ -1,7 +1,7 @@
 #include "kfs_create.h"
 
 int kfs_create(const char *path, mode_t mode, struct fuse_file_info *fi) {
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX] = {0};
     fullpath(fpath, path);
     log_debugf("kfs_create path : %s\n", fpath);
     set_current_user();

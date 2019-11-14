@@ -1,7 +1,7 @@
 #include "kfs_rmdir.h"
 
 int kfs_rmdir(const char *path) {
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX] = {0};
     fullpath(fpath, path);
     log_debugf("kfs_rmdir path : %s\n", fpath);
     set_current_user();
