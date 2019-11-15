@@ -88,13 +88,34 @@ int read_cluster() {
     return 0;
 }
 
-void fullpath(char fpath[PATH_MAX], const char *path) {
-    if (XGLFS_STATE == NULL) {
-        strcpy(fpath, GLFS_DEFAULT_CACHE_DISK);
-        strncat(fpath, path, strlen(path));
+bool str_ends_with_slash(const char *str, const char *end) {
+    if (NULL == str || NULL == end) return false;
+    unsigned long end_len = strlen(end);
+    unsigned long str_len = strlen(str);
+    return str_len < end_len ? false : !strcmp(str + str_len - end_len, end);
+}
+bool str_starts_with_slash(const char *str, const char *start) {
+    for (; ; str++, start++)
+        if (!*start)
+            return true;
+        else if (*str != *start)
+            return false;
+}
+void fullpath(char fpath[MAX_PATH], const char *path) {
+    strcpy(fpath, XGLFS_STATE->cache);
+    unsigned long cache_size = strlen(fpath);
+    if (!str_ends_with_slash(fpath, PATH_JOIN_SEPERATOR)) {
+        strncat(fpath, PATH_JOIN_SEPERATOR, MAX_PATH + cache_size);
+    }
+    if (str_starts_with_slash(path, PATH_JOIN_SEPERATOR)) {
+        char *filecopy = strdup(path);
+        if (NULL == filecopy) {
+            free(fpath);
+        }
+        strncat(fpath, ++filecopy, MAX_PATH + cache_size);
+        free(--filecopy);
     } else {
-        strcpy(fpath, XGLFS_STATE->cache);
-        strncat(fpath, path, strlen(path));
+        strncat(fpath, path, MAX_PATH + cache_size);
     }
 }
 
