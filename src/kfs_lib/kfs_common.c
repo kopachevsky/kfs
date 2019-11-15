@@ -101,21 +101,21 @@ bool str_starts_with_slash(const char *str, const char *start) {
         else if (*str != *start)
             return false;
 }
-void fullpath(char fpath[MAX_PATH], const char *path) {
+void fullpath(char fpath[PATH_MAX_EXTENDED], const char *path) {
     strcpy(fpath, XGLFS_STATE->cache);
-    unsigned long cache_size = strlen(fpath);
+
     if (!str_ends_with_slash(fpath, PATH_JOIN_SEPERATOR)) {
-        strncat(fpath, PATH_JOIN_SEPERATOR, MAX_PATH + cache_size);
+        strncat(fpath, PATH_JOIN_SEPERATOR, strlen(PATH_JOIN_SEPERATOR)+1);
     }
     if (str_starts_with_slash(path, PATH_JOIN_SEPERATOR)) {
         char *filecopy = strdup(path);
         if (NULL == filecopy) {
             free(fpath);
         }
-        strncat(fpath, ++filecopy, MAX_PATH + cache_size);
+        strncat(fpath, ++filecopy, strlen(path)+1);
         free(--filecopy);
     } else {
-        strncat(fpath, path, MAX_PATH + cache_size);
+        strncat(fpath, path, strlen(path)+1);
     }
 }
 

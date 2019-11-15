@@ -2,7 +2,7 @@
 
 int kfs_readlink(const char *path, char *buf, size_t size) {
     log_debugf("kfs_readlink start  %s\n", path);
-    char fpath[MAX_PATH] = {0};
+    char fpath[PATH_MAX_EXTENDED] = {0};
     fullpath(fpath, path);
     int res = 0;
     log_debugf("    kfs_readlink fullpath : %s\n", fpath);

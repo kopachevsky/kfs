@@ -3,7 +3,7 @@
 int kfs_chmod(const char *path, mode_t mode) {
     log_debugf("kfs_chmod start %s\n", path);
     int res = 0;
-    char fpath[MAX_PATH] = {0};
+    char fpath[PATH_MAX_EXTENDED] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_chmod fullpath : %s\n", fpath);
     set_current_user();

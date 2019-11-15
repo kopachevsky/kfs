@@ -3,7 +3,7 @@
 int kfs_fallocate(const char *path, int mode, off_t offset, off_t length, struct fuse_file_info *fi) {
     log_debugf("kfs_fallocate start  %s\n", path);
     fuse_context_log();
-    char fpath[MAX_PATH] = {0};
+    char fpath[PATH_MAX_EXTENDED] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_fallocate fullpath : %s\n", fpath);
     (void) fpath;
