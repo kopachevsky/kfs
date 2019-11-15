@@ -2,7 +2,7 @@
 
 int kfs_ftruncate(const char *path, off_t size, struct fuse_file_info *fi) {
     log_debugf("kfs_ftruncate start  %s\n", path);
-    char fpath[PATH_MAX];
+    char fpath[MAX_PATH] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_ftruncate fullpath : %s\n", fpath);
     log_debugf("    kfs_ftruncate fd : %lu\n", fi->fh);

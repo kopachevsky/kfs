@@ -3,7 +3,7 @@
 int kfs_flush(const char *path, struct fuse_file_info *fi) {
     log_debugf("kfs_flush start  %s\n", path);
     fuse_context_log();
-    char fpath[PATH_MAX];
+    char fpath[MAX_PATH] = {0};
     fullpath(fpath, path);
     (void) fpath;
     log_debugf("    kfs_flush fullpath : %s\n", fpath);

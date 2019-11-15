@@ -2,7 +2,7 @@
 
 int kfs_open(const char *path, struct fuse_file_info *fi) {
     log_debugf("kfs_open start  %s\n", path);
-    char fpath[PATH_MAX];
+    char fpath[MAX_PATH] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_open fullpath : %s\n", fpath);
     set_current_user();

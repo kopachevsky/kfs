@@ -3,7 +3,7 @@
 int kfs_chown(const char *path, uid_t uid, gid_t gid) {
     log_debugf("kfs_chown start %s\n", path);
     int res = 0;
-    char fpath[PATH_MAX] = {0};
+    char fpath[MAX_PATH] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_chown fullpath : %s\n", fpath);
     set_current_user();

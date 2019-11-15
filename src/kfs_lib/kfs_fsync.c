@@ -2,7 +2,7 @@
 
 int kfs_fsync(const char *path, int datasync, struct fuse_file_info *fi) {
     log_debugf("kfs_fsync start  %s\n", path);
-    char fpath[PATH_MAX];
+    char fpath[MAX_PATH] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_fsync fullpath : %s\n", fpath);
     log_debugf("    kfs_fsync fd : %lu\n", fi->fh);

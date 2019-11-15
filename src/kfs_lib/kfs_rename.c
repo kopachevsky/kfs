@@ -2,8 +2,8 @@
 
 int kfs_rename(const char *source_path, const char *target_path) {
     log_debugf("kfs_rename start  %s\n", source_path);
-    char fs_source_path[PATH_MAX];
-    char fs_target_path[PATH_MAX];
+    char fs_source_path[MAX_PATH] = {0};
+    char fs_target_path[MAX_PATH] = {0};
     fullpath(fs_source_path, source_path);
     fullpath(fs_target_path, target_path);
     log_debugf("    kfs_rename full_source path : %s\n", fs_source_path);

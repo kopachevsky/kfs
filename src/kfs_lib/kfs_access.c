@@ -3,7 +3,7 @@
 int kfs_access(const char *path, int mask) {
     log_debugf("kfs_access start %s\n", path);
     fuse_context_log();
-    char fpath[PATH_MAX] = {0};
+    char fpath[MAX_PATH] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_access fullpath %s\n", fpath);
     set_current_user();

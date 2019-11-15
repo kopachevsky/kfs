@@ -3,7 +3,7 @@
 int kfs_truncate(const char *path, off_t size) {
     log_debugf("kfs_truncate start  %s\n", path);
     int res = 0;
-    char fpath[PATH_MAX];
+    char fpath[MAX_PATH] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_truncate fullpath : %s\n", fpath);
     set_current_user();
