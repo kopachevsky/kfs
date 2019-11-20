@@ -202,5 +202,4 @@ void fuse_context_log() {
     log_debugf("    User ID of the calling process %d\n ", cxt->uid);
     log_debugf("    Group ID of the calling process  %d\n ", cxt->gid);
     log_debugf("    Thread ID of the calling process %d\n ", cxt->pid);
-    log_debugf("    Mask of the calling process %d\n ", cxt->umask);
 }

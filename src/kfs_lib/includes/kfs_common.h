@@ -2,7 +2,7 @@
 #define KFS_COMMON
 #define COPYMODE        0644
 #define BUFFERSIZE      4096
-#define PATH_MAX_EXTENDED        8192   //extended version of PATH MAX from limits.h (doubled size )
+#define PATH_MAX_EXTENDED        PATH_MAX*2   //extended version of PATH MAX from limits.h (doubled size )
 #define PATH_JOIN_SEPERATOR   "/"
 
 #include <limits.h>
