@@ -2,7 +2,7 @@
 
 int kfs_mkdir(const char *path, const mode_t mode) {
     log_debugf("kfs_mkdir start  %s\n", path);
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX_EXTENDED] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_mkdir fullpath : %s\n", fpath);
     set_current_user();

@@ -1,5 +1,9 @@
 #ifndef KFS_COMMON
 #define KFS_COMMON
+#define COPYMODE        0644
+#define BUFFERSIZE      4096
+#define PATH_MAX_EXTENDED        PATH_MAX*2   //extended version of PATH MAX from limits.h (doubled size )
+#define PATH_JOIN_SEPERATOR   "/"
 
 #include <limits.h>
 #include <string.h>
@@ -16,17 +20,13 @@
 
 #pragma once
 
-char *MOUNT_PATH;
-char *LOCAL_DISC_CACHE_PATH;
 char *LOG_CONFIG_PATH;
-#define COPYMODE        0644
-#define BUFFERSIZE      4096
 
 char *str_concat(const char *s1, const char *s2);
 
 int read_cluster();
 
-void fullpath(char fpath[PATH_MAX], const char *path);
+void fullpath(char fpath[PATH_MAX_EXTENDED], const char *path);
 
 void set_current_user();
 void set_default_user();

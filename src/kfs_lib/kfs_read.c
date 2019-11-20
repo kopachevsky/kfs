@@ -2,7 +2,7 @@
 
 int kfs_read(const char *path, char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
     log_debugf("kfs_read start  %s\n", path);
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX_EXTENDED] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_read fullpath : %s\n", fpath);
     log_debugf("    kfs_read fd : %lu\n", fi->fh);

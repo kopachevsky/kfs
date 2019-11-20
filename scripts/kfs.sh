@@ -15,7 +15,7 @@ cd /usr/local/lib
 
 #clone and install pjdfstest
 cd /workdir
-git clone https://github.com/pjd/pjdfstest.git
+git clone https://github.com/kopachevsky/pjdfstest.git
 cd /workdir/pjdfstest
 autoreconf -ifs
 ./configure

@@ -2,7 +2,7 @@
 
 int kfs_write(const char *path, const char *buf, size_t size, off_t offset, struct fuse_file_info *fi) {
     log_debugf("kfs_write start  %s\n", path);
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX_EXTENDED] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_write fullpath : %s\n", fpath);
     log_debugf("    kfs_write fd : %lu\n", fi->fh);

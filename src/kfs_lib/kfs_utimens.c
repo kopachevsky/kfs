@@ -2,7 +2,7 @@
 
 int kfs_utimens(const char *path, const struct timespec tv[2]) {
     log_debugf("kfs_utimens start  %s\n", path);
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX_EXTENDED] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_utimens fullpath: %s\n", fpath);
     set_current_user();

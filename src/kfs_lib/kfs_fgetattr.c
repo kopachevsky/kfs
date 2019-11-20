@@ -3,7 +3,7 @@
 int kfs_fgetattr(const char *path, struct stat *stbuf,struct fuse_file_info *fi) {
     log_debugf("kfs_fgetattr start %s\n", path);
     fuse_context_log();
-    char fpath[PATH_MAX] = {0};;
+    char fpath[PATH_MAX_EXTENDED] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_fgetattr fullpath : %s\n", fpath);
     log_debugf("    kfs_fgetattr fd : %lu\n", fi->fh);

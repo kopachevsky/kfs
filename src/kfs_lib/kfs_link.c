@@ -2,8 +2,8 @@
 
 int kfs_link(const char *source_path, const char *target_path) {
     log_debugf("kfs_link start  %s\n", source_path);
-    char fs_source_path[PATH_MAX];
-    char fs_target_path[PATH_MAX];
+    char fs_source_path[PATH_MAX_EXTENDED] = {0};
+    char fs_target_path[PATH_MAX_EXTENDED] = {0};
     fullpath(fs_source_path, source_path);
     fullpath(fs_target_path, target_path);
     log_debugf("    kfs_link full_source_path: %s\n", fs_source_path);

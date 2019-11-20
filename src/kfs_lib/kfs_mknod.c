@@ -2,7 +2,7 @@
 
 int kfs_mknod(const char *path, mode_t mode, dev_t rdev) {
     log_debugf("kfs_mknod start  %s\n", path);
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX_EXTENDED] = {0};
     fullpath(fpath, path);
     log_debugf("    kfs_mknod fullpath : %s\n", fpath);
     int res = 0;

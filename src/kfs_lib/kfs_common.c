@@ -88,13 +88,34 @@ int read_cluster() {
     return 0;
 }
 
-void fullpath(char fpath[PATH_MAX], const char *path) {
-    if (XGLFS_STATE == NULL) {
-        strcpy(fpath, GLFS_DEFAULT_CACHE_DISK);
-        strncat(fpath, path, strlen(path));
+bool str_ends_with_slash(const char *str, const char *end) {
+    if (NULL == str || NULL == end) return false;
+    unsigned long end_len = strlen(end);
+    unsigned long str_len = strlen(str);
+    return str_len < end_len ? false : !strcmp(str + str_len - end_len, end);
+}
+bool str_starts_with_slash(const char *str, const char *start) {
+    for (; ; str++, start++)
+        if (!*start)
+            return true;
+        else if (*str != *start)
+            return false;
+}
+void fullpath(char fpath[PATH_MAX_EXTENDED], const char *path) {
+    strcpy(fpath, XGLFS_STATE->cache);
+
+    if (!str_ends_with_slash(fpath, PATH_JOIN_SEPERATOR)) {
+        strncat(fpath, PATH_JOIN_SEPERATOR, strlen(PATH_JOIN_SEPERATOR)+1);
+    }
+    if (str_starts_with_slash(path, PATH_JOIN_SEPERATOR)) {
+        char *filecopy = strdup(path);
+        if (NULL == filecopy) {
+            free(fpath);
+        }
+        strncat(fpath, ++filecopy, strlen(path)+1);
+        free(--filecopy);
     } else {
-        strcpy(fpath, XGLFS_STATE->cache);
-        strncat(fpath, path, strlen(path));
+        strncat(fpath, path, strlen(path)+1);
     }
 }
 
@@ -181,5 +202,4 @@ void fuse_context_log() {
     log_debugf("    User ID of the calling process %d\n ", cxt->uid);
     log_debugf("    Group ID of the calling process  %d\n ", cxt->gid);
     log_debugf("    Thread ID of the calling process %d\n ", cxt->pid);
-    log_debugf("    Mask of the calling process %d\n ", cxt->umask);
 }
