@@ -123,11 +123,13 @@ void set_current_user() {
     struct fuse_context *cxt = fuse_get_context();
     setegid(cxt->gid);
     seteuid(cxt->uid);
+    umask(cxt->umask);
 }
 
 void set_default_user() {
     setegid(0);
     seteuid(0);
+    umask(0);
 }
 
 int log_init() {
@@ -202,4 +204,5 @@ void fuse_context_log() {
     log_debugf("    User ID of the calling process %d\n ", cxt->uid);
     log_debugf("    Group ID of the calling process  %d\n ", cxt->gid);
     log_debugf("    Thread ID of the calling process %d\n ", cxt->pid);
+    log_debugf("    Umask of the calling process %d\n ", cxt->umask);
 }
