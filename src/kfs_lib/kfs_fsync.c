@@ -20,7 +20,7 @@ int kfs_fsync(const char *path, int datasync, struct fuse_file_info *fi) {
         log_errorf("Error kfs_fsync : %s\n", strerror( errno ));
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int ret = xglfs_fsync(path, datasync, fi);
         if (ret == -1) {
             return -errno;

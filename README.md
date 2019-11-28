@@ -12,7 +12,7 @@ Build:
 
 Mount:
 
-    sudo ./build/src/kfs --server=<IP|DOMAIN> --volume=VOLUME --mountpoint=MOUNTPOINT --cache=CACHE_DISK --gluster_api=true [--protocol=<tcp|udp>] [--port=24007] [--logfile=<file|stderr|null>] [--verbosity=7] [--foreground]
+    sudo ./build/src/kfs --server=<IP|DOMAIN> --volume=VOLUME --mountpoint=MOUNTPOINT --cache=CACHE_DISK --gluster_sync=true [--protocol=<tcp|udp>] [--port=24007] [--logfile=<file|stderr|null>] [--verbosity=7] [--foreground]
 
 Unmount:
 

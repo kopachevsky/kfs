@@ -15,7 +15,7 @@ int kfs_write(const char *path, const char *buf, size_t size, off_t offset, stru
         log_errorf("Error kfs_write : %s\n", strerror( errno ));
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int ret = xglfs_write(path, buf, size, offset, fi);
         if (ret == -1) {
             return -errno;

@@ -13,7 +13,7 @@ int kfs_utimens(const char *path, const struct timespec tv[2]) {
         log_errorf("Error kfs_utimens : %s", strerror( errno ));
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int ret = xglfs_utimens(path, tv);
         if (ret == -1) {
             return -errno;

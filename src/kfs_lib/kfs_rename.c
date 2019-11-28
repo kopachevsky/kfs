@@ -16,7 +16,7 @@ int kfs_rename(const char *source_path, const char *target_path) {
         log_errorf("Error kfs_rename : %s\n", strerror( errno ));
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int ret = xglfs_rename(source_path, target_path);
         if (ret == -1) {
             return -errno;

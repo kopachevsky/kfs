@@ -13,7 +13,7 @@ int kfs_unlink(const char *path) {
         log_errorf("Error kfs_unlink : %s\n", strerror( errno ));
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int ret = xglfs_unlink(path);
         if (ret == -1) {
             return -errno;

@@ -47,7 +47,7 @@ int main(int argc, char** argv) {
             { "logfile",	    required_argument,	NULL,	'o' },
             { "verbosity",	required_argument,	NULL,	'v' },
             { "foreground",	no_argument,		NULL,	'f' },
-            { "gluster_api", required_argument,	NULL,	'g' },
+            { "gluster_sync", required_argument,	NULL,	'g' },
             { 0, 0, 0, 0}
     };
     if (getuid() != 0 || geteuid() != 0) {
@@ -103,14 +103,14 @@ int main(int argc, char** argv) {
                 foreground = 1;
                 break;
             case 'g':
-                xglfs_state->gluster_api = strdup(optarg);
+                xglfs_state->gluster_sync = strdup(optarg);
                 break;
             default:
                 exit(EX_USAGE);
         }
     }
 
-    if (xglfs_state->gluster_api) {
+    if (xglfs_state->gluster_sync) {
         if (xglfs_state->server == 0) {
             fprintf(stderr, "%s\n", "To mount FS you need to specify server");
             exit(EX_USAGE);

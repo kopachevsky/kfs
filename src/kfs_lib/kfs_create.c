@@ -13,7 +13,7 @@ int kfs_create(const char *path, mode_t mode, struct fuse_file_info *fi) {
         log_errorf("Error kfs_create : %s\n", strerror( errno ));
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int g_fd = xglfs_create(path, mode, fi);
         printf("xglfs_create execute result : %d\n", g_fd);
         if (g_fd == -1) {

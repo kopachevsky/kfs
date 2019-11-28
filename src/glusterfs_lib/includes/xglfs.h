@@ -35,7 +35,7 @@ struct xglfs_state {
     char *cache;
     char* glfs_logfile;
     int glfs_verbosity;
-    bool gluster_api;
+    bool gluster_sync;
     uint64_t g_fh;
 };
 
