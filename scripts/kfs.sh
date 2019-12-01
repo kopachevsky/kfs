@@ -13,13 +13,11 @@ make install
 cd /usr/local/lib
 /sbin/ldconfig -v
 
-#clone and install pjdfstest
+#clone and install pjdfstestpjdfstest
 cd /workdir
 git clone https://github.com/kopachevsky/pjdfstest.git
 cd /workdir/pjdfstest
-autoreconf -ifs
-./configure
-make pjdfstest
+./build.sh
 
 #clone and install kfs
 cd /workdir
