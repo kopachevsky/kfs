@@ -24,7 +24,7 @@ struct fuse_file_info read_struct(int flag) {
 }
 
 void copy_file(char *path) {
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX_EXTENDED];
     char buf[BUFFERSIZE];
     fullpath(fpath, path);
     int fd;
@@ -53,7 +53,7 @@ void copy_file(char *path) {
 }
 
 void copy_content(char *path) {
-    char fpath[PATH_MAX];
+    char fpath[PATH_MAX_EXTENDED];
     fullpath(fpath, path);
     struct fuse_file_info opendir = read_struct(O_DIRECTORY);
     struct stat sbuf;
@@ -81,6 +81,9 @@ int read_cluster() {
         log_errorf("Error opendir %s\n", strerror( errno ));
     } else {
         while (likely((direntp = glfs_readdir(FH_TO_FD(XGLFS_STATE->g_fh))) != NULL)) {
+            if( strcmp(direntp->d_name, ".")  != 0 && strcmp(direntp->d_name, "..") != 0 ) {
+                continue;
+            }
             copy_content(direntp->d_name);
         }
         xglfs_releasedir(path, &fi);
