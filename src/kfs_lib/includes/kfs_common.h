@@ -24,7 +24,7 @@ char *LOG_CONFIG_PATH;
 
 char *str_concat(const char *s1, const char *s2);
 
-int read_cluster();
+int copy_cluster_content();
 
 void fullpath(char fpath[PATH_MAX_EXTENDED], const char *path);
 
