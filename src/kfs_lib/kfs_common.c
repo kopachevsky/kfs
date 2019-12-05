@@ -28,18 +28,29 @@ void copy_file(char *path) {
     char fpath[PATH_MAX_EXTENDED];
     char buf[BUFFERSIZE];
     fullpath(fpath, path);
-    struct fuse_file_info fi = read_struct(O_RDONLY);
-    int gluster_read = xglfs_read(path, buf, BUFFERSIZE, 0, &fi);
-    if (gluster_read == -1) {
-        log_errorf("    Error read cluster file %s\n", strerror( errno ));
+    glfs_fd_t* gluster_open = glfs_open(XGLFS_STATE->fs, path, O_RDONLY);
+    if (unlikely(!gluster_open)) {
+        log_errorf("    Error open remote file %s\n", strerror( errno ));
     }
-    int fd = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, COPYMODE);
-    if (fd == -1) {
+    int gluster_read = glfs_pread(gluster_open, buf, BUFFERSIZE, 0, O_RDONLY);
+    if (gluster_read == -1) {
+        log_errorf("    Error read remote file %s\n", strerror( errno ));
+    }
+    int cache_open = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, COPYMODE);
+    if (cache_open == -1) {
         log_errorf("    Error create file copy %s\n", strerror( errno ));
     }
-    int write = pwrite(fd, buf, strlen(buf), 0);
-    if (write == -1) {
-        log_errorf("    Error write to copy %s\n", strerror( errno ));
+    int cache_write = pwrite(cache_open, buf, strlen(buf), 0);
+    if (cache_write == -1) {
+        log_errorf("    Error write to file copy %s\n", strerror( errno ));
+    }
+    int gluster_release = glfs_close(gluster_open);
+    if (gluster_release == -1) {
+        log_errorf("    Error release remote file %s\n", strerror( errno ));
+    }
+    int cache_release = close(cache_open);
+    if (cache_release == -1) {
+        log_errorf("    Error release copy file %s\n", strerror( errno ));
     }
     log_debugf("copy_file end");
 }
