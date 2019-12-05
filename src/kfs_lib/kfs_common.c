@@ -22,45 +22,67 @@ struct fuse_file_info read_struct(int flag) {
     s.flags = flag;
     return  s;
 }
+void copy_content(unsigned char type, char *path);
 
 void copy_file(char *path) {
     log_debugf("copy_file start %s\n", path);
     char fpath[PATH_MAX_EXTENDED];
     char buf[BUFFERSIZE];
     fullpath(fpath, path);
-    glfs_fd_t* gluster_open = glfs_open(XGLFS_STATE->fs, path, O_RDONLY);
-    if (unlikely(!gluster_open)) {
+    glfs_fd_t* remote_file_open = glfs_open(XGLFS_STATE->fs, path, O_RDONLY);
+    if (unlikely(!remote_file_open)) {
         log_errorf("    Error open remote file %s\n", strerror( errno ));
     }
-    int gluster_read = glfs_pread(gluster_open, buf, BUFFERSIZE, 0, O_RDONLY);
-    if (gluster_read == -1) {
+    int remote_file_read = glfs_pread(remote_file_open, buf, BUFFERSIZE, 0, O_RDONLY);
+    if (remote_file_read == -1) {
         log_errorf("    Error read remote file %s\n", strerror( errno ));
     }
-    int cache_open = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, COPYMODE);
-    if (cache_open == -1) {
-        log_errorf("    Error create file copy %s\n", strerror( errno ));
+    int local_file_open = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, COPYMODE);
+    if (local_file_open == -1) {
+        log_errorf("    Error create local file copy %s\n", strerror( errno ));
     }
-    int cache_write = pwrite(cache_open, buf, strlen(buf), 0);
-    if (cache_write == -1) {
-        log_errorf("    Error write to file copy %s\n", strerror( errno ));
+    int write_to_local_file = pwrite(local_file_open, buf, strlen(buf), 0);
+    if (write_to_local_file == -1) {
+        log_errorf("    Error write to local file copy %s\n", strerror( errno ));
     }
-    int gluster_release = glfs_close(gluster_open);
-    if (gluster_release == -1) {
+    int remote_file_release = glfs_close(remote_file_open);
+    if (remote_file_release == -1) {
         log_errorf("    Error release remote file %s\n", strerror( errno ));
     }
-    int cache_release = close(cache_open);
-    if (cache_release == -1) {
-        log_errorf("    Error release copy file %s\n", strerror( errno ));
+    int local_file_release = close(local_file_open);
+    if (local_file_release == -1) {
+        log_errorf("    Error release local copy file %s\n", strerror( errno ));
     }
     log_debugf("copy_file end");
 }
 
-void copy_directory(char *path) {
+void copy_directory(char *path, const int root) {
     log_debugf("copy_directory start %s\n", path);
     char fpath[PATH_MAX_EXTENDED];
+    char new_path[PATH_MAX_EXTENDED];
+    struct dirent *direntp;
     fullpath(fpath, path);
     if ((mkdir(fpath, COPYMODE)) == -1) {
-        log_errorf("    Erorr create local dir copy  %s\n", strerror( errno ));
+        log_errorf("    Erorr create local directory copy  %s\n", strerror( errno ));
+    }
+    glfs_fd_t* open_remote_directory = glfs_opendir(XGLFS_STATE->fs, path);
+    if (unlikely(!open_remote_directory)) {
+        log_errorf("    Error open remote directory %s\n", strerror( errno ));
+    }
+    while ((direntp = glfs_readdir(open_remote_directory)) != NULL) {
+        fullpath(fpath, direntp->d_name);
+        if (strcmp(direntp->d_name, ".") != 0 && strcmp(direntp->d_name, "..") != 0) {
+            if (direntp->d_type == DT_DIR) {
+                strcpy(new_path, path);
+                strcat(new_path, "/");
+                strcat(new_path, direntp->d_name);
+                copy_directory(new_path, root + 2);;
+            }
+        }
+    }
+    int remote_directory_release = glfs_closedir(open_remote_directory);
+    if (remote_directory_release == -1) {
+        log_errorf("    Error release remote directory %s\n", strerror( errno ));
     }
     log_debugf("copy_directory end");
 }
@@ -72,43 +94,42 @@ void copy_content(unsigned char type, char *path) {
         copy_file(path);
     }
     if (type == DT_DIR) {
-        copy_directory(path);
+        copy_directory(path, 0);
     }
     log_debugf("copy_content end");
 }
 
-int read_cluster(char *path) {
-    log_debugf("read_cluster start %s\n", path);
+int read_remote_storage(char *path) {
+    log_debugf("read_remote_storage start %s\n", path);
     char fpath[PATH_MAX_EXTENDED];
     struct dirent *direntp;
     struct fuse_file_info fi = read_struct(O_DIRECTORY);
     struct stat sbuf;
     xglfs_getattr(path, &sbuf);
     if (xglfs_opendir(path, &fi) != 0) {
-        log_errorf("    Error opendir %s\n", strerror( errno ));
+        log_errorf("    Error open remote storage %s\n", strerror( errno ));
     } else {
         while (likely((direntp = glfs_readdir(FH_TO_FD(XGLFS_STATE->g_fh))) != NULL)) {
             fullpath(fpath, direntp->d_name);
-            if( strcmp(direntp->d_name, ".")  == 0 && strcmp(direntp->d_name, "..") == 0 ) {
-                continue;
+            if (strcmp(direntp->d_name, ".") != 0 && strcmp(direntp->d_name, "..") != 0) {
+                copy_content(direntp->d_type, direntp->d_name);
             }
-            copy_content(direntp->d_type, direntp->d_name);
         }
         xglfs_releasedir(path, &fi);
     }
-    log_debugf("read_cluster end");
+    log_debugf("read_remote_storage end");
     return 0;
 }
 
-int copy_cluster_content(){
-    log_debugf("copy_cluster_content start");
+int copy_remote_content(){
+    log_debugf("copy_remote_content start");
     char *path = "/";
-    int res = read_cluster(path);
+    int res = read_remote_storage(path);
     if (res == -1) {
-        log_errorf("    Error reading cluster %s\n", strerror( errno ));
+        log_errorf("    Error reading remote torage %s\n", strerror( errno ));
         return -errno;
     }
-    log_debugf("copy_cluster_content end %d\n", res);
+    log_debugf("copy_remote_content end %d\n", res);
     return 0;
 }
 

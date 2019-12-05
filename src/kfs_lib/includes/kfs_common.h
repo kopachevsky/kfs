@@ -1,6 +1,6 @@
 #ifndef KFS_COMMON
 #define KFS_COMMON
-#define COPYMODE        0644
+#define COPYMODE        0755
 #define BUFFERSIZE      PATH_MAX*10
 #define PATH_MAX_EXTENDED        PATH_MAX*2   //extended version of PATH MAX from limits.h (doubled size )
 #define PATH_JOIN_SEPERATOR   "/"
@@ -24,7 +24,7 @@ char *LOG_CONFIG_PATH;
 
 char *str_concat(const char *s1, const char *s2);
 
-int copy_cluster_content();
+int copy_remote_content();
 
 void fullpath(char fpath[PATH_MAX_EXTENDED], const char *path);
 
