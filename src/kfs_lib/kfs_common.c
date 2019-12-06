@@ -24,6 +24,27 @@ struct fuse_file_info read_struct(int flag) {
 }
 void copy_content(unsigned char type, char *path);
 
+int copy_mode(char *path) {
+    struct stat sbuf;
+    xglfs_getattr(path, &sbuf);
+    mode_t mode = sbuf.st_mode;
+    printf("        file %s", path);
+    printf("        mode %d\n", mode);
+    return mode;
+}
+
+void set_remote_storage_uid_gid(char *path) {
+    struct stat sbuf;
+    xglfs_getattr(path, &sbuf);
+    uid_t uid = sbuf.st_uid;
+    gid_t gid = sbuf.st_gid;
+    setegid(gid);
+    seteuid(uid);
+    printf("        file %s", path);
+    printf("        uid %d", uid);
+    printf("        git %d\n", gid);
+}
+
 void copy_file(char *path) {
     log_debugf("copy_file start %s\n", path);
     char fpath[PATH_MAX_EXTENDED];
@@ -37,7 +58,9 @@ void copy_file(char *path) {
     if (remote_file_read == -1) {
         log_errorf("    Error read remote file %s\n", strerror( errno ));
     }
-    int local_file_open = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, COPYMODE);
+    set_remote_storage_uid_gid(path);
+    int local_file_open = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, copy_mode(path));
+    set_default_user();
     if (local_file_open == -1) {
         log_errorf("    Error create local file copy %s\n", strerror( errno ));
     }
@@ -62,9 +85,11 @@ void copy_directory(char *path, const int root) {
     char new_path[PATH_MAX_EXTENDED];
     struct dirent *direntp;
     fullpath(fpath, path);
+    set_remote_storage_uid_gid(path);
     if ((mkdir(fpath, COPYMODE)) == -1) {
         log_errorf("    Erorr create local directory copy  %s\n", strerror( errno ));
     }
+    set_default_user();
     glfs_fd_t* open_remote_directory = glfs_opendir(XGLFS_STATE->fs, path);
     if (unlikely(!open_remote_directory)) {
         log_errorf("    Error open remote directory %s\n", strerror( errno ));
@@ -89,7 +114,6 @@ void copy_directory(char *path, const int root) {
     }
     log_debugf("copy_directory end");
 }
-
 
 void copy_content(unsigned char type, char *path) {
     log_debugf("copy_files start %s\n", path);
