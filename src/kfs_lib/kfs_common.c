@@ -72,11 +72,14 @@ void copy_directory(char *path, const int root) {
     while ((direntp = glfs_readdir(open_remote_directory)) != NULL) {
         fullpath(fpath, direntp->d_name);
         if (strcmp(direntp->d_name, ".") != 0 && strcmp(direntp->d_name, "..") != 0) {
+            strcpy(new_path, path);
+            strcat(new_path, "/");
+            strcat(new_path, direntp->d_name);
             if (direntp->d_type == DT_DIR) {
-                strcpy(new_path, path);
-                strcat(new_path, "/");
-                strcat(new_path, direntp->d_name);
-                copy_directory(new_path, root + 2);;
+                copy_directory(new_path, root + 2);
+            }
+            if (direntp->d_type == DT_REG) {
+                copy_file(new_path);
             }
         }
     }
