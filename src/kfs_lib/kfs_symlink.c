@@ -16,7 +16,7 @@ int kfs_symlink(const char *source_path, const char *target_path) {
         log_errorf("Error kfs_symlink : %s\n", strerror( errno ));
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int ret = xglfs_symlink(source_path, target_path);
         if (ret == -1) {
             return -errno;

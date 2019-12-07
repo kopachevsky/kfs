@@ -14,7 +14,7 @@ int kfs_truncate(const char *path, off_t size) {
         log_errorf("kfs_truncate execute result : %s\n", strerror( errno ));
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int ret = xglfs_truncate(path, size);
         if (ret == -1) {
             return -errno;

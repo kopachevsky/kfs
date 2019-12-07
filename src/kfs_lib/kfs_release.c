@@ -15,7 +15,7 @@ int kfs_release(const char *path, struct fuse_file_info *fi) {
         log_errorf("Error kfs_release : %s\n", strerror( errno ));
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int g_fd = xglfs_release(path, fi);
         if (g_fd == -1) {
             return -errno;

@@ -18,7 +18,7 @@ int kfs_mknod(const char *path, mode_t mode, dev_t rdev) {
         log_errorf("kfs_mknod execute result : %s\n", strerror( errno ));
         return - errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int ret = xglfs_mknod(path, mode, rdev);
         if (ret == -1) {
             return -errno;

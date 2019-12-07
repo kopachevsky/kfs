@@ -13,7 +13,7 @@ int kfs_chmod(const char *path, mode_t mode) {
         log_errorf("Error kfs_chmod : %s\n", strerror( errno ));
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int ret = xglfs_chmod(path, mode);
         if (ret == -1) {
             return -errno;

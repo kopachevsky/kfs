@@ -13,7 +13,7 @@ int kfs_mkdir(const char *path, const mode_t mode) {
         log_errorf("Error kfs_mkdir : %s\n", strerror( errno ));
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int ret = xglfs_mkdir(path, mode);
         if (ret == -1) {
             return -errno;

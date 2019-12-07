@@ -13,7 +13,7 @@ int kfs_chown(const char *path, uid_t uid, gid_t gid) {
         log_errorf("Error kfs_chown %s", strerror( errno ));
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int ret = xglfs_chown(path, uid, gid);
         if (ret == -1) {
             return -errno;

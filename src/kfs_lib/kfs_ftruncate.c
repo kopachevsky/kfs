@@ -15,7 +15,7 @@ int kfs_ftruncate(const char *path, off_t size, struct fuse_file_info *fi) {
         log_errorf("Error kfs_ftruncate : %s\n", strerror( errno ));
         return -errno;
     }
-    if (XGLFS_STATE->gluster_api) {
+    if (XGLFS_STATE->gluster_sync) {
         int ret = xglfs_ftruncate(path, size, fi);
         if (ret == -1) {
             return -errno;
