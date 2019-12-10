@@ -28,43 +28,61 @@ int copy_mode(char *path) {
     struct stat sbuf;
     xglfs_getattr(path, &sbuf);
     mode_t mode = sbuf.st_mode;
-    printf("        file %s", path);
-    printf("        mode %d\n", mode);
     return mode;
 }
 
 void set_remote_storage_uid_gid(char *path) {
     struct stat sbuf;
     xglfs_getattr(path, &sbuf);
-    uid_t uid = sbuf.st_uid;
-    gid_t gid = sbuf.st_gid;
-    setegid(gid);
-    seteuid(uid);
-    printf("        file %s", path);
-    printf("        uid %d", uid);
-    printf("        git %d\n", gid);
+    setegid(sbuf.st_uid);
+    seteuid(sbuf.st_gid);
+}
+
+int remote_file_size(char *path) {
+    struct stat sbuf;
+    xglfs_getattr(path, &sbuf);
+    return  sbuf.st_size;
+}
+
+int local_file_size(char *path) {
+    struct stat sbuf;
+    lstat(path, &sbuf);
+    return sbuf.st_size;
 }
 
 void copy_file(char *path) {
     log_debugf("copy_file start %s\n", path);
     char fpath[PATH_MAX_EXTENDED];
-    char buf[BUFFERSIZE];
+    char buf[remote_file_size(path)];
     fullpath(fpath, path);
     glfs_fd_t* remote_file_open = glfs_open(XGLFS_STATE->fs, path, O_RDONLY);
     if (unlikely(!remote_file_open)) {
         log_errorf("    Error open remote file %s\n", strerror( errno ));
     }
-    int remote_file_read = glfs_pread(remote_file_open, buf, BUFFERSIZE, 0, O_RDONLY);
+    int remote_file_read = glfs_pread(remote_file_open, buf, remote_file_size(path), 0, O_RDONLY);
     if (remote_file_read == -1) {
         log_errorf("    Error read remote file %s\n", strerror( errno ));
     }
     set_remote_storage_uid_gid(path);
     int local_file_open = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, copy_mode(path));
     set_default_user();
+    if (local_file_open == EEXIST) {
+        char local_buf[local_file_size(fpath)];
+        int local_file_read = pread(local_file_open, local_buf, local_file_size(fpath), 0);
+        if (local_file_read == -1) {
+            log_errorf("    Error read local file %s\n", strerror( errno ));
+        }
+        if (strlen(local_buf) != strlen(buf)) {
+            int write_to_local_exist_file = pwrite(local_file_open, buf, remote_file_size(path), 0);
+            if (write_to_local_exist_file == -1) {
+                log_errorf("    Error write to local file copy %s\n", strerror( errno ));
+            }
+        }
+    }
     if (local_file_open == -1) {
         log_errorf("    Error create local file copy %s\n", strerror( errno ));
     }
-    int write_to_local_file = pwrite(local_file_open, buf, strlen(buf), 0);
+    int write_to_local_file = pwrite(local_file_open, buf, remote_file_size(path), 0);
     if (write_to_local_file == -1) {
         log_errorf("    Error write to local file copy %s\n", strerror( errno ));
     }
@@ -86,7 +104,7 @@ void copy_directory(char *path, const int root) {
     struct dirent *direntp;
     fullpath(fpath, path);
     set_remote_storage_uid_gid(path);
-    if ((mkdir(fpath, COPYMODE)) == -1) {
+    if ((mkdir(fpath, copy_mode(path))) == -1) {
         log_errorf("    Erorr create local directory copy  %s\n", strerror( errno ));
     }
     set_default_user();
