@@ -22,8 +22,6 @@ char *LOG_CONFIG_PATH;
 
 char *str_concat(const char *s1, const char *s2);
 
-int copy_remote_content();
-
 void fullpath(char fpath[PATH_MAX_EXTENDED], const char *path);
 
 void set_current_user();

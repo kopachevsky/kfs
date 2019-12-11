@@ -31,6 +31,7 @@ add_library(
         kfs_utimens.c
         kfs_statfs.c
         kfs_fallocate.c
+        copy_remote_storage_content.c
 )
 
 target_include_directories(fuse_cache PUBLIC includes)

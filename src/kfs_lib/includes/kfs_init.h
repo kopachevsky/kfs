@@ -5,6 +5,7 @@
 #include <glusterfs/api/glfs.h>
 
 #include "kfs_common.h"
+#include "copy_remote_storage_content.h"
 
 #pragma once
 

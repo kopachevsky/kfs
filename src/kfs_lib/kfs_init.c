@@ -7,7 +7,7 @@ void *kfs_init(struct fuse_conn_info *connection) {
     if (XGLFS_STATE->gluster_api) {
         log_info("   gluster sync enabled");
         res = xglfs_init(connection);
-        if (copy_remote_content() != 0) {
+        if (copy_remote_storage_content() != 0) {
             exit(EX_NOINPUT);
         }
     } else {
