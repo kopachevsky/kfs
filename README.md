@@ -40,6 +40,13 @@ Build issues:
 
 error while loading shared libraries: libzlog.so.1.2: cannot open shared object file: No such file or directory - resolved by running sudo /sbin/ldconfig -v in /usr/local/lib
 
+# docker run with shared mount between host and container
+
+Build dockerfile stored in /kfs/docker/shared_mount/
+	docker build -t "<image name>"
+
+Run image 
+	docker run -it --privileged --name "kfs" --rm --mount type=bind,source=<LOCAL_MOUNT_DIRECTORY_PATH>,target=/mnt/data,bind-propagation=rshared <IMAGE_NAME> 
 
 # setup server docker
 

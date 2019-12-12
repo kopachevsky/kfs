@@ -10,23 +10,21 @@ RUN set -x && \
 
 RUN set -e && \
     touch /var/log/kfs.log && \
-    mkdir -p /mnt/data /mnt/cache /workdir && \
-    echo "172.17.0.2      server1" >> /etc/hosts
+    mkdir -p /mnt/data /mnt/cache /workdir
 
 RUN set -e && \
+    cd /workdir && \
+    git clone https://github.com/HardySimpson/zlog.git && \
     cd zlog && make && make install && \
     cd /usr/local/lib && /sbin/ldconfig -v
 
 RUN set -e && \
-    cd /workdir && \
-    git clone https://github.com/HardySimpson/zlog.git
-
-
-RUN set -e && \
     cd /workdir set -e && \
-    git clone https://github.com/kopachevsky/kfs.git && \
-    cd /workdir/kfs/ && ./scripts/build.sh && \
+    git clone https://github.com/KostiaLevchenko/kfs.git && \
+    cd /workdir/kfs/ && git checkout Feature/dockerfile_pre-mounted_file_system  && ./scripts/build.sh && \
     cp /workdir/kfs/conf/zlog.conf ~/zlog.conf
 
-ENTRYPOINT  ["/workdir/kfs/scripts/docker-entrypoint.sh"]
+CMD set -e && \
+    echo "172.17.0.2      server1" >> /etc/hosts &&  \
+    /workdir/kfs/build/src/kfs --server=server1 --volume=gv0 --mountpoint=/mnt/data/ --cache=/mnt/cache/ --gluster_sync=true --foreground
 
