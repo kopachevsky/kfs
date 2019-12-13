@@ -25,6 +25,6 @@ RUN set -e && \
     cp /workdir/kfs/conf/zlog.conf ~/zlog.conf
 
 CMD set -e && \
-    echo "172.17.0.2      server1" >> /etc/hosts &&  \
-    /workdir/kfs/build/src/kfs --server=server1 --volume=gv0 --mountpoint=/mnt/data/ --cache=/mnt/cache/ --gluster_sync=true --foreground
+    echo "$IP_DOMAIN" >> /etc/hosts &&  \
+    /workdir/kfs/build/src/kfs --server=$DOMAIN --volume=$VOLUME --mountpoint=/mnt/data/ --cache=/mnt/cache/ --gluster_sync=true --foreground
 
