@@ -20,12 +20,6 @@ int remote_file_size(char *path) {
     return  sbuf.st_size;
 }
 
-int local_file_size(char *path) {
-    struct stat sbuf;
-    lstat(path, &sbuf);
-    return sbuf.st_size;
-}
-
 void copy_file(char *path) {
     log_debugf("copy_file start %s\n", path);
     char fpath[PATH_MAX_EXTENDED];
@@ -42,52 +36,20 @@ void copy_file(char *path) {
     set_remote_storage_uid_gid(path);
     int local_file_open = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, copy_mode(path));
     set_default_user();
-    if (local_file_open == EEXIST) {
-        char local_buf[local_file_size(fpath)];
-        int local_file_read = pread(local_file_open, local_buf, local_file_size(fpath), 0);
-        if (local_file_read == -1) {
-            log_errorf("    Error read local file %s\n", strerror( errno ));
-        }
-        if (strlen(local_buf) != strlen(buf)) {
-            int write_to_local_exist_file = pwrite(local_file_open, buf, remote_file_size(path), 0);
-            if (write_to_local_exist_file == -1) {
-                log_errorf("    Error write to local file copy %s\n", strerror( errno ));
-            }
-            int remote_file_release = glfs_close(remote_file_open);
-            if (remote_file_release == -1) {
-                log_errorf("    Error release remote file %s\n", strerror(errno));
-            }
-            int local_file_release = close(local_file_open);
-            if (local_file_release == -1) {
-                log_errorf("    Error release local copy file %s\n", strerror(errno));
-            }
-
-        } else {
-            int remote_file_release = glfs_close(remote_file_open);
-            if (remote_file_release == -1) {
-                log_errorf("    Error release remote file %s\n", strerror(errno));
-            }
-            int local_file_release = close(local_file_open);
-            if (local_file_release == -1) {
-                log_errorf("    Error release local copy file %s\n", strerror(errno));
-            }
-        }
-    } else {
-        if (local_file_open == -1) {
-            log_errorf("    Error create local file copy %s\n", strerror(errno));
-        }
-        int write_to_local_file = pwrite(local_file_open, buf, remote_file_size(path), 0);
-        if (write_to_local_file == -1) {
-            log_errorf("    Error write to local file copy %s\n", strerror(errno));
-        }
-        int remote_file_release = glfs_close(remote_file_open);
-        if (remote_file_release == -1) {
-            log_errorf("    Error release remote file %s\n", strerror(errno));
-        }
-        int local_file_release = close(local_file_open);
-        if (local_file_release == -1) {
-            log_errorf("    Error release local copy file %s\n", strerror(errno));
-        }
+    if (local_file_open == -1) {
+        log_errorf("    Error create local file copy %s\n", strerror(errno));
+    }
+    int write_to_local_file = pwrite(local_file_open, buf, remote_file_size(path), 0);
+    if (write_to_local_file == -1) {
+        log_errorf("    Error write to local file copy %s\n", strerror(errno));
+    }
+    int remote_file_release = glfs_close(remote_file_open);
+    if (remote_file_release == -1) {
+        log_errorf("    Error release remote file %s\n", strerror(errno));
+    }
+    int local_file_release = close(local_file_open);
+    if (local_file_release == -1) {
+        log_errorf("    Error release local copy file %s\n", strerror(errno));
     }
     log_debugf("copy_file end");
 }
