@@ -42,15 +42,21 @@ error while loading shared libraries: libzlog.so.1.2: cannot open shared object 
 
 # docker run with shared mount between host and container
 
-Build dockerfile stored in /kfs/docker/shared_mount/
-	docker build -t "<image name>"
+Build dockerfile stored in /kfs/docker/shared_mount/ :
+    
+    docker build -t "<image name>"
 
-Run image 
-docker run 
--e "IP_DOMAIN=<IP> <DOMAIN_NAME" 
--e "DOMAIN=<DOMAIN_NAME" 
--e "VOLUME=<VOLUME_NAME>"  
--it --privileged --name "<CONTAINER_NAME>" --rm --mount type=bind,source=<LOCAL_MOUNT_DIRECTORY_PATH>,target=/mnt/data,bind-propagation=rshared <IMAGE_NAME>
+Run image :
+
+    docker run 
+    -e "IP_DOMAIN=<IP> <DOMAIN_NAME" 
+    -e "DOMAIN=<DOMAIN_NAME" 
+    -e "VOLUME=<VOLUME_NAME>"  
+    -it 
+    --privileged 
+    --name "<CONTAINER_NAME>" 
+    --rm 
+    --mount type=bind,source=<LOCAL_MOUNT_DIRECTORY_PATH>,target=/mnt/data,bind-propagation=rshared <IMAGE_NAME>
 	
 # setup server docker
 
