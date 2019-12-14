@@ -20,8 +20,8 @@ RUN set -e && \
 
 RUN set -e && \
     cd /workdir set -e && \
-    git clone https://github.com/KostiaLevchenko/kfs.git && \
-    cd /workdir/kfs/ && git checkout Feature/dockerfile_pre-mounted_file_system  && ./scripts/build.sh && \
+    git clone https://github.com/kopachevsky/kfs.git && \
+    cd /workdir/kfs/ && ./scripts/build.sh && \
     cp /workdir/kfs/conf/zlog.conf ~/zlog.conf
 
 CMD set -e && \
