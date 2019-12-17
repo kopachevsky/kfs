@@ -7,9 +7,9 @@ void *kfs_init(struct fuse_conn_info *connection) {
     if (XGLFS_STATE->gluster_sync) {
         log_info("   gluster sync enabled");
         res = xglfs_init(connection);
-//        if (read_cluster() != 0) {
-//            exit(EX_NOINPUT);
-//        }
+        if (copy_remote_storage_content() != 0) {
+            exit(EX_NOINPUT);
+        }
     } else {
         log_info("   gluster sync disabled");
     }
