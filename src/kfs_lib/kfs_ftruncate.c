@@ -16,7 +16,9 @@ int kfs_ftruncate(const char *path, off_t size, struct fuse_file_info *fi) {
         return -errno;
     }
     if (XGLFS_STATE->gluster_sync) {
+        xglfs_set_current_user();
         int ret = xglfs_ftruncate(path, size, fi);
+        set_default_user();
         if (ret == -1) {
             return -errno;
         }

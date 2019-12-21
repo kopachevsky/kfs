@@ -16,7 +16,9 @@ int kfs_write(const char *path, const char *buf, size_t size, off_t offset, stru
         return -errno;
     }
     if (XGLFS_STATE->gluster_sync) {
+        xglfs_set_current_user();
         int ret = xglfs_write(path, buf, size, offset, fi);
+        set_default_user();
         if (ret == -1) {
             return -errno;
         }

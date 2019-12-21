@@ -16,7 +16,9 @@ int kfs_release(const char *path, struct fuse_file_info *fi) {
         return -errno;
     }
     if (XGLFS_STATE->gluster_sync) {
+        xglfs_set_current_user();
         int g_fd = xglfs_release(path, fi);
+        set_default_user();
         if (g_fd == -1) {
             return -errno;
         }

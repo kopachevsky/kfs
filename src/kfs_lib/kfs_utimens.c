@@ -14,7 +14,9 @@ int kfs_utimens(const char *path, const struct timespec tv[2]) {
         return -errno;
     }
     if (XGLFS_STATE->gluster_sync) {
+        xglfs_set_current_user();
         int ret = xglfs_utimens(path, tv);
+        set_default_user();
         if (ret == -1) {
             return -errno;
         }
