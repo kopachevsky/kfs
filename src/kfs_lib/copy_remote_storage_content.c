@@ -9,47 +9,36 @@ int copy_mode(char *path) {
 
 uid_t set_remote_storage_uid(char *path) {
     struct stat sbuf;
-    int res = xglfs_getattr(path, &sbuf);
-    if (res == -1) {
-        printf("CANT READ UID  %s\n", strerror(errno));
-    }
+    xglfs_getattr(path, &sbuf);
     return sbuf.st_uid;
 }
 
 gid_t set_remote_storage_gid(char *path) {
     struct stat sbuf;
-    int res = xglfs_getattr(path, &sbuf);
-    if (res == -1) {
-        printf("CANT READ UID  %s\n", strerror(errno));
-    }
-    return sbuf.st_gid;
-}
-
-int remote_file_size(char *path) {
-    struct stat sbuf;
     xglfs_getattr(path, &sbuf);
-    return  sbuf.st_size;
+    return sbuf.st_gid;
 }
 
 void copy_file(char *path) {
     log_debugf("copy_file start %s\n", path);
     char fpath[PATH_MAX_EXTENDED];
-    char buf[remote_file_size(path)];
+    char buf[BUFSIZ];
     fullpath(fpath, path);
     glfs_fd_t* remote_file_open = glfs_open(XGLFS_STATE->fs, path, O_RDONLY);
     if (unlikely(!remote_file_open)) {
         log_errorf("    Error open remote file %s\n", strerror( errno ));
     }
-    int remote_file_read = glfs_pread(remote_file_open, buf, remote_file_size(path), 0, O_RDONLY);
+    int remote_file_read = glfs_pread(remote_file_open, buf, BUFSIZ, 0, O_RDONLY);
     if (remote_file_read == -1) {
         log_errorf("    Error read remote file %s\n", strerror( errno ));
     }
+    set_default_user();
     int local_file_open = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, copy_mode(path));
     lchown(fpath, set_remote_storage_uid(path), set_remote_storage_gid(path));
     if (local_file_open == -1) {
         log_errorf("    Error create local file copy %s\n", strerror(errno));
     }
-    int write_to_local_file = pwrite(local_file_open, buf, remote_file_size(path), 0);
+    int write_to_local_file = pwrite(local_file_open, buf, BUFSIZ, 0);
     if (write_to_local_file == -1) {
         log_errorf("    Error write to local file copy %s\n", strerror(errno));
     }
