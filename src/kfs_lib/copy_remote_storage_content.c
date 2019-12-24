@@ -7,11 +7,22 @@ int copy_mode(char *path) {
     return mode;
 }
 
-void set_remote_storage_uid_gid(char *path) {
+uid_t set_remote_storage_uid(char *path) {
     struct stat sbuf;
-    xglfs_getattr(path, &sbuf);
-    setegid(sbuf.st_uid);
-    seteuid(sbuf.st_gid);
+    int res = xglfs_getattr(path, &sbuf);
+    if (res == -1) {
+        printf("CANT READ UID  %s\n", strerror(errno));
+    }
+    return sbuf.st_uid;
+}
+
+gid_t set_remote_storage_gid(char *path) {
+    struct stat sbuf;
+    int res = xglfs_getattr(path, &sbuf);
+    if (res == -1) {
+        printf("CANT READ UID  %s\n", strerror(errno));
+    }
+    return sbuf.st_gid;
 }
 
 int remote_file_size(char *path) {
@@ -33,9 +44,8 @@ void copy_file(char *path) {
     if (remote_file_read == -1) {
         log_errorf("    Error read remote file %s\n", strerror( errno ));
     }
-    set_remote_storage_uid_gid(path);
     int local_file_open = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, copy_mode(path));
-    set_default_user();
+    lchown(fpath, set_remote_storage_uid(path), set_remote_storage_gid(path));
     if (local_file_open == -1) {
         log_errorf("    Error create local file copy %s\n", strerror(errno));
     }
@@ -60,8 +70,9 @@ void copy_directory(char *path, const int root) {
     char new_path[PATH_MAX_EXTENDED];
     struct dirent *direntp;
     fullpath(fpath, path);
-    set_remote_storage_uid_gid(path);
-    if ((mkdir(fpath, copy_mode(path))) == -1) {
+    int res = mkdir(fpath, copy_mode(path));
+    lchown(fpath, set_remote_storage_uid(path), set_remote_storage_gid(path));
+    if (res  == -1 ){
         log_errorf("    Erorr create local directory copy  %s\n", strerror( errno ));
     }
     set_default_user();
