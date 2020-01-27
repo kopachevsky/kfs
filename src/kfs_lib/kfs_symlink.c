@@ -17,7 +17,9 @@ int kfs_symlink(const char *source_path, const char *target_path) {
         return -errno;
     }
     if (XGLFS_STATE->gluster_sync) {
+        xglfs_set_current_user();
         int ret = xglfs_symlink(source_path, target_path);
+        set_default_user();
         if (ret == -1) {
             return -errno;
         }

@@ -14,7 +14,9 @@ int kfs_rmdir(const char *path) {
         return -errno;
     }
     if (XGLFS_STATE->gluster_sync) {
+        xglfs_set_current_user();
         int ret = xglfs_rmdir(path);
+        set_default_user();
         if (ret == -1) {
             return -errno;
         }

@@ -15,7 +15,9 @@ int kfs_truncate(const char *path, off_t size) {
         return -errno;
     }
     if (XGLFS_STATE->gluster_sync) {
+        xglfs_set_current_user();
         int ret = xglfs_truncate(path, size);
+        set_default_user();
         if (ret == -1) {
             return -errno;
         }

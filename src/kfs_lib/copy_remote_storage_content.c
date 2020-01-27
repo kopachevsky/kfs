@@ -7,39 +7,38 @@ int copy_mode(char *path) {
     return mode;
 }
 
-void set_remote_storage_uid_gid(char *path) {
+uid_t set_remote_storage_uid(char *path) {
     struct stat sbuf;
     xglfs_getattr(path, &sbuf);
-    setegid(sbuf.st_uid);
-    seteuid(sbuf.st_gid);
+    return sbuf.st_uid;
 }
 
-int remote_file_size(char *path) {
+gid_t set_remote_storage_gid(char *path) {
     struct stat sbuf;
     xglfs_getattr(path, &sbuf);
-    return  sbuf.st_size;
+    return sbuf.st_gid;
 }
 
 void copy_file(char *path) {
     log_debugf("copy_file start %s\n", path);
     char fpath[PATH_MAX_EXTENDED];
-    char buf[remote_file_size(path)];
+    char buf[BUFSIZ];
     fullpath(fpath, path);
     glfs_fd_t* remote_file_open = glfs_open(XGLFS_STATE->fs, path, O_RDONLY);
     if (unlikely(!remote_file_open)) {
         log_errorf("    Error open remote file %s\n", strerror( errno ));
     }
-    int remote_file_read = glfs_pread(remote_file_open, buf, remote_file_size(path), 0, O_RDONLY);
+    int remote_file_read = glfs_pread(remote_file_open, buf, BUFSIZ, 0, O_RDONLY);
     if (remote_file_read == -1) {
         log_errorf("    Error read remote file %s\n", strerror( errno ));
     }
-    set_remote_storage_uid_gid(path);
-    int local_file_open = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, copy_mode(path));
     set_default_user();
+    int local_file_open = open(fpath, O_CREAT | O_WRONLY | O_TRUNC, copy_mode(path));
+    lchown(fpath, set_remote_storage_uid(path), set_remote_storage_gid(path));
     if (local_file_open == -1) {
         log_errorf("    Error create local file copy %s\n", strerror(errno));
     }
-    int write_to_local_file = pwrite(local_file_open, buf, remote_file_size(path), 0);
+    int write_to_local_file = pwrite(local_file_open, buf, BUFSIZ, 0);
     if (write_to_local_file == -1) {
         log_errorf("    Error write to local file copy %s\n", strerror(errno));
     }
@@ -60,8 +59,9 @@ void copy_directory(char *path, const int root) {
     char new_path[PATH_MAX_EXTENDED];
     struct dirent *direntp;
     fullpath(fpath, path);
-    set_remote_storage_uid_gid(path);
-    if ((mkdir(fpath, copy_mode(path))) == -1) {
+    int res = mkdir(fpath, copy_mode(path));
+    lchown(fpath, set_remote_storage_uid(path), set_remote_storage_gid(path));
+    if (res  == -1 ){
         log_errorf("    Erorr create local directory copy  %s\n", strerror( errno ));
     }
     set_default_user();

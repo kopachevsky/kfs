@@ -14,7 +14,9 @@ int kfs_open(const char *path, struct fuse_file_info *fi) {
         return -errno;
     }
     if (XGLFS_STATE->gluster_sync) {
+        xglfs_set_current_user();
         int g_fd = xglfs_open(path, fi);
+        set_default_user();
         printf("xglfs_open execute result : %d\n", g_fd);
             if (g_fd == -1) {
                 return -errno;

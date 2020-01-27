@@ -14,7 +14,9 @@ int kfs_create(const char *path, mode_t mode, struct fuse_file_info *fi) {
         return -errno;
     }
     if (XGLFS_STATE->gluster_sync) {
+//        xglfs_set_current_user();
         int g_fd = xglfs_create(path, mode, fi);
+//        set_default_user();
         printf("xglfs_create execute result : %d\n", g_fd);
         if (g_fd == -1) {
             return -errno;

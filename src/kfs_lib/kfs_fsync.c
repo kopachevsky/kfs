@@ -21,7 +21,9 @@ int kfs_fsync(const char *path, int datasync, struct fuse_file_info *fi) {
         return -errno;
     }
     if (XGLFS_STATE->gluster_sync) {
+        xglfs_set_current_user();
         int ret = xglfs_fsync(path, datasync, fi);
+        set_default_user();
         if (ret == -1) {
             return -errno;
         }

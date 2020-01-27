@@ -14,7 +14,9 @@ int kfs_chown(const char *path, uid_t uid, gid_t gid) {
         return -errno;
     }
     if (XGLFS_STATE->gluster_sync) {
+        xglfs_set_current_user();
         int ret = xglfs_chown(path, uid, gid);
+        set_default_user();
         if (ret == -1) {
             return -errno;
         }

@@ -55,6 +55,12 @@ void set_current_user() {
     umask(cxt->umask);
 }
 
+void xglfs_set_current_user(){
+    struct fuse_context *cxt = fuse_get_context();
+    glfs_setfsuid(cxt->uid);
+    glfs_setfsgid(cxt->gid);
+}
+
 void set_default_user() {
     setegid(0);
     seteuid(0);

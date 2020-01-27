@@ -25,6 +25,8 @@ char *str_concat(const char *s1, const char *s2);
 void fullpath(char fpath[PATH_MAX_EXTENDED], const char *path);
 
 void set_current_user();
+void set_uid_gid();
+void xglfs_set_current_user();
 void set_default_user();
 
 int log_init();
