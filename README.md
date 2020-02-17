@@ -118,7 +118,19 @@ Run script to bulld kfs and start test:
 
     /workdir/kfs.sh
 
-    
+# TravisCI configuration: build docker image or run docker image with tests or both
+
+1. To build only docker image - need in TravisCI UI in project Settings:
+    - add ENV variable "ONLY_BUILD = true";
+    - delete ENV variable "ONLY_RUN = true".
+
+2. To run only docker image with a test for kfs - need in TravisCI UI in project Settings:
+    - delete ENV variable "ONLY_BUILD = true";
+    - add ENV variable "ONLY_RUN = true".
+
+3. To build docker image and then run it with a test for kfs - need in TravisCI UI in project Settings:
+    - add ENV variable "ONLY_BUILD = true";
+    - add ENV variable "ONLY_RUN = true".  
  
 sudo /1-prj/dedicatted/kfs/build/src/kfs --mountpoint=/kfs/m2/ --cache=/kfs/cache --foreground
 

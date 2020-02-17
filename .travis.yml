@@ -1,15 +1,37 @@
-sudo: true
 dist: bionic
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::8}
 
 services:
   - docker
+
+stages:
+- name: docker-build
+  if: env(ONLY_BUILD) = true
+- name: docker-run
+  if: env(ONLY_RUN) = true
 
 script:
   - 'if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then bash ./travis/run_on_pull_requests; fi'
 #  - 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then bash ./travis/run_on_non_pull_requests; fi'
 
-script:
-  - docker run -it --privileged --name kfs-test --rm rsuslov/kfs-test /bin/bash -c "/workdir/kfs.sh"
+jobs:
+  include:
+    - stage: docker-build
+      script:
+      - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+      - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+      - docker build -f docker/Dockerfile -t $DOCKER_REPO:$COMMIT .
+      - docker images
+      - docker tag $DOCKER_REPO:$COMMIT $DOCKER_REPO:$TAG
+      - docker tag $DOCKER_REPO:$COMMIT $DOCKER_REPO:travis-$TRAVIS_BUILD_NUMBER
+      - docker images
+      - docker push $DOCKER_REPO
+    - stage: docker-run
+      script:
+      - docker run -it --privileged --name kfs --rm $DOCKER_REPO /bin/bash -c "/workdir/kfs.sh"
 
 # blocklist
 #branches:
@@ -20,7 +42,6 @@ script:
 branches:
   only:
   - master
-#  - dockerfile_change
 
 notifications:
   slack: dedicatted:gzqgysdXYUpY4CK76n4RTeHU
